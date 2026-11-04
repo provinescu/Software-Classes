@@ -1,7 +1,6 @@
 # HP Software Classes
 
-SuperCollider Software Classes
-Made with SuperCollider 3.14
+SuperCollider Software Classes for organising musical sounds created using SuperCollider 3.14.
 
 Notes:
 
