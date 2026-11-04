@@ -9,4 +9,4 @@ To use these classes, you will need the contents of the ‘extensions’ folder 
 
 Check the guides!
 
- HP-Software-Guides
+[ HP-Software-Guides](https://github.com/provinescu/HP-Software-Guides)
