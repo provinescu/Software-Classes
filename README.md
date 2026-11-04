@@ -1,11 +1,11 @@
-# HP Software Class
+# HP Software Classes
 
-SuperCollider Software Class
+SuperCollider Software Classes
 Made with SuperCollider 3.14
 
 Notes:
 
-To use these classes, you will need the contents of the ‘extensions’ folder in your own extensions folder.
+To use these Classes, you will need the contents of the ‘extensions’ folder in your own extensions folder.
 
 Check the guides!
 
