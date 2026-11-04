@@ -30,22 +30,12 @@ You will find the necessary models for each piece of software in the repository:
 
 [Wekinator-Models-for-HP-Software](https://github.com/provinescu/Wekinator-Models-for-HP-Software)
 
-For Windows or Linux users:
-
-Please refer to the repository
-
-[Software-Class](https://github.com/provinescu/Software-Class)
-
-Install a version of SuperCollider
-
-https://supercollider.github.io/
-
 Quick started:
 
 Ensure that MIDI is enabled by default ‘IAC Manager’.
 
 Launch the Class.
-A window will open displaying a series of settings.
+For exemple "Agents.new".
 The first time you use it, a folder named after the programme will be created in your ‘home/documents/’ directory.
 This is where the presets and data will be saved.
 You can, of course, create further working folders later on.
