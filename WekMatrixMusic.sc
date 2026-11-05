@@ -5547,10 +5547,7 @@ Preset Wek",
 						// Training Kohonen Freq
 						maxTraining = newFreq.size;
 						newFreq = newFreq * 127;
-						maxTraining.do({arg i;
-							newFreq.size.do({arg i;
-								kohonenF.training(newFreq.wrapAt(i).asArray, i+1, maxTraining, 1)});
-						});
+					maxTraining.do({arg i; kohonenF.training(newFreq.wrapAt(i).asArray, i+1, maxTraining, 1)});
 						// Calculate Kohonen Freq
 						newFreq = newFreq.collect({arg item, index, z;
 							item = kohonenF.training(item.asArray, 1, 1, 1);
