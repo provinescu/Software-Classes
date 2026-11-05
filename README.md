@@ -43,7 +43,10 @@ Please note: some software programmes that use sounds loaded into memory are ver
 If you wish to use your own sounds, you will need to create a new folder so that the software can initialise the start-up files correctly.
 To use your sounds, edit the file named ‘sound’ or ‘list sound’ in the working folder, ensuring you follow the correct syntax.
 
- Check the guides!
+For Mac users, the mdfind function (Spotlight) allows you to load sound files that may no longer be located in the specified path.
+For Linux and Windows users, the paths to the sound files must be correct; otherwise, they will not be loaded.
+
+Check the guides!
 
 [ HP-Software-Guides](https://github.com/provinescu/HP-Software-Guides)
 
