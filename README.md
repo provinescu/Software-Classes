@@ -6,11 +6,6 @@ Notes:
 
 To use these Classes, you will need the contents of the ‘extensions’ folder in your own extensions folder.
 
-Check the guides!
-
-[ HP-Software-Guides](https://github.com/provinescu/HP-Software-Guides)
-
-
 There are several Classes versions (exemple with Agents):
 
 Basic software agents.
