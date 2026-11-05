@@ -17,11 +17,9 @@ AgentsTR  with HPtransformer added.
 WekAgentsTR -> with Wekinator and HPtransformer added.
 
 To use the Wek... versions, you need to install Wekinator:
-
 https://github.com/fiebrink1/wekinator
 
 You will find the necessary models for each piece of software in the repository:
-
 [Wekinator-Models-for-HP-Software](https://github.com/provinescu/Wekinator-Models-for-HP-Software)
 
 Quick started:
@@ -42,7 +40,6 @@ For Mac users, the mdfind function (Spotlight) allows you to load sound files th
 For Linux and Windows users, the paths to the sound files must be correct; otherwise, they will not be loaded.
 
 Check the guides!
-
 [ HP-Software-Guides](https://github.com/provinescu/HP-Software-Guides)
 
 Otherwise, explore and have fun.
