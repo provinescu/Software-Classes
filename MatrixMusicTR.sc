@@ -6,7 +6,7 @@ MatrixMusicTR {
 
 	var <> synthAnalyzeIn, busAnalyze, bufferPlayFile, busFileIn, groupeAnalyse, groupeSynth, groupeMasterFX, oscMusicalData, serverAdresse, busIn, busFX, busOSC, fonctionSynthDef, cmdperiodfunc, listeGroupeSynth, masterFX, initSynthDef, createGUI, windowMasterFX, windowMasterFXLimit, windowMasterFXPostAmp, menuMatrix, bufferFile, synthAnalyseOnsets, synthAnalysePitch, synthAnalysePitch2, fonctionRecOn, fonctionRecOff, fonctionRecPause, flagRecording, windowControl, startSystem, switchAudioIn, algoAnalyse, volumeFileIn, offsetFileIn, fonctionLoadFileForAnalyse, choiceSynth, addNewSynth, listeWindowSynth, fonctionWindowSynth, displayOSC, fonctionLoadSample, listeBusInOut, listeBusFX, sendBusIn, userOperatingSystem, listeGroupeSynthID, fonctionUserOperatingSystem, fonctionLoadSynthesizer, fonctionSaveSynthesizer, fonctionAddSynthFX, textFileAnalyze, fonctionLoadPreset, fonctionSavePreset, fonctionLoadControl, fonctionSaveControl, userOSchoiceInstrument, userOSchoiceControl, fonctionTdefControls, fonctionTdefMusicData, listeWindows, indexWindows, fonctionShortCut, fonctionCommandes, pathMatrix, system , bpmSlider, bpmOnOff, flagSystemBPM, commande, oscStateflag, masterAppAddr, slaveAppAddr, ardourOSC, oscHPtempo, oscHPstart, oscHPrec, oscState, oscTempoMaster, initOSCresponder, numberAudioOut, systemBPM, helpMatrix, fonctionOSCsynth, listeDataOSC, signalBuffer, timeMaximum, timeMemory, fhzFilter, ampFilter, durFilter, fhzFiltreGUI, ampFiltreGUI, durFiltreGUI, fonctionTdefOSCdata, tdefOSCdata, dureeOSCdata, changeChoiceSynth, flagDataOSC, sliderDataOSC, recChannels, windowControlSynth, controlFreqSlider, controlFreqTranSlider, controlAmpSlider, controlDureeSlider, controlDureeTranSlider, controlQuantaSlider, fonctionSaveControlSynth, fonctionLoadControlSynth, previousFreq, previousDuree, previousAmp, previousPan, controlPanSlider, switchMenuAudioOut, windowKeyboard, keyboard, keyboardTranslate, synthKeyboard, flagKeyboard, keyboardShortCut, setupKeyboardShortCut, musicAppAddr, startChannelAudioOut=0, switchChanelAudioOut, keyboardTranslateBefore=0, headerFormat, sampleFormat, formatRecordingMenu, headerRecordingMenu, sampleFormatRecordingMenu, algoChangePresetMenu, algoChangeMenu, varChangeMenu, midiKeyboard, switchCanalMIDI, canalMIDI, foldersToScanAll, foldersToScanPreset, foldersToScanSynthesizer, fonctionAutomationPreset, lastMeanProbaPresetFlux=0, lastMeanProbaPresetFlatness=0, midiMenu, synthAnalyseKeyTrack, lastTimeAutomationPreset, lastNumberChoiceConfig, fonctionCollectFolders, flagCollectFolders, limitTemps, variableChange, algoChange, onOffSynth, onOffSynthValue, fluxOnFly, flatnessOnFly, keyboardVolume, keyVolume, midiOut, listeFileAnalyze, listeNameFileAnalyze, indexDataMusic, listeAlgorithm, flagMemory, numFhzBand, bandFHZ, lastTimeBand, menuMIDI, menuFile, menuRecording, menuOSC, menuAudio, menuAlgo, menuHelp, fonctionInitBand, windowVST, flagVST, flagMC, widthMC, orientationMC, switchAudioOut, numberAudioIn, rangeBand, controlRootSlider, pourcentPan, pourcentFreq, pourcentFreqT, pourcentAmp, pourcentDur, pourcentDurT, pourcentQuant, pourcentRoot, listeWindowFreeze;
 	var degrees, root, scale, tuning, automationSliderTrans, automationSliderStretch, automationSliderQuant, automationSliderPan, automationSliderAmp;
-	var oscKeyboardData, oscMIDIdata, freqBefore, ampBefore, dureeBefore, freqMIDI, ampMIDI, dureeMIDI, lastTimeMIDI, tempoMIDI, freqCentroidMIDI, flatnessMIDI, energyMIDI, fluxMIDI, freqTampon, ampTampon, lastTimeAnalyse, arrayAudioIN, textAudioIn, textFileIn, oscMusicData, lastDataAnalyze, fonctionArrayAudioIN, listAudioIN, synthPlayFile, synthFileIn, loPass, hiPass, threshAlgo, filterAlgo, maxKeybMidi, memKeybMidi, fonctionPlotNode, menuFreeze, foncSynthOut, scAdr, udpAdr;
+	var fonctionNewMusicListeners, fonctionDispatchNewMusic, lastDisplayOSCtime, displayOSCinterval, lastBPMdisplayTime, bpmDisplayInterval, oscKeyboardData, oscMIDIdata, freqBefore, ampBefore, dureeBefore, freqMIDI, ampMIDI, dureeMIDI, lastTimeMIDI, tempoMIDI, freqCentroidMIDI, flatnessMIDI, energyMIDI, fluxMIDI, freqTampon, ampTampon, lastTimeAnalyse, arrayAudioIN, textAudioIn, textFileIn, oscMusicData, lastDataAnalyze, fonctionArrayAudioIN, listAudioIN, synthPlayFile, synthFileIn, loPass, hiPass, threshAlgo, filterAlgo, maxKeybMidi, memKeybMidi, fonctionPlotNode, menuFreeze, foncSynthOut, scAdr, udpAdr;
 
 	*new	{arg path="~/Documents/MatrixTR/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="MatrixTR", wek=6448, wekPort=57120, scPort=57110, l=0.2;
 
@@ -22,6 +22,21 @@ MatrixMusicTR {
 		MainMenu.initBuiltInMenus;
 		udpAdr = NetAddr.langPort;
 		scAdr = NetAddr("localhost", scPort);
+
+		// Optimisation OSC: distribution locale directe des evenements musicaux.
+		// Evite le relais reseau /NewMusic et la conversion Array -> Symbol -> String -> Array.
+		fonctionNewMusicListeners = IdentitySet.new;
+		fonctionDispatchNewMusic = { arg music;
+			fonctionNewMusicListeners.do({ arg listener;
+				listener.value(music);
+			});
+		};
+
+		// Limitation des mises a jour de l'affichage a 10 Hz.
+		displayOSCinterval = 0.1;
+		lastDisplayOSCtime = 0.0;
+		bpmDisplayInterval = 0.1;
+		lastBPMdisplayTime = 0.0;
 
 		pathMatrix = PathName.new(path).pathOnly;
 
@@ -1725,23 +1740,22 @@ y ... -						Musical keys.
 						flatnessOnFly = flatness;
 						// Set BPM
 						if(flagSystemBPM == 0, {tempo = 1});
-						if(flagSystemBPM == 1, {{bpmSlider.valueAction_(tempo * 60)}.defer});
+						if(flagSystemBPM == 1 and: { (Main.elapsedTime - lastBPMdisplayTime) >= bpmDisplayInterval }, {
+							lastBPMdisplayTime = Main.elapsedTime;
+							{ bpmSlider.valueAction_(tempo * 60) }.defer;
+						});
 						if(flagSystemBPM == 2, {tempo = systemBPM.tempo});
 						if(flagSystemBPM == 3, {tempo = oscTempoMaster});
 						// Set Bus OSC
 						if(flagDataOSC == 'on', {busOSC.at(0).set(freq, amp, duree, tempo, freqCentroid, flatness, energy, flux)});//ok band 0
 						//Analyze Data
 						if(duree > timeMemory.at(indexAudio) or: {duree > timeMaximum.at(indexAudio)} and: {flagDataOSC == 'on'}, {
-							x=[]; y=[]; z=[];
-							// Init Array
-							(numFhzBand + 1).do({arg i;
-								x = x.add([]);
-								y = y.add(0);
-								z = z.add(time);
-							});
-							listeDataOSC.put(indexAudio,x.deepCopy);
-							indexDataMusic.put(indexAudio, y.deepCopy);
-							lastTimeBand.put(indexAudio, z.deepCopy);
+							x = Array.fill(numFhzBand + 1, { [] });
+							y = Array.fill(numFhzBand + 1, 0);
+							z = Array.fill(numFhzBand + 1, time);
+							listeDataOSC.put(indexAudio, x);
+							indexDataMusic.put(indexAudio, y);
+							lastTimeBand.put(indexAudio, z);
 							lastTimeAnalyse = time; lastDataAnalyze.put(indexAudio, [freq, amp, duree, freqTampon, ampTampon, time]);
 						});
 						if(abs(freq.cpsmidi - freqBefore.cpsmidi) >= fhzFilter.at(indexAudio) and: {abs(amp.ampdb - ampBefore.ampdb) >= ampFilter.at(indexAudio)} and: {duree >= durFilter.at(indexAudio)} and: {duree <= timeMaximum.at(indexAudio)},
@@ -1749,15 +1763,13 @@ y ... -						Musical keys.
 								if(freqTampon !=nil and: {ampTampon != nil},
 									{
 										// Send Music to Instruments
-										musicAppAddr.sendMsg('/NewMusic', [freq, amp, duree, tempo, freqCentroid, flatness, energy, flux, indexAudio].asSymbol);
+										fonctionDispatchNewMusic.value([freq, amp, duree, tempo, freqCentroid, flatness, energy, flux, indexAudio]);
 										// ici normaliser pour Transformer et envoyer
 										~hpTR.learnEvent([freq.cpsmidi / 127, amp, duree / timeMaximum.at(indexAudio)]);
 										/*// Send Studio si necessaire ici pas vraiment
 										~hptInputTarget.sendMsg("/hptransformer/input", freq.cpsmidi / 127, amp, duree / timeMaximum.at(indexAudio));*/
 										if(flagDataOSC == 'on', {
-											musicData=musicData.add(freqTampon);musicData=musicData.add(ampTampon);musicData=musicData.add(duree);
-											musicData=musicData.add(tempo);musicData=musicData.add(freqCentroid);musicData=musicData.add(flatness);
-											musicData=musicData.add(energy);musicData=musicData.add(flux);
+											musicData = [freqTampon, ampTampon, duree, tempo, freqCentroid, flatness, energy, flux];
 											freqBefore = freqTampon; ampBefore = ampTampon; dureeBefore = duree;
 											// Dispatch Band FHZ
 											for(0, numFhzBand, {arg i;
@@ -1797,7 +1809,10 @@ y ... -						Musical keys.
 									// Setup Automation Preset
 									fonctionAutomationPreset.value(listeDataOSC.at(indexAudio).at(0), freqCentroid, flatness, energy, flux);
 									// Display Data on Control Panel
-									displayOSC.setString("Fhz:" + freq.cpsmidi.asString + "\n" ++ "Amp:" + amp.asString + "\n" ++ "Dur:" + duree.asString + "\n" ++ "Bpm:" + (tempo * 60).asString + "\n" ++ "Flx:" + flux.asString + "\n" ++ "Fla:" +  flatness.asString + "\n" ++ "Fhc:" + freqCentroid.asString + "\n" ++ "Fhe:" + energy.asString + "\n" ++ "In :" + (indexAudio+1).asString, 0, 500);
+									if((Main.elapsedTime - lastDisplayOSCtime) >= displayOSCinterval, {
+										lastDisplayOSCtime = Main.elapsedTime;
+										displayOSC.setString("Fhz:" + freq.cpsmidi.asString + "\n" ++ "Amp:" + amp.asString + "\n" ++ "Dur:" + duree.asString + "\n" ++ "Bpm:" + (tempo * 60).asString + "\n" ++ "Flx:" + flux.asString + "\n" ++ "Fla:" +  flatness.asString + "\n" ++ "Fhc:" + freqCentroid.asString + "\n" ++ "Fhe:" + energy.asString + "\n" ++ "In :" + (indexAudio+1).asString, 0, 500);
+									});
 								}.defer;
 						});
 						dureeOSCdata.put(indexAudio, Main.elapsedTime);
@@ -1826,7 +1841,10 @@ y ... -						Musical keys.
 						flatnessOnFly = flatness;
 						// Set BPM
 						if(flagSystemBPM == 0, {tempo = 1});
-						if(flagSystemBPM == 1, {{bpmSlider.valueAction_(tempo * 60)}.defer});
+						if(flagSystemBPM == 1 and: { (Main.elapsedTime - lastBPMdisplayTime) >= bpmDisplayInterval }, {
+							lastBPMdisplayTime = Main.elapsedTime;
+							{ bpmSlider.valueAction_(tempo * 60) }.defer;
+						});
 						if(flagSystemBPM == 2, {tempo = systemBPM.tempo});
 						if(flagSystemBPM == 3, {tempo = oscTempoMaster});
 						// Set Bus OSC
@@ -1853,16 +1871,14 @@ y ... -						Musical keys.
 									{
 										// Send Music to Instruments
 										listAudioIN.do({arg audio;
-											musicAppAddr.sendMsg('/NewMusic', [freq, amp, duree, tempo, freqCentroid, flatness, energy, flux, audio].asSymbol);
+											fonctionDispatchNewMusic.value([freq, amp, duree, tempo, freqCentroid, flatness, energy, flux, audio]);
 										});
 										// ici normaliser pour Transformer et envoyer
 										~hpTR.learnEvent([freq.cpsmidi / 127, amp, duree / maxKeybMidi]);
 										/*// Send Studio si necessaire ici pas vraiment
 										~hptInputTarget.sendMsg("/hptransformer/input", freq.cpsmidi / 127, amp, duree / maxKeybMidi);*/
 										if(flagDataOSC == 'on', {
-											musicData=musicData.add(freqTampon);musicData=musicData.add(ampTampon);musicData=musicData.add(duree);
-											musicData=musicData.add(tempo);musicData=musicData.add(freqCentroid);musicData=musicData.add(flatness);
-											musicData=musicData.add(energy);musicData=musicData.add(flux);
+											musicData = [freqTampon, ampTampon, duree, tempo, freqCentroid, flatness, energy, flux];
 											freqBefore = freqTampon; ampBefore = ampTampon; dureeBefore = duree;
 											listAudioIN.do({arg audio;
 												// Dispatch Band FHZ
@@ -1903,7 +1919,10 @@ y ... -						Musical keys.
 									// Setup Automation Preset
 									fonctionAutomationPreset.value(listeDataOSC.at(listAudioIN.at(0)).at(0), freqCentroid, flatness, energy, flux);
 									// Display Data on Control Panel
-									displayOSC.setString("Fhz:" + freq.cpsmidi.asString + "\n" ++ "Amp:" + amp.asString + "\n" ++ "Dur:" + duree.asString + "\n" ++ "Bpm:" + (tempo * 60).asString + "\n" ++ "Flx:" + flux.asString + "\n" ++ "Fla:" +  flatness.asString + "\n" ++ "Fhc:" + freqCentroid.asString + "\n" ++ "Fhe:" + energy.asString + "\n" ++ "Keyboard In", 0, 500);
+									if((Main.elapsedTime - lastDisplayOSCtime) >= displayOSCinterval, {
+										lastDisplayOSCtime = Main.elapsedTime;
+										displayOSC.setString("Fhz:" + freq.cpsmidi.asString + "\n" ++ "Amp:" + amp.asString + "\n" ++ "Dur:" + duree.asString + "\n" ++ "Bpm:" + (tempo * 60).asString + "\n" ++ "Flx:" + flux.asString + "\n" ++ "Fla:" +  flatness.asString + "\n" ++ "Fhc:" + freqCentroid.asString + "\n" ++ "Fhe:" + energy.asString + "\n" ++ "Keyboard In", 0, 500);
+									});
 								}.defer;
 						});
 						listAudioIN.do({arg audio;
@@ -1974,16 +1993,14 @@ y ... -						Musical keys.
 								{
 									// Send Music to Instruments
 									listAudioIN.do({arg audio;
-										musicAppAddr.sendMsg('/NewMusic', [freqMIDI, ampMIDI, dureeMIDI, tempoMIDI, freqCentroidMIDI, flatnessMIDI, energyMIDI, fluxMIDI, audio].asSymbol);
+										fonctionDispatchNewMusic.value([freqMIDI, ampMIDI, dureeMIDI, tempoMIDI, freqCentroidMIDI, flatnessMIDI, energyMIDI, fluxMIDI, audio]);
 									});
 									// ici normaliser pour Transformer et envoyer
 									~hpTR.learnEvent([freq.cpsmidi / 127, amp, duree / maxKeybMidi]);
 										/*// Send Studio si necessaire ici pas vraiment
 										~hptInputTarget.sendMsg("/hptransformer/input", freq.cpsmidi / 127, amp, duree / maxKeybMidi);*/
 									if(flagDataOSC == 'on', {
-										musicData=musicData.add(freqTampon);musicData=musicData.add(ampTampon);musicData=musicData.add(dureeMIDI);
-										musicData=musicData.add(tempoMIDI);musicData=musicData.add(freqCentroidMIDI);musicData=musicData.add(flatnessMIDI);
-										musicData=musicData.add(energyMIDI);musicData=musicData.add(fluxMIDI);
+										musicData = [freqTampon, ampTampon, dureeMIDI, tempoMIDI, freqCentroidMIDI, flatnessMIDI, energyMIDI, fluxMIDI];
 										freqBefore = freqTampon; ampBefore = ampTampon; dureeBefore = dureeMIDI;
 										listAudioIN.do({arg audio;
 											// Dispatch Band FHZ
@@ -2023,7 +2040,10 @@ y ... -						Musical keys.
 								// Setup Automation Preset
 								fonctionAutomationPreset.value(listeDataOSC.at(listAudioIN.at(0)).at(0), freqCentroidMIDI, flatnessMIDI, energyMIDI, fluxMIDI);
 								// Display Data on Control Panel
-								displayOSC.setString("Fhz:" + freqMIDI.cpsmidi.asString + "\n" ++ "Amp:" + ampMIDI.asString + "\n" ++ "Dur:" + dureeMIDI.asString + "\n" ++ "Bpm:" + (tempoMIDI * 60).asString + "\n" ++ "Flx:" + fluxMIDI.asString + "\n" ++ "Fla:" +  flatnessMIDI.asString + "\n" ++ "Fhc:" + freqCentroidMIDI.asString + "\n" ++ "Fhe:" + energyMIDI.asString + "\n" ++ "Midi In", 0, 500);
+								if((Main.elapsedTime - lastDisplayOSCtime) >= displayOSCinterval, {
+									lastDisplayOSCtime = Main.elapsedTime;
+									displayOSC.setString("Fhz:" + freqMIDI.cpsmidi.asString + "\n" ++ "Amp:" + ampMIDI.asString + "\n" ++ "Dur:" + dureeMIDI.asString + "\n" ++ "Bpm:" + (tempoMIDI * 60).asString + "\n" ++ "Flx:" + fluxMIDI.asString + "\n" ++ "Fla:" +  flatnessMIDI.asString + "\n" ++ "Fhc:" + freqCentroidMIDI.asString + "\n" ++ "Fhe:" + energyMIDI.asString + "\n" ++ "Midi In", 0, 500);
+								});
 							}.defer;
 					});
 					listAudioIN.do({arg audio;
@@ -4287,10 +4307,14 @@ y ... -						Musical keys.
 				s.bind{
 					if(item.value != 1, {
 						lastName = windowSynth.name;
-						tdefSynthesizer.clear;
-						s.sync;
-						tdefSynthesizer.remove;
-						s.sync;
+						if(tdefSynthesizer.isKindOf(Function), {
+							fonctionNewMusicListeners.remove(tdefSynthesizer);
+						}, {
+							tdefSynthesizer.clear;
+							s.sync;
+							tdefSynthesizer.remove;
+							s.sync;
+						});
 						if(synthAndFX != nil, {synthAndFX.free});
 						s.sync;
 						synthNumber = item.value;
@@ -5321,7 +5345,7 @@ y ... -						Musical keys.
 						// Training Kohonen Freq
 						maxTraining = newFreq.size;
 						newFreq = newFreq * 127;
-						maxTraining.do({arg i; kohonenF.training(newFreq.wrapAt(i).asArray, i+1, maxTraining, 1)});
+						maxTraining.do({arg i;kohonenF.training(newFreq.wrapAt(i).asArray, i+1, maxTraining, 1)});
 						// Calculate Kohonen Freq
 						newFreq = newFreq.collect({arg item, index, z;
 							item = kohonenF.training(item.asArray, 1, 1, 1);
@@ -5668,9 +5692,9 @@ y ... -						Musical keys.
 						// Mode OnFly1
 						{
 							if(flagModeSynth == 'OnFly1' /*and: {synthNumber < choiceSynth.indexOf('FX (')}*/, {
-								tdefSynthesizer = OSCFunc.newMatching({arg msg, time, addr, recvPort;
-									var music, musicData, r;
-									music = msg[1].asString.interpret;
+								tdefSynthesizer = { arg music;
+									var musicData, r;
+									// music est deja un Array local: aucune serialisation OSC.
 									if(music.at(8) == audioInID,
 										{
 											//Reset Trigger Recording
@@ -5830,14 +5854,15 @@ y ... -						Musical keys.
 											});
 										};
 									});
-								}, '/NewMusic', musicAppAddr);
+								};
+								fonctionNewMusicListeners.add(tdefSynthesizer);
 							},
 							// Mode OnFly2
 							{
 								if(flagModeSynth == 'OnFly2' /*and: {synthNumber < choiceSynth.indexOf('FX (')}*/, {
-									tdefSynthesizer = OSCFunc.newMatching({arg msg, time, addr, recvPort;
-										var music, musicData, r;
-										music = msg[1].asString.interpret;
+									tdefSynthesizer = { arg music;
+										var musicData, r;
+										// music est deja un Array local: aucune serialisation OSC.
 										if(music.at(8) == audioInID,
 											{
 												//Reset Trigger Recording
@@ -6015,14 +6040,15 @@ y ... -						Musical keys.
 												});
 												};
 										});
-									}, '/NewMusic', musicAppAddr);
+									};
+								fonctionNewMusicListeners.add(tdefSynthesizer);
 								},
 								// Mode Stream 1 and 2
 								{
 									if(flagModeSynth == 'Stream1' or: {flagModeSynth == 'Stream2'} and: {synthNumber > choiceSynth.indexOf('END (') or: {synthNumber < choiceSynth.indexOf('PIANO (')}}, {
-										tdefSynthesizer = OSCFunc.newMatching({arg msg, time, addr, recvPort;
-											var music, musicData, r;
-											music = msg[1].asString.interpret;
+										tdefSynthesizer = { arg music;
+											var musicData, r;
+											// music est deja un Array local: aucune serialisation OSC.
 											if(music.at(8) == audioInID,
 												{
 													//Reset Trigger Recording
@@ -6190,7 +6216,8 @@ y ... -						Musical keys.
 													});
 													};
 											});
-										}, '/NewMusic', musicAppAddr);
+										};
+								fonctionNewMusicListeners.add(tdefSynthesizer);
 										// Synth
 										synthAndFX = Synth.new(name,[
 											\out, out + startChannelAudioOut, \busIn, listeBusInOut.at(busIn), \busOut, listeBusInOut.at(busOut), \busFXout, listeBusFX.at(busFXout), \busFXin, listeBusFX.at(busFXin), \bufferOne, bufferOne.bufnum, \bufferTwo, bufferTwo.bufnum, \loopOne, loop1, \loopTwo, loop2, \switchBuffer1, switch1, \switchBuffer2, switch2, \recBuffer1, recBuffer1, \recBuffer2, recBuffer2,
@@ -6232,10 +6259,14 @@ y ... -						Musical keys.
 					s.sync;
 					/*groupe.release(5);
 					s.sync;*/
-					tdefSynthesizer.clear;
-					s.sync;
-					tdefSynthesizer.remove;
-					s.sync;
+					if(tdefSynthesizer.isKindOf(Function), {
+						fonctionNewMusicListeners.remove(tdefSynthesizer);
+					}, {
+						tdefSynthesizer.clear;
+						s.sync;
+						tdefSynthesizer.remove;
+						s.sync;
+					});
 					tdefControls.clear;
 					s.sync;
 					tdefControls.remove;
