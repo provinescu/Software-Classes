@@ -5127,16 +5127,17 @@ Preset Wek",
 			});
 
 			// Fonction AutoControls
-			fonctionTdefControls = {arg window, groupe, newTempo=24;
+			fonctionTdefControls = {arg window, groupe, newTempo=24, valeur=0.0;
 				Tdef("AutoSynthCtrl"++groupe.nodeID.asString, {
 					loop({
 						// Update controls
+						valeur = jitterAutomationSynthControls.value;
 						{
 							if(window.isClosed  == false, {
 								if(window.view.children.at(0).value == 1 and: {window.view.children.at(51).value == 1} and: {controlsNode.value != []}, {
 									// Controls Synth
-									ctrlSynth = (window.view.children.at(49).value + [window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view
-										.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0), window.view.children.at(53).children.at(1).value * rrand(-1.0, 1.0)]).clip(0.001, 0.99);
+									ctrlSynth = (window.view.children.at(49).value + [window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view
+										.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur), window.view.children.at(53).children.at(1).value * rrand(valeur.neg,  valeur)]).clip(0.001, 0.99);
 									groupe.setn(\ctrl1, ctrlSynth.at(0), \ctrl2, ctrlSynth.at(1), \ctrl3, ctrlSynth.at(2), \ctrl4, ctrlSynth.at(3), \ctrl5, ctrlSynth.at(4), \ctrl6, ctrlSynth.at(5), \ctrl7, ctrlSynth.at(6), \ctrl8, ctrlSynth.at(7), \ctrl9, ctrlSynth.at(8), \ctrl10, ctrlSynth.at(9), \ctrl11, ctrlSynth.at(10), \ctrl12, ctrlSynth.at(11));
 								});
 								newTempo = rrand(window.view.children.at(52).children.at(1).value, window.view.children.at(52).children.at(3).value);
