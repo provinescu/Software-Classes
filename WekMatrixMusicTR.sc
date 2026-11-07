@@ -1351,7 +1351,7 @@ Preset Wek",
 				[[], "AntiClick (HP Plugins) | "],
 				nil,
 				// Sampler
-				[[0.5, 0.5], "AntiClick (HP Plugins) | startpos - startloop"],
+				[[0.5, 0.5], "AntiClick (HP Plugins) | (use offset for startPos) startloop - endLoop"],
 				[[0.5, 0.5, 0.5], "AntiClick (HP Plugins) | trig - dur - pos"],
 				[[0.5], "AntiClick (HP Plugins) | end"],
 				[[], "AntiClick (HP Plugins) | "],
@@ -1363,8 +1363,8 @@ Preset Wek",
 				[[0.5, 0.5], "AntiClick (HP Plugins) | freq - bwr"],
 				[[0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "AntiClick (HP Plugins) | RLPF lowfreq - hifreq - rq - RHPF lowfreq - hifreq - rq"],
 				[[0.5, 0.5], "AntiClick (HP Plugins) | length - coef"],
-				[[0.5], "AntiClick (HP Plugins) | phase"],
-				[[0.5], "AntiClick (HP Plugins) | phase"],
+				[[0.5], "AntiClick (HP Plugins) | shift"],
+				[[0.5], "AntiClick (HP Plugins) | shift"],
 				[[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "AntiClick (HP Plugins) | trig - chaos(2..3) - pitchratio(4..10) - pitchdispersion - timedispertion"],
 				[[0.5, 0.5, 0.5], "AntiClick (HP Plugins) | trig - pitchdispersion - timedispertion"],
 				[[0.5, 0.5], "AntiClick (HP Plugins) | pitchdispersion - timedispertion"],
@@ -7526,8 +7526,8 @@ Preset Wek",
 				// Set Buffer
 				buffer = if(switchBuffer1.value > 0, bufferOne, recBuffer1);
 				// Synth
-				chain = HPplayBuf.ar(1, buffer, 1 * reverse1, 0, BufFrames.kr(buffer) * offset1, loopOne, ctrlHP1, ctrlHP2);
-				chain = FreqShift.ar(chain, freq, ctrl1);
+				chain = HPplayBuf.ar(1, buffer, rate * reverse1, 0, BufFrames.kr(buffer) * offset1, loopOne, ctrlHP1, ctrlHP2);
+				chain = FreqShift.ar(chain, freq * ctrl1);
 				chain =  LeakDC.ar(chain.softclip);
 				// Switch Audio Out
 				foncSynthOut.value(out, chain, panLo, panHi, duree, durHi, durLo, durM, tempo, envelope, ambisonic, busOut, levelBusOut, busFXout, levelBusFX, flagAmpOnOff);
@@ -7561,8 +7561,8 @@ Preset Wek",
 				// Set Buffer
 				buffer = if(switchBuffer1.value > 0, bufferOne, recBuffer1);
 				// Synth
-				chain = HPplayBuf.ar(1, buffer, 1 * reverse1, 0, BufFrames.kr(buffer) * offset1, loopOne, ctrlHP1, ctrlHP2);
-				chain = FreqShift.ar(In.ar(busIn), freq, ctrl1);
+				chain = HPplayBuf.ar(1, buffer, rate * reverse1, 0, BufFrames.kr(buffer) * offset1, loopOne, ctrlHP1, ctrlHP2);
+				chain = FreqShift.ar(chain, ctrl1*1000);
 				chain =  LeakDC.ar(chain.softclip);
 				// Switch Audio Out
 				foncSynthOut.value(out, chain, panLo, panHi, duree, durHi, durLo, durM, tempo, envelope, ambisonic, busOut, levelBusOut, busFXout, levelBusFX, flagAmpOnOff);
