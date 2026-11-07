@@ -5757,7 +5757,7 @@ Preset Wek",
 					/*//Reset 1 Trigger Recording
 					bufferRecording1.set(\trigger, 1, \preLevel, ctrlBuffer.at(0), \postLevel, ctrlBuffer.at(1), \loop, loopRec1, \run, ctrlBuffer.at(2));
 					bufferRecording2.set(\trigger, 1, \preLevel, ctrlBuffer.at(5), \postLevel, ctrlBuffer.at(6), \loop, loopRec2, \run, ctrlBuffer.at(7));*/
-					synthAndFX = Synth.new(name,[
+					synthAndFX = Synth.newPaused(name,[
 						\out, out + startChannelAudioOut, \busIn, listeBusInOut.at(busIn), \busOut, listeBusInOut.at(busOut), \busFXout, listeBusFX.at(busFXout), \busFXin, listeBusFX.at(busFXin), \bufferOne, bufferOne.bufnum, \bufferTwo, bufferTwo.bufnum, \loopOne, loop1, \loopTwo, loop2, \switchBuffer1, switch1, \switchBuffer2, switch2, \recBuffer1, recBuffer1, \recBuffer2, recBuffer2,
 						\offset1, ctrlBuffer.at(3), \offset2, ctrlBuffer.at(8), \reverse1, ctrlBuffer.at(4), \reverse2, ctrlBuffer.at(9),
 						\freq, freq, \amp, amp, \duree, duree, \tempo, tempo.reciprocal, \freqCentroid, freqCentroid, \flatness, flatness, \energy, energy, \flux, flux,
@@ -6514,7 +6514,6 @@ Preset Wek",
 				});
 			};
 			fonctionSynthTdefFX.value;
-			if(synthAndFX != nil, {synthAndFX.run(true)});
 
 			windowSynth.onClose_({arg window;
 				s.bind{
