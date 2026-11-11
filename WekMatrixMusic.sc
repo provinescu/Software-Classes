@@ -10419,7 +10419,7 @@ Preset Wek",
 				// Synth
 				chain = Saw.ar(freq.lag(tempo), 0.5);
 				chain = HPF.ar(chain, freqCentroid.clip(20, 20000), 1, LPF.ar(chain, energy.clip(20,20000), 1));
-				chain = CombC.ar(chain, 0.2, flux.clip(0.0001, 10000), flatness.clip(0.0001, 10000), 0.5);
+				chain = CombC.ar(chain, 0.2, flux.clip(0.0001, 10000), flatness.clip(0.0001, 10000), 0.2);
 				// Switch Audio Out
 				foncSynthOut.value(out, chain, panLo, panHi, duree, durHi, durLo, durM, tempo, envelope, ambisonic, busOut, levelBusOut, busFXout, levelBusFX, flagAmpOnOff);
 		}).add;
