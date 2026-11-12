@@ -47,3 +47,6 @@ Otherwise, explore and have fun.
 Notes:
 
 For versions using the Transformer, depending on the latency, you may receive ‘late’ messages. This is perfectly normal. The Transformer performs a great deal of computation.
+
+With certain software, error messages may appear in the post window (e.g. ‘node not found’, ‘late’, ‘buffer’, etc.).
+These have no effect on the software’s operation.
