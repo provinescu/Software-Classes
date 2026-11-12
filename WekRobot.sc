@@ -6,13 +6,13 @@ WekRobot {
 
 	var keyboardShortCut, keyboardTranslate, keyboardTranslateBefore, setupKeyboardShortCut, keyboard, keyVolume, windowKeyboard, keyboardVolume, fonctionShortCut, windowVST, flagVST, flagMC=0, widthMC=2.0, orientationMC=0.5, numberAudioIn, nom, foncSynthOut, foncFXPre, foncFXPost, scAdr, udpAdr;
 
-	*new {arg path="~/Documents/WekRobot/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="WekRobot", wek=6448, wekPort=57120, scPort=57110, l=0.2;
+	*new {arg path="~/Documents/WekRobot/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="WekRobot", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
-		^super.new.init(name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, l);
+		^super.new.init(name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, sl, ml);
 
 	}
 
-	init {arg name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, l;
+	init {arg name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, sl, ml;
 
 		// Setup GUI style
 		QtGUI.palette = QPalette.dark;// light / system
@@ -69,9 +69,9 @@ WekRobot {
 		// MIDI
 		MIDIClient.init;
 		MIDIIn.connect(0, 0);
-		s.latency = l;// Default 0.2 pour accurate midi/sound
+		s.latency = sl;// Default 0.2 pour accurate midi/sound
 		~midiOut = MIDIOut(0);
-		~midiOut.latency = s.latency;
+		~midiOut.latency = ml;
 		~midiOut.connect(0);
 
 		~helpWekRobot="

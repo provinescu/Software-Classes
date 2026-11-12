@@ -3,15 +3,15 @@ Launcher {
 
 	classvar  < s;
 
-	var <> name, ni, o, r, f, l, w, devIn, devOut, listDevIn, listDevOut, path, nameSoft, driverBlock, widthMC, orientationMC, flagMC, wek, wekPort, scPort;
+	var <> name, ni, o, r, f, sl, ml, w, devIn, devOut, listDevIn, listDevOut, path, nameSoft, driverBlock, widthMC, orientationMC, flagMC, wek, wekPort, scPort;
 
-	*new	{arg path="~/Documents/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, wek=6448, wekPort = 57120, scPort = 57120, l=0.2;
+	*new	{arg path="~/Documents/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, wek=6448, wekPort = 57120, scPort = 57120, sl=0.2, ml=0.2;
 
-		^super.new.init(path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, l);
+		^super.new.init(path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, sl, ml);
 
 	}
 
-	init	{arg path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, l;
+	init	{arg path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, sl, ml;
 
 		// Init
 		QtGUI.palette = QPalette.dark;// light / system
@@ -20,7 +20,8 @@ Launcher {
 		o = 2;
 		r = 2;
 		f = 0;
-		l = 0.2;
+		sl = 0.2;
+		ml = 0.2;
 		listDevIn = ServerOptions.inDevices;
 		listDevOut = ServerOptions.outDevices;
 		devIn = listDevIn.at(0);
@@ -34,7 +35,7 @@ Launcher {
 		scPort = 57110;
 
 		// Output Panel
-		w = Window("HP Software", Rect(666, 333, 210, 475), scroll: true);
+		w = Window("HP Software", Rect(666, 333, 210, 525), scroll: true);
 		w.alpha=1.0;
 		w.front;
 		w.view.decorator = FlowLayout(w.view.bounds);
@@ -109,6 +110,16 @@ Launcher {
 				}
 			);
 		};
+
+		//Text Latency Number
+		StaticText(w, Rect(0, 0, 200, 20)).string_("Server Latency").stringColor_(Color.yellow);
+		w.view.decorator.nextLine;
+		NumberBox(w, 200@20).value_(sl).action_{arg ez; sl = ez.value}.decimals_(4);
+
+		//Text Latency Number
+		StaticText(w, Rect(0, 0, 200, 20)).string_("Midi Latency").stringColor_(Color.yellow);
+		w.view.decorator.nextLine;
+		NumberBox(w, 200@20).value_(ml).action_{arg ez; ml = ez.value}.decimals_(4);
 
 		//name = "Robot";
 		nameSoft = "Robot";
@@ -231,22 +242,17 @@ Launcher {
 	);
 };
 
-		//Text Latency Number
-		StaticText(w, Rect(0, 0, 200, 20)).string_("Latency").stringColor_(Color.yellow);
-		w.view.decorator.nextLine;
-		NumberBox(w, 200@20).value_(l).action_{arg ez; l = ez.value}.decimals_(4);
-
 		//Text File In
 		StaticText(w, Rect(0, 0, 200, 20)).string_("Choose Working Folder").stringColor_(Color.yellow);
 		//Working Folder
 		Button(w,Rect(0, 0, 200, 20)).states_([["Working Folder", Color.white]]).action = {arg start;
 			FileDialog.new({ arg paths;
 				paths = paths.at(0).asString ++"/"++ nameSoft;
-				nameSoft.interpret.new(paths, ni, o, r, f, devIn, devOut, driverBlock, widthMC, orientationMC, flagMC, nameSoft, wek, wekPort, scPort, l);
+				nameSoft.interpret.new(paths, ni, o, r, f, devIn, devOut, driverBlock, widthMC, orientationMC, flagMC, nameSoft, wek, wekPort, scPort, sl, ml);
 				//Server.default.makeGui;
 			},
 			{
-				nameSoft.interpret.new(path, ni, o, r, f, devIn, devOut, driverBlock, widthMC, orientationMC, flagMC, nameSoft, wek, wekPort, scPort, l);
+				nameSoft.interpret.new(path, ni, o, r, f, devIn, devOut, driverBlock, widthMC, orientationMC, flagMC, nameSoft, wek, wekPort, scPort, sl, ml);
 				//Server.default.makeGui;
 			}, fileMode: 2);
 			w.close;

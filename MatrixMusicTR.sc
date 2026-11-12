@@ -8,13 +8,13 @@ MatrixMusicTR {
 	var degrees, root, scale, tuning, automationSliderTrans, automationSliderStretch, automationSliderQuant, automationSliderPan, automationSliderAmp;
 	var fonctionNewMusicListeners, fonctionDispatchNewMusic, lastDisplayOSCtime, displayOSCinterval, lastBPMdisplayTime, bpmDisplayInterval, oscKeyboardData, oscMIDIdata, freqBefore, ampBefore, dureeBefore, freqMIDI, ampMIDI, dureeMIDI, lastTimeMIDI, tempoMIDI, freqCentroidMIDI, flatnessMIDI, energyMIDI, fluxMIDI, freqTampon, ampTampon, lastTimeAnalyse, arrayAudioIN, textAudioIn, textFileIn, oscMusicData, lastDataAnalyze, fonctionArrayAudioIN, listAudioIN, synthPlayFile, synthFileIn, loPass, hiPass, threshAlgo, filterAlgo, maxKeybMidi, memKeybMidi, fonctionPlotNode, menuFreeze, foncSynthOut, scAdr, udpAdr;
 
-	*new	{arg path="~/Documents/MatrixTR/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="MatrixTR", wek=6448, wekPort=57120, scPort=57110, l=0.2;
+	*new	{arg path="~/Documents/MatrixTR/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="MatrixTR", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
-		^super.new.init(name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, scPort, l);
+		^super.new.init(name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, scPort, sl, ml);
 
 	}
 
-	init	{arg name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, scPort, l;
+	init	{arg name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, scPort, sl, ml;
 
 		// Setup GUI style
 		//GUI.qt;
@@ -77,9 +77,9 @@ MatrixMusicTR {
 		// MIDI
 		MIDIClient.init;
 		MIDIIn.connect(0, 0);
-		s.latency = l;// Default 0.2 pour accurate midi/sound
+		s.latency = sl;// Default 0.2 pour accurate midi/sound
 		midiOut = MIDIOut(0);
-		midiOut.latency = s.latency;
+		midiOut.latency = ml;
 		midiOut.connect(0);
 
 		this.run;// Run the Soft

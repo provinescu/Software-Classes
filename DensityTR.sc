@@ -10,13 +10,13 @@ DensityTR {
 	var menuRecording, jpVerb, groupeLimiter, menuAlgo, sliderAlgorithm, listAlgorithm, algoLo, algoHi, displayAlgo, jitterControls,numFhzBand, bandFHZ, dataFlux, dataFlatness, dataCentroid, dataEnergy, dataBPM, dataFreq, dataAmp, dataDuree, indexDataFlux, indexDataFlatness, indexDataCentroid, indexDataEnergy, indexDataBPM, indexDataFreq, indexDataAmp, indexDataDuree, busOSCfreq, busOSCamp, busOSCduree, flagMemory, flagFhzBand;
 	var sliderSynthBand, rangeSynthBand, numIndexSynthBand, displayIndex, flagBand, fonctionBand, displayMIDI, midiRange, freqBefore, ampBefore, dureeBefore, freqTampon, ampTampon, lastTimeAnalyse, menuVST, synthVST, fxVST, groupeVST, windowVST, flagVST, flagRecSound, widthMC, orientationMC, slaveAppAddr, numberAudioIn, channelsSynth, channelsVerb, rangeFFT, rangeBand, loopMusic;
 
-	*new {arg path = "~/Documents/DensityTR/", ni = 2, numberOut=2, numberRec=2, format=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="DensityTR", wek=6448, wekPort=57120, scPort=57110, l=0.2;
+	*new {arg path = "~/Documents/DensityTR/", ni = 2, numberOut=2, numberRec=2, format=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="DensityTR", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
-		^super.new.init(name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, l);
+		^super.new.init(name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, sl, ml);
 
 	}
 
-	init {arg name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, l;
+	init {arg name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, sl, ml;
 
 		//// Setup GUI style
 		QtGUI.palette = QPalette.dark;// light / system
@@ -64,9 +64,9 @@ DensityTR {
 		// MIDI
 		MIDIClient.init;
 		MIDIIn.connect(0, 0);
-		s.latency = l;// Default 0.2 pour accurate midi/sound
+		s.latency = sl;// Default 0.2 pour accurate midi/sound
 		midiOut = MIDIOut(0);
-		midiOut.latency = s.latency;
+		midiOut.latency = ml;
 		midiOut.connect(0);
 
 		headerFormat = "aiff";

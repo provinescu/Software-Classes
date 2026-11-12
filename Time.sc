@@ -8,13 +8,13 @@ Time {
 
 	var <> hprec1, hprec2, synthAudioRec,  listeBufferAudioRec, busAudioIn, groupeAudioRec, file, listeGroupAudioRec, synthFileIn, fonctionLoadFileForAnalyse, bufferFile, listeActiveAudioRec, serverAdresse, masterAppAddr, slaveAppAddr, ardourOSC, synthOSConset, synthOSCpitch, synthOSCpitch2, synthOSCkeytrack, synthOSCkeyboard, timeOSC, chordDureeOSC, maxDureeOSC, flagOSC, windowExternalControlGUI, userOperatingSystem, userOSchoiceControl, fhzFilter, ampFilter, durFilter, setupKeyboardShortCut, windowKeyboard, keyboardShortCut, keyboardTranslate, keyboard, keyVolume, keyboardTranslateBefore, keyboardVolume, freqBefore, ampBefore, dureeBefore, flagKeyboard, indexWindows, listeWindows, activateOSC, oscHPtempo, oscHPstart, oscHPrec, oscState, oscStateFlag, initOSCresponder, audioFileText, switchOSCfreq, switchOSCamp, switchOSCdur, ampMIDIOSC, fonctionCollectFolders, foldersToScanAll, foldersToScanPreset, foldersToScanSynthesizer, flagAutomation, lastValue1Automation, lastValue2Automation, lastNumberChoiceConfig, fonctionAutomationPreset, lastTimeAutomation, thresholdAutomation, lastTime, typeAudio, midiOut, choiceCanalMidiOut, flagMidiOut, freqMidi, synthCanalMidiOut, listeFileAnalyze, listeNameFileAnalyze, listeFlagDureeSynth, loopSample, sampleMenu, loopMenu, typeMasterOut, menuFile, menuRecording, menuPreset, menuSynth, menuHelp, menuAlgo, menuScale, menuOSC, busOSCfreq, busOSCamp, busOSCduree, busOSCtempo, busOSCflatness, busOSCflux, busOSCenergy, busOSCcentroid, tempoOSC, oscTempo, flagTempo, synthOSCFFT, fonctionInitBand, numFhzBand, lastTimeBand, bandFHZ, fonctionBand, flagIndexBand, rangeNumFhzBand, listeDataBand, flagMIDI, listeGroupFX, listeGroupFilter, listeBusSynth, listeLoop, listeRecLevel, listePreLevel, audioDisplay, autoRoot, bpmDisplay, ambitusFreq, windowVST, flagVST, groupeLimiter, widthMC, orientationMC, numberAudioIn, rangeFFT, rangeBand;
 
-	*new	{arg path="~/Documents/Time/", ni=2, numberOut=2, numberRec=2, format=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="Time", wek=6448, wekPort=57120, scPort=57110, l=0.2;
+	*new	{arg path="~/Documents/Time/", ni=2, numberOut=2, numberRec=2, format=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="Time", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
-		^super.new.init(name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, l);
+		^super.new.init(name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, sl, ml);
 
 	}
 
-	init	{arg name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, l;
+	init	{arg name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, sl, ml;
 
 		// Setup GUI style
 		QtGUI.palette = QPalette.dark;// light / system
@@ -62,9 +62,9 @@ Time {
 		// MIDI
 		MIDIClient.init;
 		MIDIIn.connect(0, 0);
-		s.latency = l;// Default 0.2 pour accurate midi/sound
+		s.latency = sl;// Default 0.2 pour accurate midi/sound
 		midiOut = MIDIOut(0);
-		midiOut.latency = s.latency;
+		midiOut.latency = ml;
 		midiOut.connect(0);
 
 		// Run the Soft
