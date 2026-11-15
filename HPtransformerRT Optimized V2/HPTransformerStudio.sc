@@ -51,7 +51,7 @@ HPTransformerStudio : Object {
         // Fenetre unique : Dashboard, Controls, Generation, Graphs, Heatmaps,
         // Generation, Memoire, Surprise, AutoTune et MetaLearn Presets, Snapshots RCU, Logs.
         var w, pages, pageButtons, activePage, routine, running=true, rate=0.75;
-        var uiScale=0.86, uiRect, scrollView, uiRoot;
+        var uiScale=0.78, uiRect, scrollView, uiRoot;
         var graphDrawScale=0.82, graphRect, heatDrawScale=0.82, heatPoint, heatRect;
         var statusText, graphView, heatView, autoText, metaText, rcuText, logView;
         var genPresetText, memoryPresetText, surprisePresetText;
@@ -79,6 +79,7 @@ HPTransformerStudio : Object {
         var showPage, addLog, addSlider, button, title, trim, refresh, drawLine;
         var formatFixed;
         var styleButton, buttonColorForText, navIdleColor, navActiveColor;
+        var displayPanelColor, displayTextColor;
         var exportCSV, exportLogs, exportHeat, loadSettings, savePreset, loadPreset;
         var generalNames, generalPresets, generalProcessHz, generalLearnDivider, generalLearningState, generalGenerationState, applyGeneralPreset;
         var autoNames, autoPresets, metaNames, metaPresets;
@@ -114,28 +115,42 @@ HPTransformerStudio : Object {
          })
         };
         title={|p,text,x,y,wid=500| StaticText(p,uiRect.(x,y,wid,24)).string_(text)
-         .font_(Font.default.boldVariant.size_(15)).stringColor_(Color.cyan(0.85)) };
-        navIdleColor=Color.grey(0.24);
-        navActiveColor=Color.blue(0.58);
-        buttonColorForText={|text|
-         var lower=text.asString.toLower;
-         if(lower.contains("off") or:{lower.contains("arreter")} or:{lower.contains("desactiver")},{Color.red(0.52)},{
-          if(lower.contains("on") or:{lower.contains("demarrer")} or:{lower.contains("activer")},{Color.green(0.42)},{
-           if(lower.contains("reset") or:{lower.contains("discard")} or:{lower.contains("effacer")},{Color(0.82,0.37,0.12)},{
-            if(lower.contains("export") or:{lower.contains("sauver")} or:{lower.contains("charger")},{Color(0.38,0.25,0.70)},{
-             if(lower.contains("publish") or:{lower.contains("commit")} or:{lower.contains("prepare")},{Color(0.08,0.55,0.62)},{Color.blue(0.42)})
-            })
-           })
-          })
-         })
+         .font_(Font.default.boldVariant.size_(15)).stringColor_(Color(0.36,0.86,0.92)) };
+        // Palette Slate / Ice Cyan : contraste eleve et boutons compacts.
+        navIdleColor=Color(0.27, 0.34, 0.43);
+        // Panneaux de sortie : fond Slate fonce et texte clair explicite.
+        // Les champs de saisie restent blancs avec texte noir.
+        displayPanelColor=Color(0.09, 0.12, 0.17);
+        displayTextColor=Color(0.90, 0.95, 0.99);
+        navActiveColor=Color(0.00, 0.62, 0.70);
+        buttonColorForText={|label|
+         var lower, result;
+         lower=label.asString.toLower;
+         result=Color(0.27, 0.34, 0.43);
+         if(lower.contains("off") or:{lower.contains("arreter")} or:{lower.contains("desactiver")} or:{lower.contains("delete")}, {
+          result=Color(0.55, 0.23, 0.27);
+         });
+         if(lower.contains("on") or:{lower.contains("demarrer")} or:{lower.contains("activer")}, {
+          result=Color(0.00, 0.48, 0.53);
+         });
+         if(lower.contains("reset") or:{lower.contains("discard")} or:{lower.contains("effacer")}, {
+          result=Color(0.58, 0.38, 0.19);
+         });
+         if(lower.contains("export") or:{lower.contains("sauver")} or:{lower.contains("charger")}, {
+          result=Color(0.30, 0.42, 0.56);
+         });
+         if(lower.contains("publish") or:{lower.contains("commit")} or:{lower.contains("prepare")}, {
+          result=Color(0.00, 0.53, 0.60);
+         });
+         result
         };
         styleButton={|view,text,color|
-         view.states_([[text,Color.white,color ? buttonColorForText.(text)]]);
-         view.font_(Font.default.boldVariant.size_(11));
+         view.states_([[text,Color(0.97,0.985,1.0),color ? buttonColorForText.(text)]]);
+         view.font_(Font.default.boldVariant.size_(10));
          view
         };
         button={|p,text,x,y,wid=170,fun| var view;
-         view=Button(p,uiRect.(x,y,wid,34)); styleButton.(view,text,nil); view.action_(fun); view };
+         view=Button(p,uiRect.(x,y,wid,30)); styleButton.(view,text,nil); view.action_(fun); view };
         // Format decimal independant du formatage automatique de NumberBox.
         formatFixed={|value,decimals=6|
          var factor,scaled,negative,absolute,integerPart,fractionPart,fractionString;
@@ -151,18 +166,18 @@ HPTransformerStudio : Object {
 
         addSlider={|p,label,param,spec,x,y,wid=550,decimals=6|
          var container,labelView,sliderView,valueField,totalW,totalH,labelW,numberW,gap,sliderW,currentValue,setExactValue,widget;
-         totalW=wid*uiScale;totalH=36*uiScale;labelW=145*uiScale;
+         totalW=wid*uiScale;totalH=32*uiScale;labelW=145*uiScale;
          numberW=132*uiScale;gap=6*uiScale;
          sliderW=(totalW-labelW-numberW-(gap*2)).max(40);
          currentValue=transformer.getParameter(param).asFloat;
          container=CompositeView(p,uiRect.(x,y,wid,36)).background_(Color.clear);
          labelView=StaticText(container,Rect(0,0,labelW,totalH))
-          .string_(label).stringColor_(Color.white).font_(Font.default.size_(11));
-         sliderView=Slider(container,Rect(labelW+gap,3*uiScale,sliderW,totalH-(6*uiScale)))
+          .string_(label).stringColor_(Color.white).font_(Font.default.size_(10));
+         sliderView=Slider(container,Rect(labelW+gap,2*uiScale,sliderW,totalH-(4*uiScale)))
           .background_(Color.grey(0.28));
          valueField=TextField(container,Rect(totalW-numberW,0,numberW,totalH))
           .background_(Color.white).stringColor_(Color.black)
-          .font_(Font("Monaco",11)).align_(\right)
+          .font_(Font("Monaco",10)).align_(\right)
           .string_(formatFixed.(currentValue,decimals));
          setExactValue={|requested,sendToTransformer=true|
           var exact;exact=requested.asFloat.clip(spec.clipLo,spec.clipHi);
@@ -571,13 +586,12 @@ HPTransformerStudio : Object {
          })})
         };
 
-        w=Window("HPTransformer Studio Pro - Profils temps reel et hors temps reel",uiRect.(35,35,1320,860)).background_(Color.grey(0.13));
-        // Palette locale: Window ne comprend pas palette_; la palette doit etre appliquee a sa vue racine.
-        // Cette ligne isole le Studio de QtGUI.palette = QPalette.dark.
-        w.view.palette_(QPalette.light);
+        w=Window("HPTransformer Studio Pro - Slate / Ice Cyan",uiRect.(35,35,1320,860)).background_(Color(0.12,0.15,0.20));
+        // Palette locale Slate / Ice Cyan, sans modifier la palette globale de QtGUI.
+        w.view.palette_(QPalette.auto(Color(0.27,0.34,0.43),Color(0.12,0.15,0.20)));
         scrollView=ScrollView(w,uiRect.(0,0,1320,860)).hasBorder_(false).autohidesScrollers_(true);
-        // CompositeView explicite recommande pour fixer une surface de contenu plus grande.
-        uiRoot=CompositeView(scrollView,uiRect.(0,0,1360,1080)).background_(Color.grey(0.13));
+        // Surface de travail compacte : defilement vertical conserve pour les pages longues.
+        uiRoot=CompositeView(scrollView,uiRect.(0,0,1360,1080)).background_(Color(0.12,0.15,0.20));
         StaticText(uiRoot,uiRect.(5,1065,5,5)).string_("");
         pages=IdentityDictionary.new; pageButtons=IdentityDictionary.new;
         [
@@ -587,9 +601,9 @@ HPTransformerStudio : Object {
          [\surprisePresets,"Surprise Presets"],[\auto,"AutoTune Presets"],[\meta,"MetaLearn Presets"],
          [\rcu,"Snapshots RCU"],[\logs,"Logs"]
         ].do({|pair,i| var b,p,col,row;col=i%4;row=i.div(4);
-         b=Button(uiRoot,uiRect.(10+(col*325),8+(row*35),315,29));styleButton.(b,pair[1],navIdleColor);
+         b=Button(uiRoot,uiRect.(10+(col*325),8+(row*35),315,27));styleButton.(b,pair[1],navIdleColor);
          b.action_({showPage.(pair[0])}); pageButtons[pair[0]]=b;
-         p=CompositeView(uiRoot,uiRect.(0,190,1320,840)).background_(Color.grey(0.17)).visible_(false); pages[pair[0]]=p });
+         p=CompositeView(uiRoot,uiRect.(0,190,1320,840)).background_(Color(0.15,0.19,0.25)).visible_(false); pages[pair[0]]=p });
         showPage={|name| activePage=name; pages.keysValuesDo({|k,p|p.visible_(k==name)});
          pageButtons.keysValuesDo({|k,b| var label=b.states[0][0]; styleButton.(b,label,if(k==name,{navActiveColor},{navIdleColor}))});
          if(name==\graphs,{graphView.refresh}); if(name==\heatmaps,{heatView.refresh}) };
@@ -1795,8 +1809,10 @@ HPTransformerStudio : Object {
         savePreset={Dialog.savePanel({|p|if(p.notNil,{var fp=if(p.endsWith(".hptpreset"),{p},{p++".hptpreset"});transformer.runtimeConfig.writeArchive(fp);addLog.("Preset sauve: "++fp)})})};
         loadPreset={Dialog.openPanel({|p|if(p.notNil,{var x=Object.readArchive(p);if(x.respondsTo(\keysValuesDo),{loadSettings.(x,p)})})})};
         // Style global haute lisibilite macOS / Qt.
+        // Tous les TextView d'affichage utilisent le meme contraste sombre/clair.
+        // Les champs d'edition sont reconfigures en blanc/noir juste apres.
         pages.keysValuesDo({|pageName,pageView|pageView.children.do({|child|
-         if(child.isKindOf(TextView),{child.background_(Color(0.96,0.97,0.98));child.stringColor_(Color.black);child.font_(Font.default.size_(12));child.refresh});
+         if(child.isKindOf(TextView),{child.background_(displayPanelColor);child.stringColor_(displayTextColor);child.font_(Font.default.size_(12));child.refresh});
          if(child.isKindOf(StaticText),{child.stringColor_(Color.white)});
          if(child.isKindOf(TextField),{child.background_(Color.white);child.stringColor_(Color.black)});
          if(child.isKindOf(NumberBox),{
@@ -1809,7 +1825,22 @@ HPTransformerStudio : Object {
          if(child.isKindOf(PopUpMenu),{child.background_(Color.white);child.stringColor_(Color.black)})
         })});
 
-        [statusText,outputView,generationLiveText,memoryLiveText,surpriseLiveText,oscStatusText,oscEventsView,genPresetText,memoryPresetText,surprisePresetText,autoText,metaText,rcuText,logView,torusMaskStatus,setDescriptionView,manualParamsStatus,morphStatus].do({|view|if(view.notNil,{view.background_(Color(0.96,0.97,0.98));view.stringColor_(Color.black);view.font_(Font.default.size_(12));view.refresh})});
+        [statusText,outputView,generationLiveText,memoryLiveText,surpriseLiveText,oscStatusText,oscEventsView,genPresetText,memoryPresetText,surprisePresetText,autoText,metaText,rcuText,logView,torusMaskStatus,setDescriptionView,manualParamsStatus,morphStatus].do({|view|if(view.notNil,{view.background_(displayPanelColor);view.stringColor_(displayTextColor);view.font_(Font.default.size_(12));view.refresh})});
+
+        // Ajustement typographique specifique de l'onglet Temps reel / Bus / OSC.
+        // Les dimensions de la GUI sont compactes : on reduit les polices sans
+        // changer les coordonnees, les callbacks, ni les fonctions des controles.
+        pages[\osc].children.do({|child|
+         if(child.isKindOf(StaticText),{child.font_(Font.default.size_(9))});
+         if(child.isKindOf(Button),{child.font_(Font.default.boldVariant.size_(8))});
+         if(child.isKindOf(TextField),{child.font_(Font.default.size_(9))});
+         if(child.isKindOf(NumberBox),{child.font_(Font.default.size_(9))});
+         if(child.isKindOf(PopUpMenu),{child.font_(Font.default.size_(9))});
+         if(child.isKindOf(TextView),{child.font_(Font.default.size_(9));child.refresh})
+        });
+
+        // L'editeur de parametres reste un champ de code clair, lisible et editable.
+        if(manualParamsEditor.notNil,{manualParamsEditor.background_(Color.white);manualParamsEditor.stringColor_(Color.black);manualParamsEditor.refresh});
         exportCSV={Dialog.savePanel({|p|var f,n,fp;if(p.notNil,{fp=if(p.endsWith(".csv"),{p},{p++".csv"});f=File(fp,"w");f.write("index,loss,surprise,entropy,memoryRecall,trajectoryRecall\n");
          n=loss.size.min(surprise.size).min(entropy.size).min(memRecall.size).min(trajRecall.size);n.do({|i|f.write([i,loss[i],surprise[i],entropy[i],memRecall[i],trajRecall[i]].join(",")++"\n")});f.close;addLog.("CSV exporte")})})};
 
