@@ -90,7 +90,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.green(0.8, 0.25)],["Tdef Display On", Color.black, Color.red(0.8, 0.25)]];
+		~startTdefGenomeAll = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
 		~startTdefGenomeAll.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));
@@ -229,7 +229,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll2 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.green(0.8, 0.25)],["Tdef Display On", Color.black, Color.red(0.8, 0.25)]];
+		~startTdefGenomeAll2 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
 		//~startTdefGenomeAll2.action = {arg view;
 		//if (view.value == 1, {// Start Tdef
 		//~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));
@@ -378,7 +378,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll3 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.green(0.8, 0.25)],["Tdef Display On", Color.black, Color.red(0.8, 0.25)]];
+		~startTdefGenomeAll3 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
 		//~startTdefGenomeAll3.action = {arg view;
 		//if (view.value == 1, {// Start Tdef
 		//~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));
@@ -518,7 +518,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll4 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.green(0.8, 0.25)],["Tdef Display On", Color.black, Color.red(0.8, 0.25)]];
+		~startTdefGenomeAll4 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
 		~startTdefGenomeAll4.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));

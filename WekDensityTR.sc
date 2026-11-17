@@ -30,7 +30,7 @@ WekDensityTR {
 		scAdr = NetAddr("localhost", scPort);
 
 		pathData = PathName.new(path).pathOnly;
-		pathSound = "/Applications/SuperCollider.app/Contents/Resources/";
+		pathSound = "/Applications/WekDensityTR.app/Contents/Resources/Resources/";
 
 		// Verify Path
 		if(File.exists(pathData).not) {systemCmd("mkdir" + pathData)};
@@ -48,6 +48,7 @@ WekDensityTR {
 		);// Type Format stereo, ambisonic, etc...
 
 		//Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
+
 		thisProcess.openUDPPort(wekPort.asInteger); // Sender Port Wekinator + Enter Port change 6448 to an another for example 6449
 
 		s = Server.default;
@@ -1384,7 +1385,7 @@ Preset Wek",
 			);
 		};*/
 		~hpTR = HPtransformerRT.new(3, 3, 6, 12, 16, 2, 8, 3);// réglages i7 temps reel
-		//~hpTR.setIntelUltraCPUFastLearn;// Ultra minimal CPU rapide pour utiliser sans le Studio
+		//~hpTR.setClassicUltraCPUFastLearn;// Ultra minimal CPU rapide pour utiliser sans le Studio
 		~studio = HPTransformerStudio.new(~hpTR, \hpTR).front;
 		//~studio = HPTransformerStudio.new(~hpTR).front;//par default
 		//~studio.window.view.palette_(QPalette.light); // plus necessaire
@@ -4068,7 +4069,7 @@ Preset Wek",
 					lastNote = 74 + keyboardTranslate.value;
 					keyboard.setColor(74 + keyboardTranslate.value, Color.red);
 				});
-				// Key �
+				// Key
 				if(modifiers==0 and: {unicode==233} and: {keycode==41}, {
 					keyboard.removeColor(lastNote);
 					keyboard.setColor(lastNote, Color.blue);
@@ -4102,7 +4103,7 @@ Preset Wek",
 		windowVST = Window.new("VST Stereo", Rect(710, 300, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 50, 20)).
-		states_([["Run On", Color.green], ["Run Off", Color.red]]).
+		states_([["Run Off", Color.red], ["Run On", Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {synthVST.run(false); flagVST = 'off'},
@@ -4159,7 +4160,7 @@ Preset Wek",
 		windowKeyboard.front;
 		// Setup ShortCut
 		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 105, 20));
-		setupKeyboardShortCut.states = [["System Shortcut", Color.green], ["Keyboard Shortcut", Color.red]];
+		setupKeyboardShortCut.states = [["System Shortcut", Color.red], ["Keyboard Shortcut", Color.green]];
 		setupKeyboardShortCut.action = {arg shortcut;
 			if(shortcut.value == 1, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})}, {fonctionShortCut.value(windowKeyboard);
@@ -4217,7 +4218,7 @@ Preset Wek",
 		};
 		// Pbind Data Loop
 		Button(windowPlotterData, Rect(0, 0, 100, 20)).
-		states_([["Pbind Data Loop On", Color.green], ["Pbind Data Loop Off", Color.red]]).
+		states_([["Pbind Data Loop Off", Color.red], ["Pbind Data Loop On", Color.green]]).
 		action = {arg val;
 			switch (val.value,
 				0, {loopMusic = 1},
@@ -4225,7 +4226,7 @@ Preset Wek",
 			);
 		};
 		windowPlotterData.view.decorator.nextLine;
-		Button(windowPlotterData, Rect(0, 0, 100, 20)).states_([["WekRec On", Color.magenta], ["WekRec Off", Color.red]]).action_({|view|
+		Button(windowPlotterData, Rect(0, 0, 100, 20)).states_([["WekRec Off", Color.magenta], ["WekRec On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {sender.sendMsg("/wekinator/control/stopRecording")},
 				1, {sender.sendMsg("/wekinator/control/startRecording");
@@ -4233,12 +4234,12 @@ Preset Wek",
 				}
 			);
 		});
-		Button(windowPlotterData, Rect(0, 0, 100, 20)).states_([["WekTrain On", Color.magenta]]).action_({|view|
+		Button(windowPlotterData, Rect(0, 0, 100, 20)).states_([["WekTrain", Color.magenta]]).action_({|view|
 			sender.sendMsg("/wekinator/control/train");
 			windowPlotterData.view.children.at(2).valueAction = 0;// rec
 			windowPlotterData.view.children.at(4).valueAction = 0;// run
 		});
-		Button(windowPlotterData, Rect(0, 0, 100, 20)).states_([["WekRun On", Color.magenta], ["WekRun Off", Color.red]]).action_({|view|
+		Button(windowPlotterData, Rect(0, 0, 100, 20)).states_([["WekRun Off", Color.magenta], ["WekRun On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagStreamMFCC = 'off'; sender.sendMsg("/wekinator/control/stopRunning");
 				},
@@ -4247,14 +4248,14 @@ Preset Wek",
 				}
 			);
 		});
-		Button(windowPlotterData, Rect(0, 0, 45, 20)).states_([["WTD On", Color.magenta], ["WTD Off", Color.red]]).action_({|view|
+		Button(windowPlotterData, Rect(0, 0, 45, 20)).states_([["WTD Off", Color.magenta], ["WTD On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagWTD = 'off'},
 				1, {flagWTD = 'on'});
 		}).valueAction_(1);
 		NumberBox(windowPlotterData, 25 @ 15).value_(0.0625).action_({|ez| timeWekData = ez.value});
 
-		Button(windowPlotterData, Rect(0, 0, 45, 20)).states_([["WTP On", Color.magenta], ["WTP Off", Color.red]]).action_({|view|
+		Button(windowPlotterData, Rect(0, 0, 45, 20)).states_([["WTP Off", Color.magenta], ["WTP On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagWTP = 'off'},
 				1, {flagWTP = 'on'});
@@ -4493,7 +4494,7 @@ Preset Wek",
 
 		// Start System
 		startSystem = Button(windowEar,Rect(0, 0, 100, 20));
-		startSystem.states = [["Start", Color.green], ["Stop", Color.red]];
+		startSystem.states = [["Stop", Color.red], ["Start", Color.green]];
 		startSystem.action = {arg start, varTampon;
 			switch (start.value,
 				0, {
@@ -4626,7 +4627,7 @@ Preset Wek",
 		};
 		// Midi Out
 		Button(windowEar,Rect(0, 0, 100, 20)).
-		states_([["Chanels Midi Out On", Color.green], ["Chanels Midi Out Off", Color.red]]).
+		states_([["Chanels Midi Out Off", Color.red], ["Chanels Midi Out On", Color.green]]).
 		action_({arg midi;
 			if(midi.value == 0, {flagMidiOut = 'off'; windowEar.view.children.at(12).enabled_(false)},
 				{flagMidiOut = 'on'; windowEar.view.children.at(12).enabled_(true)}
@@ -4795,7 +4796,7 @@ Preset Wek",
 		}, 3, layout: \horz);
 		// flagFhzBand
 		Button(windowEar,Rect(0, 0, 90, 20))
-		.states_([["FhzBand On", Color.green], ["FhzBand Off", Color.red]])
+		.states_([["FhzBand Off", Color.red], ["FhzBand On", Color.green]])
 		.action = {arg flag;
 			if(flag.value == 0,
 				{flagFhzBand = 'off';
@@ -4832,7 +4833,7 @@ Preset Wek",
 		)};
 		// FlagMemory on off
 		Button(windowEar,Rect(0, 0, 105, 20))
-		.states_([["Infinite Memory On", Color.green], ["Infinite Memory Off", Color.red]])
+		.states_([["Infinite Memory Off", Color.red], ["Infinite Memory On", Color.green]])
 		.action = {arg flag;
 			if(flag.value == 0,
 				{
@@ -5052,12 +5053,12 @@ Preset Wek",
 			{|ez| panSynthLo = ez.value.at(0); panSynthHi = ez.value.at(1)}, [0, 0], labelWidth: 25,numberWidth: 40);
 		// Loop PlaySound
 		Button(windowEar,Rect(0, 0, 70, 20)).
-		states_([["Ploop On", Color.green], ["Ploop Off", Color.red]]).
+		states_([["Ploop Off", Color.red], ["Ploop On", Color.green]]).
 		action_({arg loop; if(loop.value == 0, {loopSound = 0}, {loopSound = 1});
 		});
 		// Loop RecSound
 		Button(windowEar,Rect(0, 0, 70, 20)).
-		states_([["Rloop On", Color.green], ["Rloop Off", Color.red], ["Rloop Off", Color.blue]]).
+		states_([["Rloop Off", Color.red], ["Rloop Off", Color.blue], ["Rloop On", Color.green]]).
 		action_({arg loop;
 			if(loop.value == 0, {loopRec = 0; flagRec = 0});
 			if(loop.value == 1, {loopRec = 1; flagRec = 0});
@@ -5065,7 +5066,7 @@ Preset Wek",
 		});
 		// Reverse Sound
 		Button(windowEar,Rect(0, 0, 80, 20)).
-		states_([["Reverse On", Color.green], ["Reverse Off", Color.red]]).
+		states_([["Reverse Off", Color.red], ["Reverse On", Color.green]]).
 		action_({arg rev; if (rev.value == 0, {reverseSound = 1},{reverseSound = 1.neg});
 		});
 		// Set Sampler or Sound
@@ -5079,7 +5080,7 @@ Preset Wek",
 		};
 		// RecSound on off
 		Button(windowEar,Rect(0, 0, 75, 20)).
-		states_([["RecSnd On", Color.green], ["RecSnd Off", Color.red]]).
+		states_([["RecSnd Off", Color.red], ["RecSnd On", Color.green]]).
 		action_({arg loop; if(loop.value == 0, {flagRecSound = 'off'}, {flagRecSound = 'on'})});
 		windowEar.view.decorator.nextLine;
 		// Display Instrument
@@ -5154,7 +5155,7 @@ Preset Wek",
 		EZKnob(windowEar , 150 @ 20, "JitterCtrl", \unipolar,
 			{|ez| jitterControls = ez.value}, 0, layout: \horz);
 		// Automation Root
-		Button(windowEar, Rect(0, 0, 90, 20)).states_([["AutoRoot On", Color.green], ["AutoRoot Off", Color.red]]).action_({|view|
+		Button(windowEar, Rect(0, 0, 90, 20)).states_([["AutoRoot Off", Color.red], ["AutoRoot On", Color.green]]).action_({|view|
 			if(view.value == 1, {flagRoot = 'on';
 				windowEar.view.children.at(87).enabled_(false);
 			}, {flagRoot = 'off';
@@ -5166,7 +5167,7 @@ Preset Wek",
 			);
 		}).enabled_(true);
 		// Automation BPM
-		Button(windowEar, Rect(0, 0, 90, 20)).states_([["AutoBPM On", Color.green], ["AutoBPM Off", Color.red]]).action_({|view|
+		Button(windowEar, Rect(0, 0, 90, 20)).states_([["AutoBPM Off", Color.red], ["AutoBPM On", Color.green]]).action_({|view|
 			if(view.value == 1, {
 				flagBPM = 'on';
 				// Setup GUI Value
@@ -5179,7 +5180,7 @@ Preset Wek",
 			});
 		}).enabled_(true);
 		// Chord On / Off
-		Button(windowEar, Rect(0, 0, 80, 20)).states_([["Chord On", Color.green], ["Chord Off", Color.red]]).action_({|view|
+		Button(windowEar, Rect(0, 0, 80, 20)).states_([["Chord Off", Color.red], ["Chord On", Color.green]]).action_({|view|
 			if(view.value == 1, {flagChord = 'on'}, {flagChord = 'off'});
 		});
 		// Algorithm
@@ -5191,43 +5192,43 @@ Preset Wek",
 		StaticText(windowEar, 60 @ 20).string = "FhzBand"; // 67
 		// Band 0 to 12
 		Button.new(windowEar, 40 @ 20).
-		states_([["0", Color.green], ["All", Color.red]]).
+		states_([["All", Color.red], ["0", Color.green]]).
 		action_({arg band; flagBand.put(0, band.value); fonctionBand.value(0)}); // 68 all data
 		Button.new(windowEar, 40 @ 20).
-		states_([["1", Color.green], ["1", Color.red]]).
+		states_([["1", Color.red], ["1", Color.green]]).
 		action_({arg band; flagBand.put(1, band.value); fonctionBand.value(1)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["2", Color.green], ["2", Color.red]]).
+		states_([["2", Color.red], ["2", Color.green]]).
 		action_({arg band; flagBand.put(2, band.value); fonctionBand.value(2)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["3", Color.green], ["3", Color.red]]).
+		states_([["3", Color.red], ["3", Color.green]]).
 		action_({arg band; flagBand.put(3, band.value); fonctionBand.value(3)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["4", Color.green], ["4", Color.red]]).
+		states_([["4", Color.red], ["4", Color.green]]).
 		action_({arg band; flagBand.put(4, band.value); fonctionBand.value(4)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["5", Color.green], ["5", Color.red]]).
+		states_([["5", Color.red], ["5", Color.green]]).
 		action_({arg band; flagBand.put(5, band.value); fonctionBand.value(5)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["6", Color.green], ["6", Color.red]]).
+		states_([["6", Color.red], ["6", Color.green]]).
 		action_({arg band; flagBand.put(6, band.value); fonctionBand.value(6)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["7", Color.green], ["7", Color.red]]).
+		states_([["7", Color.red], ["7", Color.green]]).
 		action_({arg band; flagBand.put(7, band.value); fonctionBand.value(7)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["8", Color.green], ["8", Color.red]]).
+		states_([["8", Color.red], ["8", Color.green]]).
 		action_({arg band; flagBand.put(8, band.value); fonctionBand.value(8)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["9", Color.green], ["9", Color.red]]).
+		states_([["9", Color.red], ["9", Color.green]]).
 		action_({arg band; flagBand.put(9, band.value); fonctionBand.value(9)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["10", Color.green], ["10", Color.red]]).
+		states_([["10", Color.red], ["10", Color.green]]).
 		action_({arg band; flagBand.put(10, band.value); fonctionBand.value(10)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["11", Color.green], ["11", Color.red]]).
+		states_([["11", Color.red], ["11", Color.green]]).
 		action_({arg band; flagBand.put(11, band.value); fonctionBand.value(11)});
 		Button.new(windowEar, 40 @ 20).
-		states_([["12", Color.green], ["12", Color.red]]).
+		states_([["12", Color.red], ["12", Color.green]]).
 		action_({arg band; flagBand.put(12, band.value); fonctionBand.value(12)});// 79
 		windowEar.view.decorator.nextLine;
 

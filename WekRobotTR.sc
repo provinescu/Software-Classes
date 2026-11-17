@@ -6,7 +6,7 @@ WekRobotTR {
 
 	var keyboardShortCut, keyboardTranslate, keyboardTranslateBefore, setupKeyboardShortCut, keyboard, keyVolume, windowKeyboard, keyboardVolume, fonctionShortCut, windowVST, flagVST, flagMC=0, widthMC=2.0, orientationMC=0.5, numberAudioIn, nom, foncSynthOut, foncFXPre, foncFXPost, scAdr, udpAdr;
 
-	*new {arg path="~/Documents/WekRobotTR/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="WekRobotTR", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
+	*new {arg path="~/Documents/WekRobotTR/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 51257110, wid=2.0, ori=0.5, flag=0, name="WekRobotTR", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
 		^super.new.init(name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, sl, ml);
 
@@ -27,6 +27,7 @@ WekRobotTR {
 		if(File.exists(thisProcess.platform.recordingsDir).not) {systemCmd("mkdir" + thisProcess.platform.recordingsDir.quote)};
 
 		//Server.default = s = Server(name,NetAddr("localhost", scPort.asInteger), Server.default.options);
+
 		thisProcess.openUDPPort(wekPort.asInteger); // Sender Port Wekinator + Enter Port change 6448 to an another for example 6449
 
 		s = Server.default;
@@ -62,7 +63,7 @@ WekRobotTR {
 		sender = NetAddr.new("127.0.0.1", wek);// Wekinator
 		Pipe.new("open -a Wekinator", "r").close;
 
-		~samplePourAnalyse = "/Applications/SuperCollider.app/Contents/Resources/sounds/a11wlk01-44_1.aiff";
+		~samplePourAnalyse = "/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/a11wlk01-44_1.aiff";
 		~listeSamplePourAnalyse = [];
 		~listeNameSamplePourAnalyse = [];
 
@@ -381,7 +382,7 @@ Preset Wek",
 				~synthampeffetsPoststepdatas=~synthampeffetsPoststepdatas.add(~datasampeffetsPosts);
 				~listeeffetsPresynth=~listeeffetsPresynth.add([]);
 				~listeeffetsPostsynth=~listeeffetsPostsynth.add([]);
-				// Cr�e les effetsPres  � choix pour les synth (� maper ensuite pour les activer avec GUI)
+				// Cr e les effetsPres    choix pour les synth (  maper ensuite pour les activer avec GUI)
 				~nombreEffetsPre.do({arg ii;
 					~listeeffetsPresynth.wrapPut(i,~listeeffetsPresynth.wrapAt(i).add(Synth.newPaused(~fxPre.wrapAt(ii),['out',~canalaudioout.wrapAt(i) + ~startChannelAudioOut,'in',~buseffetsPresynth.wrapAt(i).index,'buseffetsPost',~buseffetsPostsynth.wrapAt(i).index],~geffet.wrapAt(i),\addToTail)));
 				});
@@ -666,11 +667,11 @@ Preset Wek",
 			~flagScaling = [];
 			~flagByPassSynth = [];
 
-			~routineinstrument=[];// liste des instruments � jouer par les scheduler
+			~routineinstrument=[];// liste des instruments   jouer par les scheduler
 			~levelenvsynth=[];// liste level envelope instruments
 			~timeenvsynth=[];// liste time envelope instruments
 
-			// Datas musicales � jouer par les instruments
+			// Datas musicales   jouer par les instruments
 			~playinstrument=[];// on off playing instruments
 			~flagfreq=[];
 			~flagamp=[];
@@ -921,104 +922,104 @@ Preset Wek",
 		s.bind{
 
 			// FONCTION POUR LOADER REPERTOIRE
-			//"/Applications/SuperCollider.app/Contents/Resources/sounds/"
+			//"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/"
 			~initAllSound={arg path, file;
 				if(File.exists(path++file), {file=File(path++file,"r");~sounds=file.readAllString.interpret.soloArray;file.close},{~sounds=
 					[
 						//Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff"
 						// Array Voice Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Voice/voix.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Voice/Choeur.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Voice/voix.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Voice/Choeur.aiff",
 						// Array String Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Contrebasse1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Contrebasse2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Violoncelle1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Alto1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Alto2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Violon1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/cordes.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String3.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebasseST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/AltoST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/StringST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/AltoST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebassePizz1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebassePizz2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/pizzacato.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonPizz1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/Contrebasse1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/Contrebasse2.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/Violoncelle1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/Alto1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/Alto2.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/Violon1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/cordes.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/String1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/String2.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/String3.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/ContrebasseST1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/AltoST1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/ViolonST1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/StringST1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/AltoST1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/ViolonST1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/ContrebassePizz1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/ContrebassePizz2.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/pizzacato.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/String/ViolonPizz1.wav",
 						// Array Woodwind Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/clarinette basse.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/clarinette.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/hautbois.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/flute.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Woodwind/clarinette basse.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Woodwind/clarinette.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Woodwind/hautbois.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Woodwind/flute.aiff",
 						// Array Brass Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain P.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain Soft.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Cor Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Cor Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Attack F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Attack F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Attack FFF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Attack F.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain P.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain Soft.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain MF.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain F.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Trombone Sustain MF.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Trombone Sustain F.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Cor Sustain MF.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Cor Sustain F.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/French Horn Sustain MF.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/French Horn Sustain F.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Tuba Attack F.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Trombone Attack F.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/Trombone Attack FFF.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Brass/French Horn Attack F.aiff",
 						// Array Keyboard Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/piano m.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/piano f.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/fender rhode.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/glockenspiel.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Keyboard/piano m.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Keyboard/piano f.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Keyboard/fender rhode.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Keyboard/glockenspiel.aiff",
 						// Array Percussion Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPbassdrum.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPsnare.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPsnareRoll.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPrimshot.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tom.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tomHigh.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPhihat.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/CymbaleLow.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/bloc chinois.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tambourin.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/crapeau.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/crecelle.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/batonDePluie.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/HPbassdrum.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/HPsnare.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/HPsnareRoll.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/HPrimshot.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/tom.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/tomHigh.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/HPhihat.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/CymbaleLow.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/bloc chinois.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/tambourin.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/crapeau.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/crecelle.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Percussion/batonDePluie.aiff",
 						// Array Special Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSound1.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSine.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSaw.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSquare.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroNoise.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Pluck.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/RissetPercu.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/CordeMetal.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Roach.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Synth 1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Synth 2.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/MicroSound1.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/MicroSine.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/MicroSaw.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/MicroSquare.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/MicroNoise.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/Pluck.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/RissetPercu.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/CordeMetal.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/Roach.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/Synth 1.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Special/Synth 2.wav",
 						// Free Buffer different time
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/100milliseconde.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/64samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/128samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/256samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/512samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/1024samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/2048samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/4096samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample1.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample12.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample14.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample18.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample116.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample132.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample164.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample2.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample4.aiff"
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/100milliseconde.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/64samples.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/128samples.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/256samples.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/512samples.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/1024samples.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/2048samples.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/4096samples.wav",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample1.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample12.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample14.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample18.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample116.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample132.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample164.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample2.aiff",
+						"/Applications/WekRobotTR.app/Contents/Resources/Resources/sounds/Buffer/sample4.aiff"
 					];
 					file=File(~nompathdata++"List Sounds.scd","w");file.write("~sounds="++~sounds.asCompileString);file.close});
 			};
@@ -1324,7 +1325,7 @@ Preset Wek",
 
 			// Par Instruments
 			~listeSynthID=[];
-			~numerobuffer=[];// numero du buffer� jouer par l'instrument
+			~numerobuffer=[];// numero du buffer  jouer par l'instrument
 			~numerobufferAdd=[];// numero buffer pour fft
 			~nombreinstrument.do({arg i;var x,y,z,w,n1,n2,g;
 				~listeSynthID=~listeSynthID.add(nil);
@@ -1579,7 +1580,7 @@ Preset Wek",
 				~reversesampledatas=~reversesampledatas.add(~datasreverse);
 				~listeeffetsPresynth=~listeeffetsPresynth.add([]);
 				~listeeffetsPostsynth=~listeeffetsPostsynth.add([]);
-				// Cr�e les effetsPres  � choix pour les synth (� maper ensuite pour les activer avec GUI)
+				// Cr e les effetsPres    choix pour les synth (  maper ensuite pour les activer avec GUI)
 				~nombreEffetsPre.do({arg ii;
 					~listeeffetsPresynth.wrapPut(i,~listeeffetsPresynth.wrapAt(i).add(Synth.newPaused(~fxPre.wrapAt(ii),['out',~canalaudioout.wrapAt(i) + ~startChannelAudioOut,'in',~buseffetsPresynth.wrapAt(i).index,'buseffetsPost',~buseffetsPostsynth.wrapAt(i).index],~geffet.wrapAt(i),\addToTail)));
 					s.sync;
@@ -2791,7 +2792,7 @@ Preset Wek",
 		windowVST = Window.new("VST Stereo", Rect(40, 40, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 60, 20)).
-		states_([["Run On", Color.green], ["Run Off", Color.red]]).
+		states_([["Run Off", Color.red], ["Run On", Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {~synthVST.run(false); flagVST = 'off'},
@@ -2840,7 +2841,7 @@ Preset Wek",
 		windowKeyboard.front;
 		// Setup ShortCut
 		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 105, 20));
-		setupKeyboardShortCut.states = [["Keyboard Shortcut", Color.green], ["System Shortcut", Color.red]];
+		setupKeyboardShortCut.states = [["System Shortcut", Color.red], ["Keyboard Shortcut", Color.green]];
 		setupKeyboardShortCut.action = {arg shortcut;
 			if(shortcut.value == 1, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})},
@@ -2895,7 +2896,7 @@ Preset Wek",
 		~wp.view.decorator = FlowLayout(~wp.view.bounds);
 		40.do({arg i;
 			~recpartbutton = ~recpartbutton.add(Button(~wp,Rect(0,0,85,18)));
-			~recpartbutton.wrapAt(i).states = [["Rec"+(i+1).asString+"Off", Color.black,  Color.green(0.8, 0.25)],["Rec"+(i+1).asString+"On", Color.white, Color.red(0.8, 0.25)]];
+			~recpartbutton.wrapAt(i).states = [["Rec"+(i+1).asString+"Off", Color.black,  Color.red(0.8, 0.25)], ["Rec"+(i+1).asString+"On", Color.white, Color.green(0.8, 0.25)]];
 			~recpartbutton.wrapAt(i).action = {|view| var p;
 				if(view.value == 1, {~tempoSystem.schedAbs(~tempoSystem.beats, {
 					{~dureerecpart.wrapPut(i, 0);~listerecpart.wrapPut(i,[]);~flagrecpart.wrapPut(i,view.value)}.defer;nil})},
@@ -3014,19 +3015,19 @@ Preset Wek",
 			w.view.decorator.nextLine;
 			//neurone button
 			~neuroneviewmode = ~neuroneviewmode.add(Button(w,Rect(0,0,115,18)));
-			~neuroneviewmode.wrapAt(i).states = [["Neurone Rec Off", Color.black,  Color.green(0.8, 0.25)],["Neurone Rec On", Color.white, Color.red(0.8, 0.25)]];
+			~neuroneviewmode.wrapAt(i).states = [["Neurone Rec Off", Color.black,  Color.red(0.8, 0.25)], ["Neurone Rec On", Color.white, Color.green(0.8, 0.25)]];
 			~neuroneviewmode.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~neuroneviewmode",view.value);if (view.value == 1, {~neuronemode.wrapPut(i,'rec')},
 				{~neuronemode.wrapPut(i,'off')})};
 			// Init Neurones
 			~initneurones = ~initneurones.add(Button(w,Rect(0,0,115,18)));
-			~initneurones.wrapAt(i).states = [["Init Weight/Thresh", Color.black,  Color.green(0.8, 0.25)],["Init Weight/Thresh", Color.white, Color.red(0.8, 0.25)]];
+			~initneurones.wrapAt(i).states = [["Init Weight/Thresh", Color.black,  Color.red(0.8, 0.25)], ["Init Weight/Thresh", Color.white, Color.green(0.8, 0.25)]];
 			~initneurones.wrapAt(i).action = {|view| var x,y;
 				~writepartitions.value(i,'normal','off',"~initneurones",view.value);
 				if (view.value == 1, {~instanceNeurones.wrapAt(i).init(3, ~couchecachee, 3)},{nil});
 				~initneurones.wrapAt(i).value=0};
 			// Rec patterns Neurones out pour algo Neurone2
 			~initpatternneurones = ~initpatternneurones.add(Button(w,Rect(0,0,115,18)));
-			~initpatternneurones.wrapAt(i).states = [["Rec Pattern", Color.black,  Color.green(0.8, 0.25)],["Rec Pattern", Color.white, Color.red(0.8, 0.25)]];
+			~initpatternneurones.wrapAt(i).states = [["Rec Pattern", Color.black,  Color.red(0.8, 0.25)], ["Rec Pattern", Color.white, Color.green(0.8, 0.25)]];
 			~initpatternneurones.wrapAt(i).action = {|view|
 				~writepartitions.value(i,'normal','off',"~initpatternneurones",view.value);
 				if (view.value == 1, {~listeoutneuronefreq.wrapPut(i,~listeinfreq.wrapAt(i));~listeoutneuroneamp.wrapPut(i,~listeinamp.wrapAt(i));~listeoutneuroneduree.wrapPut(i,~listeinduree.wrapAt(i));
@@ -3049,7 +3050,7 @@ Preset Wek",
 				{~genetiquemode.wrapPut(i,'off')})};
 			// Init Genetiques
 			~initgenetiques = ~initgenetiques.add(Button(w,Rect(0,0,125,18)));
-			~initgenetiques.wrapAt(i).states = [["Init Algo Population", Color.black,  Color.green(0.8, 0.25)],["Init Algo Population", Color.white, Color.red(0.8, 0.25)]];
+			~initgenetiques.wrapAt(i).states = [["Init Algo Population", Color.black,  Color.red(0.8, 0.25)], ["Init Algo Population", Color.white, Color.green(0.8, 0.25)]];
 			~initgenetiques.wrapAt(i).action = {|view| var x;~writepartitions.value(i,'normal','off',"~initgenetiques",view.value);if (view.value == 1, {~instanceGenetiques.wrapAt(i).init(3,~listedatassize.wrapAt(i)); ~instanceAlgo2.wrapAt(i).init(s: ~listedatassize.wrapAt(i))},{nil});
 				~initgenetiques.wrapAt(i).value=0};
 			// genetic croisement
@@ -3124,7 +3125,7 @@ Preset Wek",
 			StaticText(w, Rect(0,0, 75, 18)).string_(" <- Sample1").stringColor_(Color.yellow);
 			// rec sample
 			~recsamplebutton = ~recsamplebutton.add(Button(w,Rect( 0, 0, 58, 18)));
-			~recsamplebutton.wrapAt(i).states = [["Rec off", Color.black,  Color.green(0.8, 0.25)],["Rec on", Color.white, Color.red(0.8, 0.25)]];
+			~recsamplebutton.wrapAt(i).states = [["Rec off", Color.black,  Color.red(0.8, 0.25)], ["Rec on", Color.white, Color.green(0.8, 0.25)]];
 			~recsamplebutton.wrapAt(i).action = {|view| var level;
 				~writepartitions.value(i,'rec sample',~numerobuffer.wrapAt(i),"~recsamplebutton",view.value);
 				level=~synthcontrolviewlevels.wrapAt(i).value;
@@ -3160,7 +3161,7 @@ Preset Wek",
 			};
 			// loop rec sample
 			~looprecsamplebutton = ~looprecsamplebutton.add(Button(w,Rect( 0, 0, 60, 18)));
-			~looprecsamplebutton.wrapAt(i).states = [["LoopR off", Color.black,  Color.green(0.8, 0.25)],["LoopR on", Color.white, Color.red(0.8, 0.25)]];
+			~looprecsamplebutton.wrapAt(i).states = [["LoopR off", Color.black,  Color.red(0.8, 0.25)], ["LoopR on", Color.white, Color.green(0.8, 0.25)]];
 			~looprecsamplebutton.wrapAt(i).action = {|view| ~writepartitions.value(i,'loop rec sample',~numerobuffer.wrapAt(i),"~looprecsamplebutton",view.value);~listesamplein.wrapAt(~numerobuffer.wrapAt(i)).set(\loop, view.value);
 				~looprecordingValue.wrapPut(~numerobuffer.wrapAt(i), view.value);
 				~nombreinstrument.do({arg instr;
@@ -3170,12 +3171,12 @@ Preset Wek",
 			};
 			// loop sample
 			~loopbutton = ~loopbutton.add(Button(w,Rect(0, 0, 60, 18)));
-			~loopbutton.wrapAt(i).states = [["LoopP off", Color.black,  Color.green(0.8, 0.25)],["LoopP on", Color.white, Color.red(0.8, 0.25)]];
+			~loopbutton.wrapAt(i).states = [["LoopP off", Color.black,  Color.red(0.8, 0.25)], ["LoopP on", Color.white, Color.green(0.8, 0.25)]];
 			~loopbutton.wrapAt(i).action = {|view| ~writepartitions.value(i,'loop sample',~numerobuffer.wrapAt(i),"~loopbutton",view.value);~loopplaysamplerdatas.wrapPut(i,~loopplaysamplerdatas.wrapAt(i).wrapPut(~numerobuffer.wrapAt(i),view.value))};
 
 			// set reverse sample
 			~reversebutton = ~reversebutton.add(Button(w,Rect(0, 0, 60, 18)));
-			~reversebutton.wrapAt(i).states = [["->", Color.black,  Color.green(0.8, 0.25)],["<-", Color.white, Color.red(0.8, 0.25)]];
+			~reversebutton.wrapAt(i).states = [["->", Color.black,  Color.red(0.8, 0.25)], ["<-", Color.white, Color.green(0.8, 0.25)]];
 			~reversebutton.wrapAt(i).action = {|view|
 				~writepartitions.value(i,'reverse sample',~numerobuffer.wrapAt(i),"~reversebutton",view.value);
 				if(view.value == 0, {~reversesampledatas.wrapPut(i,~reversesampledatas.wrapAt(i).wrapPut(~numerobuffer.wrapAt(i),1));~busoffsetplaysampler.wrapAt(i).set(~sampleroffsetcontrol.wrapAt(i).value)},{~reversesampledatas.wrapPut(i,~reversesampledatas.wrapAt(i).wrapPut(~numerobuffer.wrapAt(i),-1));~busoffsetplaysampler.wrapAt(i).set(1-~sampleroffsetcontrol.wrapAt(i).value)})};
@@ -3396,12 +3397,12 @@ Preset Wek",
 			w.view.decorator.nextLine;
 			// Automation controls instrument
 			~automationinstrument = ~automationinstrument.add(Button(w,Rect(0,0,205,18)));
-			~automationinstrument.wrapAt(i).states = [["Random Synth Off", Color.black,  Color.green(0.8, 0.25)],["Random Synth On", Color.white, Color.red(0.8, 0.25)]];
+			~automationinstrument.wrapAt(i).states = [["Random Synth Off", Color.black,  Color.red(0.8, 0.25)], ["Random Synth On", Color.white, Color.green(0.8, 0.25)]];
 			~automationinstrument.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationinstrument",view.value);
 				~randomValueSynth.wrapAt(i).wrapPut(~synthcontrol.wrapAt(i).value, view.value)};
 			// Automation parametres instrument
 			~automationparametres = ~automationparametres.add(Button(w,Rect(0,0,205,18)));
-			~automationparametres.wrapAt(i).states = [["Random Instrument Off", Color.black,  Color.green(0.8, 0.25)],["Random Instrument On", Color.white, Color.red(0.8, 0.25)]];
+			~automationparametres.wrapAt(i).states = [["Random Instrument Off", Color.black,  Color.red(0.8, 0.25)], ["Random Instrument On", Color.white, Color.green(0.8, 0.25)]];
 			~automationparametres.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationparametres",view.value);
 				~randomValueParametreSynth.wrapAt(i).wrapPut(~synthcontrol.wrapAt(i).value, view.value)};
 			StaticText(w, Rect(0, 0, 52, 12)).string_("").stringColor_(Color.yellow).font_(Font("Helvetica", 10));
@@ -3417,7 +3418,7 @@ Preset Wek",
 				~automationeffetpanpre.wrapAt(i).valueAction_(~randomValueEffetPanPre.wrapAt(i).wrapAt(effetsPre.value).value);
 			};
 			~synthonoffeffetsPre = ~synthonoffeffetsPre.add(Button(w,Rect( 0,0,40,18)));
-			~synthonoffeffetsPre.wrapAt(i).states = [["Off", Color.black,  Color.green(0.8, 0.25)],["On", Color.white, Color.red(0.8, 0.25)]
+			~synthonoffeffetsPre.wrapAt(i).states = [["Off", Color.black,  Color.red(0.8, 0.25)],["On", Color.white, Color.green(0.8, 0.25)]
 			];
 			~synthonoffeffetsPre.wrapAt(i).action = {|view| var datas;
 				~writepartitions.value(i,'onoff_pre',~listenodeeffetsPresynth.wrapAt(i).value,"~synthonoffeffetsPre",view.value);
@@ -3435,7 +3436,7 @@ Preset Wek",
 				~automationeffetpost.wrapAt(i).valueAction_(~randomValueEffetPost.wrapAt(i).wrapAt(effetsPost.value).value);
 				~automationeffetpanpost.wrapAt(i).valueAction_(~randomValueEffetPanPost.wrapAt(i).wrapAt(effetsPost.value).value)};
 			~synthonoffeffetsPost = ~synthonoffeffetsPost.add(Button(w,Rect( 0,0,40,18)));
-			~synthonoffeffetsPost.wrapAt(i).states = [["Off", Color.black,  Color.green(0.8, 0.25)],["On", Color.white, Color.red(0.8, 0.25)]
+			~synthonoffeffetsPost.wrapAt(i).states = [["Off", Color.black,  Color.red(0.8, 0.25)],["On", Color.white, Color.green(0.8, 0.25)]
 			];
 			~synthonoffeffetsPost.wrapAt(i).action = {|view| var datas;
 				~writepartitions.value(i,'onoff_post',~listenodeeffetsPostsynth.wrapAt(i).value,"~synthonoffeffetsPost",view.value);
@@ -3532,12 +3533,12 @@ Preset Wek",
 			//StaticText(w, Rect(0, 0, 50, 10)).string_("").stringColor_(Color.yellow).font_(Font("Helvetica", 10));
 			// Automation pan effets_pre
 			~automationeffetpanpre = ~automationeffetpanpre.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpanpre.wrapAt(i).states = [["Random Pan Effect_Pre Off", Color.black,  Color.green(0.8, 0.25)],["Random Pan Effect_Pre On", Color.white, Color.red(0.8, 0.25)]];
+			~automationeffetpanpre.wrapAt(i).states = [["Random Pan Effect_Pre Off", Color.black,  Color.red(0.8, 0.25)], ["Random Pan Effect_Pre On", Color.white, Color.green(0.8, 0.25)]];
 			~automationeffetpanpre.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpanpre",view.value);
 				~randomValueEffetPanPre.wrapAt(i).wrapPut(~syntheffetsPrecontrol.wrapAt(i).value, view.value)};
 			// Automation pan effets_post
 			~automationeffetpanpost = ~automationeffetpanpost.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpanpost.wrapAt(i).states = [["Random Pan Effect_Post Off", Color.black,  Color.green(0.8, 0.25)],["Random Pan Effect_Post On", Color.white, Color.red(0.8, 0.25)]];
+			~automationeffetpanpost.wrapAt(i).states = [["Random Pan Effect_Post Off", Color.black,  Color.red(0.8, 0.25)], ["Random Pan Effect_Post On", Color.white, Color.green(0.8, 0.25)]];
 			~automationeffetpanpost.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpanpost",view.value);
 				~randomValueEffetPanPost.wrapAt(i).wrapPut(~syntheffetsPostcontrol.wrapAt(i).value, view.value)};
 			w.view.decorator.nextLine;
@@ -3555,12 +3556,12 @@ Preset Wek",
 			StaticText(w, Rect(0, 0, 50, 10)).string_("").stringColor_(Color.yellow).font_(Font("Helvetica", 10));
 			// Automation controls effets_pre
 			~automationeffetpre = ~automationeffetpre.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpre.wrapAt(i).states = [["Random Effect_Pre Off", Color.black,  Color.green(0.8, 0.25)],["Random Effect_Pre On", Color.white, Color.red(0.8, 0.25)]];
+			~automationeffetpre.wrapAt(i).states = [["Random Effect_Pre Off", Color.black,  Color.red(0.8, 0.25)], ["Random Effect_Pre On", Color.white, Color.green(0.8, 0.25)]];
 			~automationeffetpre.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpre",view.value);
 				~randomValueEffetPre.wrapAt(i).wrapPut(~syntheffetsPrecontrol.wrapAt(i).value, view.value)};
 			// Automation controls effets_post
 			~automationeffetpost = ~automationeffetpost.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpost.wrapAt(i).states = [["Random Effect_Post Off", Color.black,  Color.green(0.8, 0.25)],["Random Effect_Post On", Color.white, Color.red(0.8, 0.25)]];
+			~automationeffetpost.wrapAt(i).states = [["Random Effect_Post Off", Color.black,  Color.red(0.8, 0.25)], ["Random Effect_Post On", Color.white, Color.green(0.8, 0.25)]];
 			~automationeffetpost.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpost",view.value);
 				~randomValueEffetPost.wrapAt(i).wrapPut(~syntheffetsPostcontrol.wrapAt(i).value, view.value)};
 			w.view.decorator.nextLine;
@@ -3602,91 +3603,91 @@ Preset Wek",
 			// SynthBand 88 to 98
 			// Band 0 to 12
 			~synthBand0 = ~synthBand0.add(Button.new(w, 16 @ 18).
-				states_([["All", Color.green], ["All", Color.red]]).
+				states_([["All", Color.red], ["All", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand0",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(0, band.value));
 				});
 			);
 			~synthBand1 = ~synthBand1.add(Button.new(w, 16 @ 18).
-				states_([["1", Color.green], ["1", Color.red]]).
+				states_([["1", Color.red], ["1", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand1",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(1, band.value));
 				});
 			);
 			~synthBand2 = ~synthBand2.add(Button.new(w, 16 @ 18).
-				states_([["2", Color.green], ["2", Color.red]]).
+				states_([["2", Color.red], ["2", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand2",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(2, band.value));
 				});
 			);
 			~synthBand3 = ~synthBand3.add(Button.new(w, 16 @ 18).
-				states_([["3", Color.green], ["3", Color.red]]).
+				states_([["3", Color.red], ["3", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand3",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(3, band.value));
 				});
 			);
 			~synthBand4 = ~synthBand4.add(Button.new(w, 16 @ 18).
-				states_([["4", Color.green], ["4", Color.red]]).
+				states_([["4", Color.red], ["4", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand4",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(4, band.value));
 				});
 			);
 			~synthBand5 = ~synthBand5.add(Button.new(w, 16 @ 18).
-				states_([["5", Color.green], ["5", Color.red]]).
+				states_([["5", Color.red], ["5", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand5",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(5, band.value));
 				});
 			);
 			~synthBand6 = ~synthBand6.add(Button.new(w, 16 @ 18).
-				states_([["6", Color.green], ["6", Color.red]]).
+				states_([["6", Color.red], ["6", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand6",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(6, band.value));
 				});
 			);
 			~synthBand7 = ~synthBand7.add(Button.new(w, 16 @ 18).
-				states_([["7", Color.green], ["7", Color.red]]).
+				states_([["7", Color.red], ["7", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand7",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(7, band.value));
 				});
 			);
 			~synthBand8 = ~synthBand8.add(Button.new(w, 16 @ 18).
-				states_([["8", Color.green], ["8", Color.red]]).
+				states_([["8", Color.red], ["8", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand8",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(8, band.value));
 				});
 			);
 			~synthBand9 = ~synthBand9.add(Button.new(w, 16 @ 20).
-				states_([["9", Color.green], ["9", Color.red]]).
+				states_([["9", Color.red], ["9", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand9",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(9, band.value));
 				});
 			);
 			~synthBand10 = ~synthBand10.add(Button.new(w, 16 @ 18).
-				states_([["10", Color.green], ["10", Color.red]]).
+				states_([["10", Color.red], ["10", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand10",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(10, band.value));
 				});
 			);
 			~synthBand11 = ~synthBand11.add(Button.new(w, 16 @ 18).
-				states_([["11", Color.green], ["11", Color.red]]).
+				states_([["11", Color.red], ["11", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand11",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(11, band.value));
 				});
 			);
 			~synthBand12 = ~synthBand12.add(Button.new(w, 16 @ 18).
-				states_([["12", Color.green], ["12", Color.red]]).
+				states_([["12", Color.red], ["12", Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand12",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(12, band.value));
@@ -3695,7 +3696,7 @@ Preset Wek",
 
 			// flagFhzBand  99
 			~buttonSynthBand = ~buttonSynthBand.add(Button(w, Rect(0, 0, 40, 18))
-				.states_([["On", Color.green], ["Off", Color.red]])
+				.states_([["Off", Color.red], ["On", Color.green]])
 				.action = {arg flag;
 					~writepartitions.value(i,'normal','off',"~buttonSynthBand",flag.value);
 					if(flag.value == 0,
@@ -3931,7 +3932,7 @@ Preset Wek",
 
 			// Sound Synth ByPass
 			~byPassSynth = ~byPassSynth.add(Button(w, Rect(0, 0, 100, 18))
-				.states_([["ByPass On", Color.green], ["ByPass Off", Color.red]])
+				.states_([["ByPass Off", Color.red], ["ByPass On", Color.green]])
 				.action = {arg flag;
 					~writepartitions.value(i,'normal','off',"~byPassSynth", flag.value);
 					~flagByPassSynth.put(i, flag.value);
@@ -3960,7 +3961,7 @@ Preset Wek",
 		~wg.view.decorator = FlowLayout(~wg.view.bounds);
 		// Systeme start stop playing
 		~startsysteme = Button(~wg,Rect(0,0,100,18));
-		~startsysteme.states = [["System Off", Color.black,  Color.green(0.8, 0.25)],["System On", Color.white, Color.red(0.8, 0.25)]];
+		~startsysteme.states = [["System Off", Color.black,  Color.red(0.8, 0.25)], ["System On", Color.white, Color.green(0.8, 0.25)]];
 		~startsysteme.action = {|view|
 			if(~oscStateFlag == 'master', {~slaveAppAddr.sendMsg('/HPstart', view.value)});// Send OSC pour synchro app
 			if (view.value == 1, {
@@ -4109,7 +4110,7 @@ Preset Wek",
 		})};
 		// Calculation midi start stop playing
 		~calculationmidi = Button(~wg,Rect(0,0,100,18));
-		~calculationmidi.states = [["MIDIIn Off", Color.black,  Color.green(0.8, 0.25)],["MIDIIn On", Color.white, Color.red(0.8, 0.25)]];
+		~calculationmidi.states = [["MIDIIn Off", Color.black,  Color.red(0.8, 0.25)], ["MIDIIn On", Color.white, Color.green(0.8, 0.25)]];
 		~calculationmidi.action = {|view|
 			~writepartitions.value(nil,'control panel normal','off',"~calculationmidi",view.value);
 			if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
@@ -4258,7 +4259,7 @@ Preset Wek",
 				}
 			);
 		};
-		~tempoButton = Button(~wg,Rect(10,10, 150, 18)).states=[["Tempo Analyze Off", Color.black, Color.green(0.8, 0.25)],["Tempo Analyze On", Color.black, Color.red(0.8, 0.25)]];
+		~tempoButton = Button(~wg,Rect(10,10, 150, 18)).states=[["Tempo Analyze Off", Color.black, Color.red(0.8, 0.25)], ["Tempo Analyze On", Color.black, Color.green(0.8, 0.25)]];
 		~tempoButton.action = {arg view;
 			~writepartitions.value(nil,'control panel normal','off',"~tempoButton",view.value);
 			if (view.value == 1,
@@ -4315,7 +4316,7 @@ Preset Wek",
 		~wg.view.decorator.nextLine;
 		// Calculation chaos start stop playing
 		~calculationchaos = Button(~wg,Rect(0,0,85,18));
-		~calculationchaos.states = [["Chaos Off", Color.black,  Color.green(0.8, 0.25)],["Chaos On", Color.white, Color.red(0.8, 0.25)]];
+		~calculationchaos.states = [["Chaos Off", Color.black,  Color.red(0.8, 0.25)], ["Chaos On", Color.white, Color.green(0.8, 0.25)]];
 		~calculationchaos.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationchaos",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listechaosfreq.wrapPut(instr,[]);~listechaosamp.wrapPut(instr,[]);
@@ -4329,7 +4330,7 @@ Preset Wek",
 		})};
 		// Calculation neurone start stop playing
 		~calculationneurone = Button(~wg,Rect(0,0,85,18));
-		~calculationneurone.states = [["Neural Off", Color.black,  Color.green(0.8, 0.25)],["Neural On", Color.white, Color.red(0.8, 0.25)]];
+		~calculationneurone.states = [["Neural Off", Color.black,  Color.red(0.8, 0.25)], ["Neural On", Color.white, Color.green(0.8, 0.25)]];
 		~calculationneurone.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationneurone",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listeneuronefreq.wrapPut(instr,[]);~listeneuroneamp.wrapPut(instr,[]);
@@ -4342,7 +4343,7 @@ Preset Wek",
 		})};
 		// Calculation genetique start stop playing
 		~calculationgenetique = Button(~wg,Rect(0,0,85,18));
-		~calculationgenetique.states = [["Genetic Off", Color.black,  Color.green(0.8, 0.25)],["Genetic On", Color.white, Color.red(0.8, 0.25)]];
+		~calculationgenetique.states = [["Genetic Off", Color.black,  Color.red(0.8, 0.25)], ["Genetic On", Color.white, Color.green(0.8, 0.25)]];
 		~calculationgenetique.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationgenetique",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listegenetiquefreq.wrapPut(instr,[]);~listegenetiqueamp.wrapPut(instr,[]);
@@ -4355,7 +4356,7 @@ Preset Wek",
 		})};
 		// Calculation algorithmes start stop playing
 		~calculationalgorithmes= Button(~wg,Rect(0,0,85,18));
-		~calculationalgorithmes.states = [["Algo Off", Color.black,  Color.green(0.8, 0.25)],["Algo On", Color.white, Color.red(0.8, 0.25)]];
+		~calculationalgorithmes.states = [["Algo Off", Color.black,  Color.red(0.8, 0.25)], ["Algo On", Color.white, Color.green(0.8, 0.25)]];
 		~calculationalgorithmes.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationalgorithmes",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listealgo1freq.wrapPut(instr,[]);~listealgo1amp.wrapPut(instr,[]);~listealgo1duree.wrapPut(instr,[]);~listealgo2freq.wrapPut(instr,[]);~listealgo2amp.wrapPut(instr,[]);~listealgo2duree.wrapPut(instr,[]);
@@ -4371,7 +4372,7 @@ Preset Wek",
 		})};
 		// Calculation automation start stop playing
 		~calculationautomation = Button(~wg,Rect(0,0,85,18));
-		~calculationautomation.states = [["Random Off", Color.black,  Color.green(0.8, 0.25)],["Random On", Color.white, Color.red(0.8, 0.25)]];
+		~calculationautomation.states = [["Random Off", Color.black,  Color.red(0.8, 0.25)], ["Random On", Color.white, Color.green(0.8, 0.25)]];
 		~calculationautomation.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationautomation",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~routineautomation.play(quant: Quant.new(1));
 			~tempoprocessautomation.enabled_(true);
@@ -4501,7 +4502,7 @@ Preset Wek",
 		~audioDisplay = StaticText(~wg, Rect(0, 0, 40, 18)).string_("Audio").background_(Color.white(1, 1));
 
 		// Wekinator
-		Button(~wg, Rect(0, 0, 70, 18)).states_([["WekRec On", Color.magenta], ["WekRec Off", Color.red]]).action_({|view|
+		Button(~wg, Rect(0, 0, 70, 18)).states_([["WekRec Off", Color.magenta], ["WekRec On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {sender.sendMsg("/wekinator/control/stopRecording")},
 				1, {sender.sendMsg("/wekinator/control/startRecording");
@@ -4509,12 +4510,12 @@ Preset Wek",
 				}
 			);
 		});
-		Button(~wg, Rect(0, 0, 70, 18)).states_([["WekTrain On", Color.magenta]]).action_({|view|
+		Button(~wg, Rect(0, 0, 70, 18)).states_([["WekTrain", Color.magenta]]).action_({|view|
 			sender.sendMsg("/wekinator/control/train");
 			~wg.view.children.at(34).valueAction = 0;// run
 			~wg.view.children.at(36).valueAction = 0;// run
 		});
-		Button(~wg, Rect(0, 0, 70, 18)).states_([["WekRun On", Color.magenta], ["WekRun Off", Color.red]]).action_({|view|
+		Button(~wg, Rect(0, 0, 70, 18)).states_([["WekRun Off", Color.magenta], ["WekRun On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagStreamMFCC = 'off'; sender.sendMsg("/wekinator/control/stopRunning");
 				},
@@ -4523,7 +4524,7 @@ Preset Wek",
 				}
 			);
 		});
-		Button(~wg, Rect(0, 0, 45, 18)).states_([["WTP On", Color.magenta], ["WTP Off", Color.red]]).action_({|view|
+		Button(~wg, Rect(0, 0, 45, 18)).states_([["WTP Off", Color.magenta], ["WTP On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagWTP = 'off'},
 				1, {flagWTP = 'on'});
@@ -5528,7 +5529,7 @@ if(~flagMidiOut == 'on' and: {~canalMidiOutInstr.wrapAt(i).value >= 0}, {
 					lastNote = 74 + keyboardTranslate.value;
 					keyboard.setColor(74 + keyboardTranslate.value, Color.red);
 				});
-				// Key �
+				// Key
 				if(modifiers==0 and: {unicode==233} and: {keycode==41}, {
 					keyboard.removeColor(lastNote);
 					keyboard.setColor(lastNote, Color.blue);
@@ -6403,7 +6404,7 @@ if(~flagMidiOut == 'on' and: {~canalMidiOutInstr.wrapAt(i).value >= 0}, {
 					XOut.ar(out, xFade, chain);
 			}).add;
 
-			// Mod�le de definition de synth !!!!!
+			// Mod le de definition de synth !!!!!
 
 			SynthDef("PlayBuf",
 				{

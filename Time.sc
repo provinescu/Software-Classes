@@ -8,7 +8,7 @@ Time {
 
 	var <> hprec1, hprec2, synthAudioRec,  listeBufferAudioRec, busAudioIn, groupeAudioRec, file, listeGroupAudioRec, synthFileIn, fonctionLoadFileForAnalyse, bufferFile, listeActiveAudioRec, serverAdresse, masterAppAddr, slaveAppAddr, ardourOSC, synthOSConset, synthOSCpitch, synthOSCpitch2, synthOSCkeytrack, synthOSCkeyboard, timeOSC, chordDureeOSC, maxDureeOSC, flagOSC, windowExternalControlGUI, userOperatingSystem, userOSchoiceControl, fhzFilter, ampFilter, durFilter, setupKeyboardShortCut, windowKeyboard, keyboardShortCut, keyboardTranslate, keyboard, keyVolume, keyboardTranslateBefore, keyboardVolume, freqBefore, ampBefore, dureeBefore, flagKeyboard, indexWindows, listeWindows, activateOSC, oscHPtempo, oscHPstart, oscHPrec, oscState, oscStateFlag, initOSCresponder, audioFileText, switchOSCfreq, switchOSCamp, switchOSCdur, ampMIDIOSC, fonctionCollectFolders, foldersToScanAll, foldersToScanPreset, foldersToScanSynthesizer, flagAutomation, lastValue1Automation, lastValue2Automation, lastNumberChoiceConfig, fonctionAutomationPreset, lastTimeAutomation, thresholdAutomation, lastTime, typeAudio, midiOut, choiceCanalMidiOut, flagMidiOut, freqMidi, synthCanalMidiOut, listeFileAnalyze, listeNameFileAnalyze, listeFlagDureeSynth, loopSample, sampleMenu, loopMenu, typeMasterOut, menuFile, menuRecording, menuPreset, menuSynth, menuHelp, menuAlgo, menuScale, menuOSC, busOSCfreq, busOSCamp, busOSCduree, busOSCtempo, busOSCflatness, busOSCflux, busOSCenergy, busOSCcentroid, tempoOSC, oscTempo, flagTempo, synthOSCFFT, fonctionInitBand, numFhzBand, lastTimeBand, bandFHZ, fonctionBand, flagIndexBand, rangeNumFhzBand, listeDataBand, flagMIDI, listeGroupFX, listeGroupFilter, listeBusSynth, listeLoop, listeRecLevel, listePreLevel, audioDisplay, autoRoot, bpmDisplay, ambitusFreq, windowVST, flagVST, groupeLimiter, widthMC, orientationMC, numberAudioIn, rangeFFT, rangeBand;
 
-	*new	{arg path="~/Documents/Time/", ni=2, numberOut=2, numberRec=2, format=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="Time", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
+	*new	{arg path="~/Documents/Time/", ni=2, numberOut=2, numberRec=2, format=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="Time", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
 		^super.new.init(name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag, scPort, sl, ml);
 
@@ -36,6 +36,7 @@ Time {
 
 		// Setup Server Options
 		//Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
+
 		s = Server.default;
 		s.options.memSize = 2 ** 20;
 		s.options.inDevice_(devIn);
@@ -920,7 +921,7 @@ f						Switch File for Analyze.
 				listeBusOutFX=listeBusOutFX.add(Bus.audio(s, 1));
 				listeBusInDolby=listeBusInDolby.add(Bus.audio(s, 1));
 				// Load Sample
-				bufferAndSoundFile = fonctionLoadSample.value("/Applications/SuperCollider.app/Contents/Resources/sounds/a11wlk01-44_1.aiff", listeGroupSynth.at(synth), nil, nil);
+				bufferAndSoundFile = fonctionLoadSample.value("/Applications/Time.app/Contents/Resources/Resources/sounds/a11wlk01-44_1.aiff", listeGroupSynth.at(synth), nil, nil);
 				// Setup Data Sample
 				listeBuffer=listeBuffer.add(bufferAndSoundFile.at(0));
 				listeSoundFile=listeSoundFile.add(bufferAndSoundFile.at(1));
@@ -953,7 +954,7 @@ f						Switch File for Analyze.
 			synthOSCFFT = Synth.new("Time FFT", [\busIn, busAudioIn, \speed, 24], groupeAudioRec, \addToHead);
 
 			// Init FileIn
-			fonctionLoadFileForAnalyse.value("/Applications/SuperCollider.app/Contents/Resources/sounds/a11wlk01-44_1.aiff");
+			fonctionLoadFileForAnalyse.value("/Applications/Time.app/Contents/Resources/Resources/sounds/a11wlk01-44_1.aiff");
 
 			// Create Synth FileIn
 			synthFileIn = Synth.newPaused("FileIn", [\bufferFile, bufferFile, \busIn, busAudioIn], groupeAudioRec, \addToHead);
@@ -2509,7 +2510,7 @@ f						Switch File for Analyze.
 				});
 				// Key é
 				if(modifiers == 0 and: {unicode == 233} and: {keycode == 41}, {
-					/*if(char == $�, {*/
+					/*if(char == $ , {*/
 					s.bind{
 						keyboard.removeColor(lastNote);
 						s.sync;
@@ -2559,7 +2560,7 @@ f						Switch File for Analyze.
 			{|ez| keyVolume = ez.value.dbamp}, -12,labelWidth: 75,numberWidth: 50);
 		// Setup ShortCut
 		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 200, 20));
-		setupKeyboardShortCut.states = [["Musical Keyboard Shortcut", Color.black,  Color.red(0.8, 0.25)],["System Shortcut", Color.white, Color.green(0.8, 0.25)]];
+		setupKeyboardShortCut.states = [["System Shortcut", Color.black,  Color.red(0.8, 0.25)],["Keyboard Shortcut", Color.white, Color.green(0.8, 0.25)]];
 		setupKeyboardShortCut.action = {arg shortcut;
 			if(shortcut.value == 0, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})}, {fonctionShortCut.value(windowKeyboard);
@@ -2622,7 +2623,7 @@ f						Switch File for Analyze.
 		///////////////////////////////////////////////////////////////////////////////////////////////
 
 		// Systeme start stop playing
-		startSystem = Button(windowExternalControlGUI,Rect(5, 5, 100, 20)).states_([["System On", Color.black,  Color.green],["System Off", Color.white, Color.red]]).focus.action = {|view|
+		startSystem = Button(windowExternalControlGUI,Rect(5, 5, 100, 20)).states_([["System Off", Color.white, Color.red],["System On", Color.black,  Color.green]]).focus.action = {|view|
 			if(oscStateFlag == 'master', {slaveAppAddr.sendMsg('/HPstart', view.value)});// Send Synchro Start
 			switch(view.value,
 				0, {if(flagRecording == 'on', {s.pauseRecording}); sequencer.stop;
@@ -2653,11 +2654,11 @@ f						Switch File for Analyze.
 			userOperatingSystem.value_(0)};
 
 		// TempoOSC
-		oscTempo = Button(windowExternalControlGUI,Rect(5, 5, 75, 20)).states_([["OSCtempo Off", Color.green,  Color.black],["OSCtempo On", Color.red, Color.black]]).focus.action = {|view|
+		oscTempo = Button(windowExternalControlGUI,Rect(5, 5, 75, 20)).states_([["OSCtempo Off", Color.red, Color.black],["OSCtempo On", Color.green,  Color.black]]).focus.action = {|view|
 			if(view.value == 0, {flagTempo = 0}, {flagTempo = 1});
 		};
 
-		audioFileText = StaticText(windowExternalControlGUI, Rect(0, 0, 105, 20)).string_("/Applications/SuperCollider.app/Contents/Resources/sounds/a11wlk01-44_1.aiff").stringColor_(Color.white(1.0,1.0)).font_(Font("Georgia", 10)).align_(\right);
+		audioFileText = StaticText(windowExternalControlGUI, Rect(0, 0, 105, 20)).string_("/Applications/Time.app/Contents/Resources/Resources/sounds/a11wlk01-44_1.aiff").stringColor_(Color.white(1.0,1.0)).font_(Font("Georgia", 10)).align_(\right);
 
 		windowExternalControlGUI.view.decorator.nextLine;
 
@@ -2778,7 +2779,7 @@ f						Switch File for Analyze.
 		};
 
 		// Automation Preset and Synthesizer
-		Button(windowExternalControlGUI,Rect(0, 0, 80, 20)).states_([["Automation Off", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["Automation On", Color.new(0.1, 0.8, 0.9, 1), Color.red]]).action = {|view|
+		Button(windowExternalControlGUI,Rect(0, 0, 80, 20)).states_([["Automation Off", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["Automation On", Color.black, Color.green]]).action = {|view|
 			switch(view.value,
 				0, {flagAutomation = 'off'; windowExternalControlGUI.view.children.at(9).enabled_(false);
 				},
@@ -2873,7 +2874,7 @@ f						Switch File for Analyze.
 		}, numFhzBand).setColors(knobColor: Color.new(0.582, 0, 0), sliderBackground: Color.grey, stringColor: Color.new(0.985, 0.701, 0));
 
 		// MIDI OOU on / off
-		Button(windowExternalControlGUI,Rect(0, 0, 75, 20)).states_([["MIDI Out Off", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["MIDI Out On", Color.new(0.1, 0.8, 0.9, 1), Color.red]]).action = {|view|
+		Button(windowExternalControlGUI,Rect(0, 0, 75, 20)).states_([["MIDI Out Off", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["MIDI Out On", Color.black, Color.green]]).action = {|view|
 			switch(view.value,
 				0, {flagMidiOut = 'off'; 16.do({arg canal; midiOut.allNotesOff(canal);
 					if(flagVST == 'on', {~fxVST.midi.allNotesOff(canal)})});
@@ -2957,7 +2958,7 @@ f						Switch File for Analyze.
 		// Auto Root
 		Button(windowControlGUI, Rect(615, 5, 105, 20))
 		.background_(Color.white).
-		states_([["Roots On", Color.green, Color.black(0.75, 0.25)],["Roots Off", Color.red(1, 1), Color.black(0.75, 0.25)]]).
+		states_([["Roots Off", Color.red(1, 1), Color.black(0.75, 0.25)],["Roots On", Color.green, Color.black(0.75, 0.25)]]).
 		action_({arg etat; if(etat.value == 0, {autoRoot = 'off'; /*windowControlGUI.view.children.at(7).children.at(2).valueAction_(0)*/}, {autoRoot = 'on'})});
 
 		// Tuning
@@ -3143,7 +3144,7 @@ f						Switch File for Analyze.
 				modeMIDIOSC.put(synth, changeChoiceMIDI.wrapAt(item.value));
 			};
 
-			Button(windowControlGUI, Rect(synth * 315 + 185, numberSynth * 25 + 100, 100, 20)).states_([["Smp Loop On", Color.black,  Color.green],["Smp Loop Off", Color.black, Color.red]]).action = {|view|
+			Button(windowControlGUI, Rect(synth * 315 + 185, numberSynth * 25 + 100, 100, 20)).states_([["Smp Loop Off", Color.black, Color.red],["Smp Loop On", Color.black,  Color.green]]).action = {|view|
 				switch(view.value,
 					0, {loopSample.put(synth, 0)},
 					1, {loopSample.put(synth, 1)}
@@ -3251,50 +3252,50 @@ f						Switch File for Analyze.
 			});
 
 			// Text Buffer
-			StaticText(windowControlGUI, Rect(synth * 315 + 50, numberSynth * 25 + 175, 260, 20)).string_("/Applications/SuperCollider.app/Contents/Resources/sounds/a11wlk01-44_1.aiff").stringColor_(Color.white(1.0,1.0)).font_(Font("Georgia", 10)).align_(\right);
+			StaticText(windowControlGUI, Rect(synth * 315 + 50, numberSynth * 25 + 175, 260, 20)).string_("/Applications/Time.app/Contents/Resources/Resources/sounds/a11wlk01-44_1.aiff").stringColor_(Color.white(1.0,1.0)).font_(Font("Georgia", 10)).align_(\right);
 
 			// SynthBand
 			StaticText(windowControlGUI, Rect(synth * 315 + 5, numberSynth * 25 + 200, 40, 20)).string = "Band";// 20
 
 			// Band All to 12
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (0 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["A", Color.green], ["A", Color.red]]).
+			states_([["A", Color.red], ["A", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(0, band.value)); fonctionBand.value(0, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (1 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["1", Color.green], ["1", Color.red]]).
+			states_([["1", Color.red], ["1", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(1, band.value)); fonctionBand.value(1, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (2 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["2", Color.green], ["2", Color.red]]).
+			states_([["2", Color.red], ["2", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(2, band.value)); fonctionBand.value(2, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (3 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["3", Color.green], ["3", Color.red]]).
+			states_([["3", Color.red], ["3", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(3, band.value)); fonctionBand.value(3, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (4 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["4", Color.green], ["4", Color.red]]).
+			states_([["4", Color.red], ["4", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(4, band.value)); fonctionBand.value(4, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (5 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["5", Color.green], ["5", Color.red]]).
+			states_([["5", Color.red], ["5", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(5, band.value)); fonctionBand.value(5, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (6 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["6", Color.green], ["6", Color.red]]).
+			states_([["6", Color.red], ["6", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(6, band.value)); fonctionBand.value(6, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (7 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["7", Color.green], ["7", Color.red]]).
+			states_([["7", Color.red], ["7", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(7, band.value)); fonctionBand.value(7, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (8 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["8", Color.green], ["8", Color.red]]).
+			states_([["8", Color.red], ["8", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(8, band.value)); fonctionBand.value(8, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (9 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["9", Color.green], ["9", Color.red]]).
+			states_([["9", Color.red], ["9", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(9, band.value)); fonctionBand.value(9, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (10 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["10", Color.green], ["10", Color.red]]).
+			states_([["10", Color.red], ["10", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(10, band.value)); fonctionBand.value(10, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (11 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["11", Color.green], ["11", Color.red]]).
+			states_([["11", Color.red], ["11", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(11, band.value)); fonctionBand.value(11, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (12 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["12", Color.green], ["12", Color.red]]).
+			states_([["12", Color.red], ["12", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(12, band.value)); fonctionBand.value(12, synth)});
 
 			// Active AudioIn/Sample
@@ -3838,7 +3839,7 @@ f						Switch File for Analyze.
 		windowVST = Window.new("VST Stereo", Rect(1000, 540, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 50, 20)).
-		states_([["Run On", Color.green], ["Run Off", Color.red]]).
+		states_([["Run Off", Color.red], ["Run On", Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {~synthVST.run(false); flagVST = 'off'},

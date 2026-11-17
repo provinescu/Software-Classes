@@ -7,7 +7,7 @@ Agents {
 
 	var keyboardShortCut, keyboardTranslate, keyboardTranslateBefore, setupKeyboardShortCut, keyboard, keyVolume, windowKeyboard, keyboardVolume, fonctionShortCut, windowVST, flagVST, numberAudioIn, rangeBand, nom, foncSynthOut, foncFXOut, foncVerbOut, scAdr, udpAdr;
 
-	*new	{arg path="~/Documents/Agents/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="Agents", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
+	*new	{arg path="~/Documents/Agents/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="Agents", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
 		^super.new.init(name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, scPort, sl, ml);
 
@@ -55,7 +55,7 @@ Agents {
 		Safety(s);
 		//s.makeGui;
 
-		~samplePourAnalyse = "/Applications/SuperCollider.app/Contents/Resources/sounds/a11wlk01-44_1.aiff";
+		~samplePourAnalyse = "/Applications/Agents.app/Contents/Resources/Resources/sounds/a11wlk01-44_1.aiff";
 		~listeSamplePourAnalyse = [];
 		~listeNameSamplePourAnalyse = [];
 
@@ -1076,98 +1076,98 @@ G                       Init Genome Agent (solo).
 					[
 						//Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff"
 						// Array Voice Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Voice/voix.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Voice/Choeur.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Voice/voix.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Voice/Choeur.aiff",
 						// Array String Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Contrebasse1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Contrebasse2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Violoncelle1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Alto1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Alto2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Violon1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/cordes.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String3.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebasseST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/AltoST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/StringST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/AltoST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebassePizz1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebassePizz2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/pizzacato.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonPizz1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/Contrebasse1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/Contrebasse2.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/Violoncelle1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/Alto1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/Alto2.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/Violon1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/cordes.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/String1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/String2.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/String3.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/ContrebasseST1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/AltoST1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/ViolonST1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/StringST1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/AltoST1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/ViolonST1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/ContrebassePizz1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/ContrebassePizz2.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/pizzacato.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/String/ViolonPizz1.wav",
 						// Array Woodwind Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/clarinette basse.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/clarinette.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/hautbois.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/flute.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Woodwind/clarinette basse.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Woodwind/clarinette.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Woodwind/hautbois.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Woodwind/flute.aiff",
 						// Array Brass Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain P.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain Soft.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Cor Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Cor Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Attack F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Attack F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Attack FFF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Attack F.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain P.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain Soft.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain MF.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain F.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Trombone Sustain MF.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Trombone Sustain F.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Cor Sustain MF.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Cor Sustain F.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/French Horn Sustain MF.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/French Horn Sustain F.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Tuba Attack F.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Trombone Attack F.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/Trombone Attack FFF.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Brass/French Horn Attack F.aiff",
 						// Array Keyboard Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/piano m.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/piano f.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/fender rhode.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/glockenspiel.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Keyboard/piano m.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Keyboard/piano f.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Keyboard/fender rhode.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Keyboard/glockenspiel.aiff",
 						// Array Percussion Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPbassdrum.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPsnare.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPsnareRoll.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPrimshot.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tom.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tomHigh.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPhihat.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/CymbaleLow.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/bloc chinois.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tambourin.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/crapeau.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/crecelle.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/batonDePluie.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/HPbassdrum.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/HPsnare.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/HPsnareRoll.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/HPrimshot.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/tom.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/tomHigh.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/HPhihat.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/CymbaleLow.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/bloc chinois.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/tambourin.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/crapeau.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/crecelle.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Percussion/batonDePluie.aiff",
 						// Array Special Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSound1.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSine.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSaw.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSquare.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroNoise.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Pluck.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/RissetPercu.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/CordeMetal.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Roach.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Synth 1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Synth 2.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/MicroSound1.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/MicroSine.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/MicroSaw.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/MicroSquare.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/MicroNoise.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/Pluck.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/RissetPercu.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/CordeMetal.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/Roach.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/Synth 1.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Special/Synth 2.wav",
 						// Free Buffer different time
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/100milliseconde.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/64samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/128samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/256samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/512samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/1024samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/2048samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/4096samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample1.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample12.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample14.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample18.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample116.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample132.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample164.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample2.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample4.aiff"
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/100milliseconde.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/64samples.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/128samples.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/256samples.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/512samples.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/1024samples.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/2048samples.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/4096samples.wav",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample1.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample12.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample14.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample18.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample116.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample132.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample164.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample2.aiff",
+						"/Applications/Agents.app/Contents/Resources/Resources/sounds/Buffer/sample4.aiff"
 					];
 					file=File(~nompathdata++"List Sounds.scd","w");file.write("~sounds="++~sounds.asCompileString);file.close});
 		};
@@ -3271,9 +3271,11 @@ G                       Init Genome Agent (solo).
 				\timingOffset, 0,
 				\dur, Pfunc({
 					var flagDead='off', time, prochaineDuree;
-					var cycleSeconds;
+					var cycleSeconds, cycleStartBeat, cycleStartSeconds, elapsedSeconds;
 
 					// Capture atomique des parametres temporels du cycle.
+					cycleStartBeat = thisThread.clock.beats;
+					cycleStartSeconds = Main.elapsedTime;
 					cycleSeconds = ~tempoagents.value.asFloat.reciprocal;
 					if(cycleSeconds.isNumber.not or: {cycleSeconds <= 0}, {
 						cycleSeconds = 0.0001;
@@ -3928,7 +3930,7 @@ G                       Init Genome Agent (solo).
 		StaticText(~wg, Rect(0, 0, 300, 15)).string_("Musical Genome").stringColor_(Color.white).font_(Font("Georgia", 12));
 		~wg.view.decorator.nextLine;
 		~geneFreqRanger=EZRanger(~wg, 300 @ 18, "Frequency", ControlSpec(0, 127, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneFreqRanger", view.value)})}, [24, 108], false, 125, 40);
-		~geneFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneFreqButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneFreqButton", action.value)});
 			if(action.value == 1 ,{~flagGeneFreq='on';~freqInstr.enabled_(false);~geneFreqRanger.enabled_(true)},{~flagGeneFreq='off';~freqInstr.enabled_(true);~geneFreqRanger.enabled_(false)});
@@ -3937,7 +3939,7 @@ G                       Init Genome Agent (solo).
 		~geneFreqRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneTransFreqRanger=EZRanger(~wg, 300 @ 18, "Translate Frequency", ControlSpec(-127, 127, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneTransFreqRanger", view.value)})}, [-12, 12], false, 125, 40);
-		~geneTransFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneTransFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneTransFreqButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneTransFreqButton", action.value)});
 			if(action.value == 1 ,{~flagGeneTransFreq='on';~freqTransposeInstr.enabled_(false);~geneTransFreqRanger.enabled_(true)},{~flagGeneTransFreq='off';~freqTransposeInstr.enabled_(true);~geneTransFreqRanger.enabled_(false)});
@@ -3945,7 +3947,7 @@ G                       Init Genome Agent (solo).
 		~geneTransFreqRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneAmpRanger=EZRanger(~wg, 300 @ 18, "Amplitude", ControlSpec(-inf, 0, \db, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAmpRanger", view.value)})}, [-inf, 0], false, 125, 40);
-		~geneAmpButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneAmpButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneAmpButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAmpButton", action.value)});
 			if(action.value == 1 ,{~flagGeneAmp='on';~ampInstr.enabled_(false);~geneAmpRanger.enabled_(true)},{~flagGeneAmp='off';~ampInstr.enabled_(true);~geneAmpRanger.enabled_(false)});
@@ -3953,7 +3955,7 @@ G                       Init Genome Agent (solo).
 		~geneAmpRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneDureeRanger=EZRanger(~wg, 300 @ 18, "Duration", ControlSpec(0, 60, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneDureeRanger", view.value)})}, [0, 4], false, 125, 40);
-		~geneDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneDureeButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneDureeButton", action.value)});
 			if(action.value == 1 ,{~flagGeneDuree='on';~dureeInstr.enabled_(false);~geneDureeRanger.enabled_(true)},{~flagGeneDuree='off';~dureeInstr.enabled_(true);~geneDureeRanger.enabled_(false)});
@@ -3961,7 +3963,7 @@ G                       Init Genome Agent (solo).
 		~geneDureeRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneMulDureeRanger=EZRanger(~wg, 300 @ 18, "Stretch Duration", ControlSpec(-16, 64, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMulDureeRanger", view.value)})}, [-2, 4], false, 125, 40);
-		~geneMulDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneMulDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneMulDureeButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMulDureeButton", action.value)});
 			if(action.value == 1 ,{~flagGeneMulDuree='on';~dureeTempoinstr.enabled_(false);~geneMulDureeRanger.enabled_(true)},{~flagGeneMulDuree='off';~dureeTempoinstr.enabled_(true);~geneMulDureeRanger.enabled_(false)});
@@ -3969,7 +3971,7 @@ G                       Init Genome Agent (solo).
 		~geneMulDureeRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~genePanRanger=EZRanger(~wg, 300 @ 18, "Pan", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genePanRanger", view.value)})}, [-1, 1], false, 125, 40);
-		~genePanButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~genePanButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~genePanButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genePanButton", action.value)});
 			if(action.value == 1 ,{~flagGenePan='on';~panInstr.enabled_(false);~genePanRanger.enabled_(true)},{~flagGenePan='off';~panInstr.enabled_(true);~genePanRanger.enabled_(false)});
@@ -3979,7 +3981,7 @@ G                       Init Genome Agent (solo).
 		~geneBufferRanger=EZRanger(~wg, 300 @ 18, "Time Buffer Sound", ControlSpec(0.01, ~tempsmaxsignal, \exp, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferRanger", view.value)})}, [0.015625, ~tempsmaxsignal], false, 125, 40);
 		~geneBufferRanger.view.children.at(1).decimals = 4;
 		~geneBufferRanger.view.children.at(3).decimals = 4;
-		~geneBufferButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneBufferButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneBufferButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferButton", action.value)});
 			if(action.value == 1 ,{~flagGeneBuffer='on';
@@ -3998,7 +4000,7 @@ G                       Init Genome Agent (solo).
 		~geneSampleRangerLow.action = { arg item; ~geneSamplePopUpLow = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSampleRangerLow", item.value)})};
 		~geneSampleRangerHigh=PopUpMenu(~wg,Rect(0,0, 148, 18)).items = ~displaySons;
 		~geneSampleRangerHigh.action = { arg item; ~geneSamplePopUpHigh = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSampleRangerHigh", item.value)})};
-		~geneSampleButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneSampleButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneSampleButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSampleButton", action.value)});
 			if(action.value == 1 ,{~flagGeneSample='on';~geneBufferButton.valueAction_(0);~geneSampleRangerLow.enabled_(true);~geneSampleRangerHigh.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneSample='off';~geneSampleRangerLow.enabled_(false);~geneSampleRangerHigh.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4011,7 +4013,7 @@ G                       Init Genome Agent (solo).
 		~geneSampleRangerHigh.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneReverseRanger=EZRanger(~wg, 300 @ 18, "Reverse Sample", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneReverseRanger", view.value)})}, [-1, 1], false, 125, 40);
-		~geneReverseButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneReverseButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneReverseButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneReverseButton", action.value)});
 			if(action.value == 1 ,{~flagGeneReverse='on';~geneReverseRanger.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneReverse='off';~geneReverseRanger.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4019,7 +4021,7 @@ G                       Init Genome Agent (solo).
 		~geneReverseRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneLoopRanger=EZRanger(~wg, 300 @ 18, "Loop Sample", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopRanger", view.value)})}, [-1, 1], false, 125, 40);
-		~geneLoopButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneLoopButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneLoopButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopButton", action.value)});
 			if(action.value == 1 ,{~flagGeneLoop='on';~geneLoopRanger.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneLoop='off';~geneLoopRanger.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4027,7 +4029,7 @@ G                       Init Genome Agent (solo).
 		~geneLoopRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneOffsetRanger=EZRanger(~wg, 300 @ 18, "Offset Sample", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneOffsetRanger", view.value)})}, [0, 1], false, 125, 40);
-		~geneOffsetButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneOffsetButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneOffsetButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneOffsetButton", action.value)});
 			if(action.value == 1 ,{~flagGeneOffset='on';~geneOffsetRanger.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneOffset='off';~geneOffsetRanger.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4035,7 +4037,7 @@ G                       Init Genome Agent (solo).
 		~geneOffsetRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneEnvLevelRanger=EZRanger(~wg, 300 @ 18, "Envelope Level", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvLevelRanger", view.value)})}, [0.1, 0.9], false, 125, 40);
-		~geneEnvLevelButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneEnvLevelButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneEnvLevelButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvLevelButton", action.value)});
 			if(action.value == 1 ,{~flagGeneEnvLevel='on';~geneEnvLevelRanger.enabled_(true);if(~flagGeneEnvDuree == 'on', {~envelopeSynthMenu.enabled_(false)})},{~flagGeneEnvLevel='off';~envelopeSynthMenu.enabled_(true);~geneEnvLevelRanger.enabled_(false)});
@@ -4043,7 +4045,7 @@ G                       Init Genome Agent (solo).
 		~geneEnvLevelRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneEnvDureeRanger=EZRanger(~wg, 300 @ 18, "Envelope Duration", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvDureeRanger", view.value)})}, [0.125, 0.75], false, 125, 40);
-		~geneEnvDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneEnvDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneEnvDureeButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvDureeButton", action.value)});
 			if(action.value == 1 ,{~flagGeneEnvDuree='on';~geneEnvDureeRanger.enabled_(true);if(~flagGeneEnvLevel == 'on', {~envelopeSynthMenu.enabled_(false)})},{~flagGeneEnvDuree='off';~envelopeSynthMenu.enabled_(true);~geneEnvDureeRanger.enabled_(false)});
@@ -4054,7 +4056,7 @@ G                       Init Genome Agent (solo).
 		~geneSynthRangerLow.action = { arg item; ~geneSynthPopUpLow = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSynthRangerLow", item.value)})};
 		~geneSynthRangerHigh=PopUpMenu(~wg,Rect(0,0, 148, 18)).items = ~listSynth;
 		~geneSynthRangerHigh.action = { arg item; ~geneSynthPopUpHigh = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSynthRangerHigh", item.value)})};
-		~geneSynthButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)], ["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneSynthButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)], ["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneSynthButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSynthButton", action.value)});
 			if(action.value == 1 ,{~flagGeneSynth='on';~synthDefInstrMenu.enabled_(false);~geneSynthRangerLow.enabled_(true);~geneSynthRangerHigh.enabled_(true);
@@ -4068,7 +4070,7 @@ G                       Init Genome Agent (solo).
 		~geneSynthRangerHigh.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneControlsRanger=EZRanger(~wg, 300 @ 18, "Control Synthesizer", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneControlsRanger", view.value)})}, [0, 1], false, 125, 40);
-		~geneControlsButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneControlsButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneControlsButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneControlsButton", action.value)});
 			if(action.value == 1 ,{~flagGeneControl='on';~controlsSynthMenu.enabled_(false);~geneControlsRanger.enabled_(true)},{~flagGeneControl='off';~controlsSynthMenu.enabled_(true);~geneControlsRanger.enabled_(false)});
@@ -4076,7 +4078,7 @@ G                       Init Genome Agent (solo).
 		~geneControlsRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneAudioOutRanger=EZRanger(~wg, 300 @ 18, "Audio Out", ControlSpec(1, ~sourceOutAgents.size, \lin, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAudioOutRanger", view.value)})}, [1, 1], false, 125, 40);
-		~geneAudioOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneAudioOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneAudioOutButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAudioOutButton", action.value)});
 			if(action.value == 1 ,{~flagGeneOut='on';~sourceOutSlider.enabled_(false);~geneAudioOutRanger.enabled_(true)},{~flagGeneOut='off';~sourceOutSlider.enabled_(true);~geneAudioOutRanger.enabled_(false)});
@@ -4084,7 +4086,7 @@ G                       Init Genome Agent (solo).
 		~geneAudioOutRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneMidiOutRanger=EZRanger(~wg, 300 @ 18, "Midi Out", ControlSpec(0, 16, \lin, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMidiOutRanger", view.value)})}, [1, 16], false, 125, 40);
-		~geneMidiOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneMidiOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneMidiOutButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMidiOutButton", action.value)});
 			if(action.value == 1 ,{~flagGeneMidi='on';~canalMidiOutSlider.enabled_(false);~geneMidiOutRanger.enabled_(true);
@@ -4099,7 +4101,7 @@ G                       Init Genome Agent (solo).
 		~geneInputRangerHigh=PopUpMenu(~wg,Rect(0,0, 120, 18)).items = ~audioInLR;
 		~geneInputRangerHigh.action = { arg item; ~geneInputPopUpHigh = item.value;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneInputRangerHigh", item.value)})};
-		~geneInputButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneInputButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneInputButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneInputButton", action.value)});
 			if(action.value == 1 ,{~flagGeneInput='on';
@@ -4114,7 +4116,7 @@ G                       Init Genome Agent (solo).
 		~geneInputButton.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneLoopMusicRanger=EZRanger(~wg, 300 @ 18, "Loop Buffer Music", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopMusicRanger", view.value)})}, [-1, 1], false, 125, 40);
-		~geneLoopMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneLoopMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneLoopMusicButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopMusicButton", action.value)});
 			if(action.value == 1 ,{~flagGeneLoopMusic='on';~geneLoopMusicRanger.enabled_(true);~loopseq.enabled_(false)},{~flagGeneLoopMusic='off';~geneLoopMusicRanger.enabled_(false);~loopseq.enabled_(true)});
@@ -4122,7 +4124,7 @@ G                       Init Genome Agent (solo).
 		~geneLoopMusicRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneBufferMusicRanger=EZRanger(~wg, 300 @ 18, "Buffer Music", ControlSpec(1, 256, \exp, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferMusicRanger", view.value)})}, [6, 24], false, 125, 40);
-		~geneBufferMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneBufferMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneBufferMusicButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferMusicButton", action.value)});
 			if(action.value == 1 ,{~flagGeneBufferMusic='on';~geneBufferMusicRanger.enabled_(true);~dataAgentsSlider.enabled_(false);
@@ -4134,7 +4136,7 @@ G                       Init Genome Agent (solo).
 		~geneBufferMusicRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneChordMaxRanger=EZRanger(~wg, 300 @ 18, "Chord Max", ControlSpec(1, 12, \exp, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordMaxRanger", view.value)})}, [3, 6], false, 125, 40);
-		~geneChordMaxButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneChordMaxButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneChordMaxButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordMaxButton", action.value)});
 			if(action.value == 1 ,{~flagGeneChordMax='on';~geneChordMaxRanger.enabled_(true);~notesAccordsSlider.enabled_(false);
@@ -4146,7 +4148,7 @@ G                       Init Genome Agent (solo).
 		~geneChordMaxRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneChordDurRanger=EZRanger(~wg, 300 @ 18, "Chord Dur", ControlSpec(0.01, 1, \exp, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordDurRanger", view.value)})}, [0.0625, 0.0833], false, 125, 40);
-		~geneChordDurButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneChordDurButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneChordDurButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordDurButton", action.value)});
 			if(action.value == 1 ,{~flagGeneChordDur='on';~geneChordDurRanger.enabled_(true);~dureeAccordsSlider.enabled_(false);
@@ -4159,7 +4161,7 @@ G                       Init Genome Agent (solo).
 		// Algo Choice
 		StaticText(~wg, Rect(0, 0, 46, 15)).string_("Algorithm").stringColor_(Color.white);
 		~geneAlgorithm=EZRanger(~wg, 250 @ 18, "Algorithm", ControlSpec(0, ~listeAlgorithm.size - 1, \lin, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAlgorithm", view.value)})}, [0, ~listeAlgorithm.size - 1], false, 70, 40);
-		~geneAlgorithmButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~geneAlgorithmButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~geneAlgorithmButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAlgorithmButton", action.value)});
 			if(action.value == 1 ,{~flagGeneAlgorithm='on';~geneAlgorithm.enabled_(true); ~choiceAlgoData.enabled_(false)}, {~flagGeneAlgorithm='off';~geneAlgorithm.enabled_(false); ~choiceAlgoData.enabled_(true)});
@@ -4236,7 +4238,7 @@ G                       Init Genome Agent (solo).
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand12", band.value)});
 		});
 
-		~buttonGeneBand = Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~buttonGeneBand = Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~buttonGeneBand.action = {arg flag;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~buttonGeneBand", flag.value)});
 			if(flag.value == 0,
@@ -4439,31 +4441,31 @@ G                       Init Genome Agent (solo).
 		};
 		~wi.view.decorator.nextLine;
 		// REC
-		~recSamplesButton=Button(~wi,Rect(10, 10, 50, 18)).states=[["Rec On", Color.black, Color.green(0.8, 0.25)],["Rec Off", Color.black, Color.red(0.8, 0.25)]];
+		~recSamplesButton=Button(~wi,Rect(10, 10, 50, 18)).states=[["Rec Off", Color.black, Color.red(0.8, 0.25)],["Rec On", Color.black, Color.green(0.8, 0.25)]];
 		~recSamplesButton.action = {arg rec;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~recSamplesButton", rec.value)});
 			~listesamplein.wrapAt(~soundsInstrMenu.value).set(\run, rec.value, \trigger, rec.value);
 			~recSamplesButtonSons.wrapPut(~soundsInstrMenu.value, rec.value);
 			if(rec.value == 1 , {~flagFreqSamplesSons.wrapPut(~soundsInstrMenu.value, 'on'); ~flagFreqSamples='on'});
 		};
-		~recSamplesLoopButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopR On", Color.black, Color.green(0.8, 0.25)],["LoopR Off", Color.black, Color.red(0.8, 0.25)]];
+		~recSamplesLoopButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopR Off", Color.black, Color.red(0.8, 0.25)],["LoopR On", Color.black, Color.green(0.8, 0.25)]];
 		~recSamplesLoopButton.action = {arg loop;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~recSamplesLoopButton", loop.value)});
 			~listesamplein.wrapAt(~soundsInstrMenu.value).set(\loop, loop.value, \trigger, loop.value);
 			~recSamplesLoopSons.wrapPut(~soundsInstrMenu.value, loop.value);
 		};
-		~loopSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopP On", Color.black, Color.green(0.8, 0.25)],["LoopP Off", Color.black, Color.red(0.8, 0.25)]];
+		~loopSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopP Off", Color.black, Color.red(0.8, 0.25)],["LoopP On", Color.black, Color.green(0.8, 0.25)]];
 		~loopSynthButton.action = {arg loop;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~loopSynthButton", loop.value)});
 			~loopSynthSons.wrapPut(~soundsInstrMenu.value, loop.value);
 		};
-		~reverseSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["Reverse On", Color.black, Color.green(0.8, 0.25)],["Reverse Off", Color.black, Color.red(0.8, 0.25)]];
+		~reverseSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["Reverse Off", Color.black, Color.red(0.8, 0.25)],["Reverse On", Color.black, Color.green(0.8, 0.25)]];
 		~reverseSynthButton.action = {arg reverse;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~reverseSynthButton", reverse.value)});
 			~reverseSynthSons.wrapPut(~soundsInstrMenu.value, reverse.value);
 		};
 		// Amp Synth on/off
-		~ampSynth = Button(~wi,Rect(10,10, 150, 18)).states=[["Bypass Amp Synth->FX On", Color.black, Color.green(0.8, 0.25)],["Bypass Amp Synth->FX Off", Color.black, Color.red(0.8, 0.25)]];
+		~ampSynth = Button(~wi,Rect(10,10, 150, 18)).states=[["Bypass Amp Synth->FX Off", Color.black, Color.red(0.8, 0.25)],["Bypass Amp Synth->FX On", Color.black, Color.green(0.8, 0.25)]];
 		~ampSynth.action = {arg view; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~ampSynth", view.value)});
 			if(view.value == 0 , {~flagAmpSynth = 'off'},{~flagAmpSynth = 'on'});
 		};
@@ -4495,7 +4497,7 @@ G                       Init Genome Agent (solo).
 			~automationJitterControlsSynth.wrapPut(~synthDefInstrMenu.value, view.value);
 		}, 0.1, labelWidth: 60,unitWidth: 0, layout: 'horz');
 		// Automation controls synth
-		~randomControlsSynth = Button(~wi,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomControlsSynth = Button(~wi,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomControlsSynth.action = {arg view; ~valueRandomControlsSynth = view.value;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomControlsSynth", view.value)});
 			~automationControlsSynth.wrapPut(~synthDefInstrMenu.value, view.value);
@@ -4625,7 +4627,7 @@ G                       Init Genome Agent (solo).
 			~randomControlsEffets.value_(~automationControlsEffets.wrapAt(effet.value));
 		};
 		~effetsInstrMenu.focus;
-		~playEffetsButton=Button(~we,Rect(10, 10, 50, 18)).states=[["Play On", Color.black, Color.green(0.8, 0.25)],["Play Off", Color.black, Color.red(0.8, 0.25)]];
+		~playEffetsButton=Button(~we,Rect(10, 10, 50, 18)).states=[["Play Off", Color.black, Color.red(0.8, 0.25)],["Play On", Color.black, Color.green(0.8, 0.25)]];
 		~playEffetsButton.action = {arg play;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~playEffetsButton", play.value)});
 			~playSynthEffets.wrapPut(~effetsInstrMenu.value, play.value);
@@ -4650,7 +4652,7 @@ G                       Init Genome Agent (solo).
 		~jitterControlsEffets=EZKnob(~we, 55 @ 75, "JitterCtrls", ControlSpec(0, 1, \lin, 0), {arg view; ~jitterControlsSynthEffets.wrapPut(~effetsInstrMenu.value, view.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterControlsEffets", view.value)})}, 0.1, labelWidth: 55,unitWidth: 0, layout: 'vert');
 		// Random Effets
-		~randomControlsEffets= Button(~we,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomControlsEffets= Button(~we,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomControlsEffets.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomControlsEffets", view.value)});
 			~automationControlsEffets.wrapPut(~effetsInstrMenu.value, view.value);
@@ -4666,7 +4668,7 @@ G                       Init Genome Agent (solo).
 		~jitterPanEffets=EZKnob(~we, 55 @ 75, "JitterPan", ControlSpec(0, 1, \lin, 0), {arg view;
 			~jitterPanSynthEffets.wrapPut(~effetsInstrMenu.value, view.value);if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterPanEffets", view.value)})}, 0.1, labelWidth: 40,unitWidth: 0, layout: 'vert');
 		// Random Pan
-		~randomPanEffets= Button(~we,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomPanEffets= Button(~we,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomPanEffets.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomPanEffets", view.value)});
 			~automationPanEffets.wrapPut(~effetsInstrMenu.value, view.value);
@@ -4720,7 +4722,7 @@ G                       Init Genome Agent (solo).
 			~randomControlsVerb.value_(~automationControlsVerb.wrapAt(verb.value));
 		};
 		~verbInstrMenu.focus;
-		~playVerbButton=Button(~wv,Rect(10, 10, 50, 18)).states=[["Play On", Color.black, Color.green(0.8, 0.25)],["Play Off", Color.black, Color.red(0.8, 0.25)]];
+		~playVerbButton=Button(~wv,Rect(10, 10, 50, 18)).states=[["Play Off", Color.black, Color.red(0.8, 0.25)],["Play On", Color.black, Color.green(0.8, 0.25)]];
 		~playVerbButton.action = {arg play;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~playVerbButton", play.value)});
 			~playSynthVerb.wrapPut(~verbInstrMenu.value, play.value);
@@ -4745,7 +4747,7 @@ G                       Init Genome Agent (solo).
 		~jitterControlsVerb=EZKnob(~wv, 55 @ 75, "JitterCtrls", ControlSpec(0, 1, \lin, 0), {arg view; ~jitterControlsSynthVerb.wrapPut(~verbInstrMenu.value, view.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterControlsVerb", view.value)})}, 0.1, labelWidth: 55,unitWidth: 0, layout: 'vert');
 		// Random Verb
-		~randomControlsVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomControlsVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomControlsVerb.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomControlsVerb", view.value)});
 			~automationControlsVerb.wrapPut(~verbInstrMenu.value, view.value);
@@ -4761,7 +4763,7 @@ G                       Init Genome Agent (solo).
 		~jitterPanVerb=EZKnob(~wv, 55 @ 75, "JitterPan", ControlSpec(0, 1, \lin, 0), {arg view;
 			~jitterPanSynthVerb.wrapPut(~verbInstrMenu.value, view.value);if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterPanVerb", view.value)})}, 0.1, labelWidth: 40,unitWidth: 0, layout: 'vert');
 		// Random Pan
-		~randomPanVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomPanVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomPanVerb.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomPanVerb", view.value)});
 			~automationPanVerb.wrapPut(~verbInstrMenu.value, view.value);
@@ -4800,7 +4802,7 @@ G                       Init Genome Agent (solo).
 		~wp.view.decorator.nextLine;
 		StaticText(~wp, Rect(10,10,500,20)).string_("System Agents").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~startsysteme = Button(~wp,Rect(10,10,75,20)).states=[["System On", Color.black, Color.green(0.8, 0.25)],["System Off", Color.black, Color.red(0.8, 0.25)]];
+		~startsysteme = Button(~wp,Rect(10,10,75,20)).states=[["System Off", Color.black, Color.red(0.8, 0.25)],["System On", Color.black, Color.green(0.8, 0.25)]];
 		~startsysteme.action = {arg view;
 			if(~oscStateFlag == 'master', {~slaveAppAddr.sendMsg('/HPstart', view.value)});// Send Synchro Start
 			if (view.value == 1, {
@@ -4882,7 +4884,7 @@ G                       Init Genome Agent (solo).
 			if(~flagMidiOut == 'on', {16.do({arg canal; ~midiOut.allNotesOff(canal); if(flagVST == 'on', {~fxVST.midi.allNotesOff(canal)})})});//MIDI setup off
 		};
 		~startsysteme.focus;
-		~musique = Button(~wp,Rect(10,10,75,20)).states=[["Music On", Color.black, Color.green(0.8, 0.25)],["Music Off", Color.black, Color.red(0.8, 0.25)]];
+		~musique = Button(~wp,Rect(10,10,75,20)).states=[["Music Off", Color.black, Color.red(0.8, 0.25)],["Music On", Color.black, Color.green(0.8, 0.25)]];
 		~musique.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~musique", view.value)});
 			if (view.value == 1, {
@@ -4892,21 +4894,21 @@ G                       Init Genome Agent (solo).
 			{~agents.do({arg agent; ~routineMusic.wrapAt(agent).stop;~musicOutAgents.wrapPut(agent , 0)})});
 			if(~flagMidiOut == 'on', {16.do({arg canal; ~midiOut.allNotesOff(canal); if(flagVST == 'on', {~fxVST.midi.allNotesOff(canal)})})});//MIDI setup off
 		};
-		~viewworld = Button(~wp,Rect(10,10,100,20)).states=[["View Virtual On", Color.black, Color.green(0.8, 0.25)],["View Virtual Off", Color.black, Color.red(0.8, 0.25)]];
+		~viewworld = Button(~wp,Rect(10,10,100,20)).states=[["View Virtual Off", Color.black, Color.red(0.8, 0.25)],["View Virtual On", Color.black, Color.green(0.8, 0.25)]];
 		~viewworld.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~viewworld", view.value)});
 			if (view.value == 1,
 				{if(~startsysteme.value == 1, {~routineVirtual.play(quant: Quant.new(1))})},
 				{~routineVirtual.stop});
 		};
-		~affichage = Button(~wp,Rect(10,10, 100,20)).states=[["State System On", Color.black, Color.green(0.8, 0.25)],["State System Off", Color.black, Color.red(0.8, 0.25)]];
+		~affichage = Button(~wp,Rect(10,10, 100,20)).states=[["State System Off", Color.black, Color.red(0.8, 0.25)],["State System On", Color.black, Color.green(0.8, 0.25)]];
 		~affichage.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~affichage", view.value)});
 			if (view.value == 1,
 				{if(~startsysteme.value == 1, {~routineData.play(quant: Quant.new(1))})},
 				{~routineData.stop});
 		};
-		~tempoButton = Button(~wp,Rect(10,10, 150, 20)).states=[["Tempo Analyze On", Color.black, Color.green(0.8, 0.25)],["Tempo Analyze Off", Color.black, Color.red(0.8, 0.25)]];
+		~tempoButton = Button(~wp,Rect(10,10, 150, 20)).states=[["Tempo Analyze Off", Color.black, Color.red(0.8, 0.25)],["Tempo Analyze On", Color.black, Color.green(0.8, 0.25)]];
 		~tempoButton.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~tempoButton", view.value)});
 			if (view.value == 1,
@@ -5279,7 +5281,7 @@ G                       Init Genome Agent (solo).
 		~wp.view.decorator.nextLine;
 		StaticText(~wp, Rect(10,10,500,20)).string_("Musical").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~loopseq = Button(~wp,Rect(10, 10, 100, 20)).states=[["Loop Music On", Color.black, Color.green(0.8, 0.25)],["Loop Music Off", Color.black, Color.red(0.8, 0.25)]];
+		~loopseq = Button(~wp,Rect(10, 10, 100, 20)).states=[["Loop Music Off", Color.black, Color.red(0.8, 0.25)],["Loop Music On", Color.black, Color.green(0.8, 0.25)]];
 		~loopseq.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~loopseq", view.value)});
 			if (view.value == 1,
@@ -5308,7 +5310,7 @@ G                       Init Genome Agent (solo).
 
 		StaticText(~wp, Rect(10,10,500,20)).string_("Spatial (Virtual Space)").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~toreButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Toric Space On", Color.black, Color.green(0.8, 0.25)],["Toric Space Off", Color.black, Color.red(0.8, 0.25)]];
+		~toreButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Toric Space Off", Color.black, Color.red(0.8, 0.25)],["Toric Space On", Color.black, Color.green(0.8, 0.25)]];
 		~toreButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~toreButton", action.value)});
 			if(action.value == 1 ,{~flagTore='on';
@@ -5320,7 +5322,7 @@ G                       Init Genome Agent (solo).
 				~routineSignauxAgents=~signauxvoisinsNoTore;
 				~routineMoveAgents=~movingagentsNoTore});
 		};
-		~flockButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Agent Flock On", Color.black, Color.green(0.8, 0.25)],["Agent Flock Off", Color.black, Color.red(0.8, 0.25)]];
+		~flockButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Agent Flock Off", Color.black, Color.red(0.8, 0.25)],["Agent Flock On", Color.black, Color.green(0.8, 0.25)]];
 		~flockButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~flockButton", action.value)});
 			if(action.value == 1 ,{~flagFlock='on';
@@ -5340,12 +5342,12 @@ G                       Init Genome Agent (solo).
 
 		StaticText(~wp, Rect(10,10, 500, 20)).string_("Genetic Algorithm").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~elitisteButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Elitist Reproduction On", Color.black, Color.green(0.8, 0.25)],["Elitist Reproduction Off", Color.black, Color.red(0.8, 0.25)]];
+		~elitisteButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Elitist Reproduction Off", Color.black, Color.red(0.8, 0.25)],["Elitist Reproduction On", Color.black, Color.green(0.8, 0.25)]];
 		~elitisteButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~elitisteButton", action.value)});
 			if(action.value == 1 ,{~flagElitiste='on'},{~flagElitiste='off'});
 		};
-		~sharedMusicButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Shared Music Agent On", Color.black, Color.green(0.8, 0.25)],["Shared Music Agent Off", Color.black, Color.red(0.8, 0.25)]];
+		~sharedMusicButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Shared Music Agent Off", Color.black, Color.red(0.8, 0.25)],["Shared Music Agent On", Color.black, Color.green(0.8, 0.25)]];
 		~sharedMusicButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~sharedMusicButton", action.value)});
 			if(action.value == 1 ,{~flagSharedMusic='on'},{~flagSharedMusic='off'});
@@ -5513,7 +5515,7 @@ G                       Init Genome Agent (solo).
 		//Automation et Densite
 		~wad = Window("Automation Density", Rect(595, 10, 415, 85), scroll: true);
 		~wad.view.decorator = FlowLayout(~wad.view.bounds);
-		~startAutomation = Button(~wad, Rect(0, 0, 125, 20)).states=[["All Automation On", Color.black, Color.green(0.8, 0.25)],["All Automation Off", Color.black, Color.red(0.8, 0.25)]];
+		~startAutomation = Button(~wad, Rect(0, 0, 125, 20)).states=[["All Automation Off", Color.black, Color.red(0.8, 0.25)],["All Automation On", Color.black, Color.green(0.8, 0.25)]];
 		~startAutomation.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~startAutomation", view.value)});
 			if (view.value == 1 and: {~startsysteme.value == 1}, {~routineAutomation.play(quant: Quant.new(1))},{~routineAutomation.stop});
@@ -5528,12 +5530,12 @@ G                       Init Genome Agent (solo).
 		~densite=EZRanger(~wad, 165@20, "Time", ControlSpec(3600.reciprocal, 60, \exp, 0), {|valeur|  if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~densite", valeur.value)})}, [0.25, 0.5], labelWidth: 30, numberWidth: 30);
 		~wad.view.decorator.nextLine;
 		// Init
-		~initAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["AgentI On", Color.black, Color.green(0.8, 0.25)],["AgentI Off", Color.black, Color.red(0.8, 0.25)]];
+		~initAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["AgentI Off", Color.black, Color.red(0.8, 0.25)],["AgentI On", Color.black, Color.green(0.8, 0.25)]];
 		~initAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~initAutomation", action.value)});
 			if(action.value == 1, {~flagInitAutomation='on'}, {~flagInitAutomation='off'})};
 		// Univers
-		~universAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["PresetL On", Color.black, Color.green(0.8, 0.25)],["PresetL Off", Color.black, Color.red(0.8, 0.25)]];
+		~universAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["PresetL Off", Color.black, Color.red(0.8, 0.25)],["PresetL On", Color.black, Color.green(0.8, 0.25)]];
 		~universAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~universAutomation", action.value)});
 			if(action.value == 1, {~flagUniversAutomation='on'}, {~flagUniversAutomation='off'})};
@@ -5542,38 +5544,38 @@ G                       Init Genome Agent (solo).
 		~changeSynth.action = {|view| if(~variableChange == "Flux", {~valueSynthChange.put(0,  view.value)}, {~valueSynthChange.put(1,  view.value)})};
 		~changeSynth.step_(0.01); ~changeSynth.clipLo_(0); ~changeSynth.clipHi_(10); ~changeSynth.scroll_step_(0.01); ~changeSynth.value_(~valueSynthChange.wrapAt(0));
 		// Monde Agents
-		~mondesAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlA On", Color.black, Color.green(0.8, 0.25)],["ControlA Off", Color.black, Color.red(0.8, 0.25)]];
+		~mondesAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlA Off", Color.black, Color.red(0.8, 0.25)],["ControlA On", Color.black, Color.green(0.8, 0.25)]];
 		~mondesAgentsAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~mondesAgentsAutomation", action.value)});
 			if(action.value == 1, {~flagMondesAgentsAutomation='on'}, {~flagMondesAgentsAutomation='off'})};
 		// Monde Musique
-		~mondesMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlM On", Color.black, Color.green(0.8, 0.25)],["ControlM Off", Color.black, Color.red(0.8, 0.25)]];
+		~mondesMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlM Off", Color.black, Color.red(0.8, 0.25)],["ControlM On", Color.black, Color.green(0.8, 0.25)]];
 		~mondesMusiqueAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~mondesMusiqueAutomation", action.value)});
 			if(action.value == 1, {~flagMondesMusiqueAutomation='on'}, {~flagMondesMusiqueAutomation='off'})};
 		~wad.view.decorator.nextLine;
 		// Genes Synth
-		~genesSAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesA On", Color.black, Color.green(0.8, 0.25)],["GenesA Off", Color.black, Color.red(0.8, 0.25)]];
+		~genesSAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesA Off", Color.black, Color.red(0.8, 0.25)],["GenesA On", Color.black, Color.green(0.8, 0.25)]];
 		~genesSAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genesSAutomation", action.value)});
 			if(action.value == 1, {~flagGenesSAutomation='on'}, {~flagGenesSAutomation='off'})};
 		// Genes Musique
-		~genesMAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesM On", Color.black, Color.green(0.8, 0.25)],["GenesM Off", Color.black, Color.red(0.8, 0.25)]];
+		~genesMAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesM Off", Color.black, Color.red(0.8, 0.25)],["GenesM On", Color.black, Color.green(0.8, 0.25)]];
 		~genesMAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genesMAutomation", action.value)});
 			if(action.value == 1, {~flagGenesMAutomation='on'}, {~flagGenesMAutomation='off'})};
 		// Synth agents
-		~synthAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthA On", Color.black, Color.green(0.8, 0.25)],["SynthA Off", Color.black, Color.red(0.8, 0.25)]];
+		~synthAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthA Off", Color.black, Color.red(0.8, 0.25)],["SynthA On", Color.black, Color.green(0.8, 0.25)]];
 		~synthAgentsAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthAgentsAutomation", action.value)});
 			if(action.value == 1, {~flagSynthAgentsAutomation='on'}, {~flagSynthAgentsAutomation='off'})};
 		// Synth musique
-		~synthMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthM On", Color.black, Color.green(0.8, 0.25)],["SynthM Off", Color.black, Color.red(0.8, 0.25)]];
+		~synthMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthM Off", Color.black, Color.red(0.8, 0.25)],["SynthM On", Color.black, Color.green(0.8, 0.25)]];
 		~synthMusiqueAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthMusiqueAutomation", action.value)});
 			if(action.value == 1, {~flagSynthMusiqueAutomation='on'}, {~flagSynthMusiqueAutomation='off'})};
 		// Root Automation
-		~rootAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["Root On", Color.black, Color.green(0.8, 0.25)],["Root Off", Color.black, Color.red(0.8, 0.25)]];
+		~rootAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["Root Off", Color.black, Color.red(0.8, 0.25)],["Root On", Color.black, Color.green(0.8, 0.25)]];
 		~rootAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~rootAutomation", action.value)});
 			if(action.value == 1, {~flagRootAutomation='on'}, {~flagRootAutomation='off'; /*~rootChoice.valueAction_(0)*/})};
@@ -5588,7 +5590,7 @@ G                       Init Genome Agent (solo).
 		windowKeyboard.front;
 		// Setup ShortCut
 		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 105, 20));
-		setupKeyboardShortCut.states = [["System Shortcut", Color.green], ["Keyboard Shortcut", Color.red]];
+		setupKeyboardShortCut.states = [["System Shortcut", Color.red], ["Keyboard Shortcut", Color.green]];
 		setupKeyboardShortCut.action = {arg shortcut;
 			if(shortcut.value == 1, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})},
@@ -5639,7 +5641,7 @@ G                       Init Genome Agent (solo).
 		windowVST = Window.new("VST Stereo", Rect(40, 300, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 60, 20)).
-		states_([["Run On", Color.green], ["Run Off", Color.red]]).
+		states_([["Run Off", Color.red], ["Run On", Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {~synthVST.run(false); flagVST = 'off'},

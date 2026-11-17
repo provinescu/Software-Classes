@@ -39,7 +39,7 @@ MatrixMusicData {
 
 		w = Window("MatrixMusic Music Data Editor", Rect(500, 100, 625, 530));
 		w.view.decorator = FlowLayout(w.view.bounds);
-		StaticText(w, Rect(0, 0, 500, 20)).string_("MatrixMusic Music Data Editor (A software for editing MatrixMusic (freeze) musical data)").stringColor_(Color.white(1.0,1.0));
+		StaticText(w, Rect(0, 0, 500, 20)).string_("Matrix Music Data Editor (Editing MatrixMusic (Freeze) Musical Data)").stringColor_(Color.white(1.0,1.0));
 		w.view.decorator.nextLine;
 
 		// menu Sequence

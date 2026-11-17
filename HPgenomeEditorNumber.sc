@@ -85,7 +85,7 @@ HPgenomeEditorNumber {
 				if(num.value > ~agents, {~agentCopy.value_(1)});
 			},{~agentCopy.value_(0)});
 		};
-		~startTdef = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.green(0.8, 0.25)],["Tdef Display On", Color.black, Color.red(0.8, 0.25)]];
+		~startTdef = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
 		~startTdef.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineGenome.play(quant: Quant.new(1, 0.0, 0.0));

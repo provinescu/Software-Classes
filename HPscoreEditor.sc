@@ -56,7 +56,7 @@ HPscoreEditor {
 		};
 		~menuScore.focus;
 		// Routine score display
-		~startTdefScore = Button(~wScore,Rect(10, 10, 150, 18)).states=[["Score Play Off", Color.black, Color.green(0.8, 0.25)],["Score Play On", Color.black, Color.red(0.8, 0.25)]];
+		~startTdefScore = Button(~wScore,Rect(10, 10, 150, 18)).states=[["Score Play Off", Color.black, Color.red(0.8, 0.25)],["Score Play On", Color.black, Color.green(0.8, 0.25)]];
 		~startTdefScore.action = {arg view;
 			if (view.value == 1, {
 				// Start Score

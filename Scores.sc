@@ -15,7 +15,32 @@ Scores {
 	init	{arg path;
 
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			Color(0.12, 0.15, 0.20)   // Fenêtres
+		);
+
+		// Textes principaux
+		pal.setColor(Color(0.95, 0.97, 1.00), \windowText);
+		pal.setColor(Color(0.95, 0.97, 1.00), \buttonText);
+
+		// Zones de saisie et listes
+		pal.setColor(Color(0.085, 0.11, 0.15), \base);
+		pal.setColor(Color(0.94, 0.96, 0.99), \baseText);
+		pal.setColor(Color(0.15, 0.19, 0.25), \alternateBase);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		// Informations et alertes
+		pal.setColor(Color(1.0, 0.85, 0.55), \brightText);
+		pal.setColor(Color(0.95, 0.97, 1.0), \toolTipText);
+		pal.setColor(Color(0.20, 0.25, 0.32), \toolTipBase);
+
+		QtGUI.palette = pal;
 
 		pathScore = path;
 
@@ -70,7 +95,7 @@ Scores {
 						scorePlaying = score.interpret;
 						wEditScore.string_(score);
 						file.close;
-						wScore.view.children.at(0).string = "Score Editor/Player for HP Software | " + PathName(path).fileName;
+						wScore.view.children.at(0).string = "Scores Editor/Player for HP Software | " + PathName(path).fileName;
 						dimScore = scorePlaying.size - 1;
 						items = 0;
 						startItems = 0;
@@ -84,7 +109,7 @@ Scores {
 					Dialog.savePanel({arg path;
 						file=File(path,"w");
 						file.write(wEditScore.string);file.close;
-						wScore.view.children.at(0).string = "Score Editor/Player for HP Software | " + PathName(path).fileName;
+						wScore.view.children.at(0).string = "Scores Editor/Player for HP Software | " + PathName(path).fileName;
 					},
 					{"cancelled".postln});
 				}
@@ -92,12 +117,12 @@ Scores {
 		};
 
 		//Score
-		wScore = Window("Score (Score Editor/Player for HP Software)", Rect(250, 250, 625, 525));
+		wScore = Window("Scores (A Command Scores Editor/Player for HP Software)", Rect(250, 250, 625, 525));
 		wScore.view.decorator = FlowLayout(wScore.view.bounds);
-		StaticText(wScore, Rect(0, 0, 620, 24)).string_("Score (A Score Editor/Player)").stringColor_(Color.yellow(1.0,1.0));
+		StaticText(wScore, Rect(0, 0, 620, 24)).string_("Scores (A Scores Editor/Player)").stringColor_(Color.yellow(1.0,1.0));
 		wScore.view.decorator.nextLine;
 		// Load Score
-		menuScore = PopUpMenu(wScore,Rect(0, 0, 110, 20)).background_(Color.grey(0.5, 0.8)).items = ["Score menu", "Load Score", "Save Score"];
+		menuScore = PopUpMenu(wScore,Rect(0, 0, 110, 20)).background_(Color.grey(0.5, 0.8)).items = ["Scores menu", "Load Scores", "Save Scores"];
 		menuScore.action={arg item;
 			foncLoadSaveScore.value(item.value);
 			menuScore.value_(0);
@@ -105,48 +130,48 @@ Scores {
 		};
 		menuScore.focus;
 		// Button Score Loop Score
-		Button(wScore,Rect(10, 10, 105, 18)).states_([ ["Loop Score On", Color.black, Color.green(0.8, 0.25)], ["Loop Score Off", Color.black, Color.red(0.8, 0.25)]]).action_({arg view;
+		Button(wScore,Rect(10, 10, 105, 18)).states_([ ["Loop Scores Off", Color.black, Color.red], ["Loop Scores On", Color.white, Color.green]]).action_({arg view;
 			if(view.value == 0, {
-				"Loop Score Off".postln;
+				"Loop Scores Off".postln;
 				loopScore = 'off';
 				wScore.view.children.at(numView.value).focus;
 			},
 			{
-				"Loop Score On".postln;
+				"Loop Scores On".postln;
 				loopScore = 'on';
 				wScore.view.children.at(numView.value).focus;
 			});
 		});
 		// Button Score
-		startManualScore = Button(wScore,Rect(10, 10, 125, 18)).states=[ ["Manual Stop Score", Color.black, Color.green(0.8, 0.25)], ["Manual Play Score", Color.black, Color.red(0.8, 0.25)]];
+		startManualScore = Button(wScore,Rect(10, 10, 125, 18)).states=[ ["Manual Stop Scores", Color.black, Color.red], ["Manual Play Scores", Color.white, Color.green]];
 		startManualScore.action = {arg view;
 			numView = 3;// manual score
 			startTdefScore.value_(0);
 			if(view.value == 0, {
 				// Stop Score
-				"Stop Manual Score".postln;
+				"Stop Manual Scores".postln;
 				flagManualPlaying = 'off';
 				//items = 0;
 			},
 			{
-				"Stop Tdef Score".postln;
+				"Stop Tdef Scores".postln;
 				routineScore.value(scorePlaying).stop;
 				routineScore.value(scorePlaying).clear;
 				routineScore.value(scorePlaying).remove;
 				// Play Score
 				//items = 0;
-				"Start Manual Score".postln;
+				"Start Manual Scores".postln;
 				flagManualPlaying = 'on';
 				wScore.view.children.at(numView.value).focus;
 			});
 		};
-		startTdefScore = Button(wScore,Rect(10, 10, 110, 18)).states=[["Tdef Stop Score", Color.black, Color.yellow(0.8, 0.25)], ["Tdef Play Score", Color.black, Color.red(0.8, 0.25)]];
+		startTdefScore = Button(wScore,Rect(10, 10, 110, 18)).states=[["Tdef Stop Scores", Color.black, Color.yellow], ["Tdef Play Scores", Color.white, Color.green]];
 		startTdefScore.action = {arg view;
 			numView = 5;// valid score
 			startManualScore.value_(0);
 			if(view.value == 0, {
 				// Stop Score
-				"Stop Tdef Score".postln;
+				"Stop Tdef Scores".postln;
 				routineScore.value(scorePlaying).stop;
 				routineScore.value(scorePlaying).clear;
 				routineScore.value(scorePlaying).remove;
@@ -156,13 +181,13 @@ Scores {
 			{
 				// Play Score
 				//items = 0;
-				"Start Tdef Score".postln;
+				"Start Tdef Scores".postln;
 				routineScore.value(scorePlaying).reset;
 				routineScore.value(scorePlaying).play;
 				wScore.view.children.at(numView.value).focus;
 			});
 		};
-		validScore = Button(wScore,Rect(0, 0, 100, 20)).states=[["Init Score", Color.black, Color.blue(0.8, 0.25)]];
+		validScore = Button(wScore,Rect(0, 0, 100, 20)).states=[["Init Scores", Color.white, Color.blue]];
 		validScore.action = {arg view;
 			scorePlaying  = wEditScore.string.interpret;
 			scorePlaying.postcs;
@@ -177,8 +202,8 @@ Scores {
 
 		// Ici les Shortcuts
 
-		StaticText(wScore, Rect(0, 0, 50, 20)).string_("SCORE").stringColor_(Color.yellow(1.0,1.0));
-		Button(wScore,Rect(0, 0, 155, 20)).states_([["Commandes + Shortcuts", Color.black, Color.white(0.8, 0.25)]]).
+		StaticText(wScore, Rect(0, 0, 50, 20)).string_("SCORES").stringColor_(Color.yellow(1.0,1.0));
+		Button(wScore,Rect(0, 0, 155, 20)).states_([["Commandes + Shortcuts", Color.white, Color.black]]).
 		action_(
 			{
 				TextView().name_("Commandes + Shortcuts").string_(
@@ -241,7 +266,7 @@ ctrl + alt + k wekinator time stop
 alt + K wekinator density start
 ctrl + alt + K wekinator density stop
 
-Score Commandes:
+Scores Commandes:
 
 'all'
 'robot'
@@ -274,13 +299,13 @@ Score Commandes:
 		);
 
 		// Start Items Score
-		EZNumber(wScore, 110@20, "Start Score", ControlSpec(0, 100, 'lin', 1),
+		EZNumber(wScore, 120@20, "Start Scores", ControlSpec(0, 100, 'lin', 1),
 			{arg i; items = i.value; startItems = i.value}, 0, true, 80, 40).value_(0);
 		// End Items Score
-		EZNumber(wScore, 110@20, "End Score", ControlSpec(0, 100, 'lin', 1),
+		EZNumber(wScore, 110@20, "End Scores", ControlSpec(0, 100, 'lin', 1),
 			{arg i; stopItems = i.value}, 0, true, 80, 40).value_(dimScore);
 		// Init
-		Button(wScore,Rect(0, 0, 50, 20)).states_([["Init Val", Color.white, Color.red(0.8, 0.25)]]).
+		Button(wScore,Rect(0, 0, 50, 20)).states_([["Init Val", Color.white, Color.grey]]).
 		action_({arg b;
 			items = 0;
 			startItems = 0;
@@ -929,23 +954,23 @@ Score Commandes:
 									scorePlaying = score.interpret;
 									wEditScore.string_(score);
 									file.close;
-									wScore.view.children.at(0).string = "Score Editor/Player for HP Software | " + pathScore++"score"+number.asString;
+									wScore.view.children.at(0).string = "Scores Editor/Player for HP Software | " + pathScore++"score"+number.asString;
 									dimScore = scorePlaying.size - 1;
 									items = 0;
 									startItems = 0;
 									stopItems = dimScore;
 									wScore.view.children.at(8).children.at(1).value_(startItems);
 									wScore.view.children.at(9).children.at(1).value_(stopItems);
-							}, {"Score not Found".postln});
+							}, {"Scores not Found".postln});
 					});
 					//Save Score
 					if(commandeExecute == 'save',
 						{
-									file=File(pathScore++"Score"+number.asString,"w");
-									file.write(wEditScore.string);file.close;
-									wScore.view.children.at(0).string = "Score Editor/Player for HP Software | " + pathScore++"score"+number.asString;
-							});
+							file=File(pathScore++"Score"+number.asString,"w");
+							file.write(wEditScore.string);file.close;
+							wScore.view.children.at(0).string = "Scores Editor/Player for HP Software | " + pathScore++"score"+number.asString;
 					});
+			});
 			commande = [];
 		};
 

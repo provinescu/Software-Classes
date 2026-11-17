@@ -7,7 +7,7 @@ WekAgents {
 
 	var keyboardShortCut, keyboardTranslate, keyboardTranslateBefore, setupKeyboardShortCut, keyboard, keyVolume, windowKeyboard, keyboardVolume, fonctionShortCut, windowVST, flagVST, numberAudioIn, rangeBand, sender, mfccData, flagStreamMFCC, numPreset, lastNumPreset, menuWek, lastTimeWekPreset, timeWekPreset, timeWekData, lastTimeWekData, listeWekPreset, flagWTD, flagWTP, nom, foncVerbOut, scAdr, udpAdr;
 
-	*new	{arg path="~/Documents/WekAgents/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 256, wid=2.0, ori=0.5, flag=0, name="WekAgents", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
+	*new	{arg path="~/Documents/WekAgents/", ni=2, o=2, r=2, f=0, devIn="Built-in Microph", devOut="Built-in Output", size = 512, wid=2.0, ori=0.5, flag=0, name="WekAgents", wek=6448, wekPort=57120, scPort=57110, sl=0.2, ml=0.2;
 
 		^super.new.init(name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, sl, ml);
 
@@ -33,6 +33,7 @@ WekAgents {
 		~switchAudioOut = f;// Type Format stereo, ambisonic, etc...
 
 		//Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
+
 		thisProcess.openUDPPort(wekPort.asInteger); // Sender Port Wekinator + Enter Port change 6448 to an another for example 6449
 
 		s = Server.default;
@@ -61,7 +62,7 @@ WekAgents {
 		sender = NetAddr.new("127.0.0.1", wek);// Wekinator
 		Pipe.new("open -a Wekinator", "r").close;
 
-		~samplePourAnalyse = "/Applications/SuperCollider.app/Contents/Resources/sounds/a11wlk01-44_1.aiff";
+		~samplePourAnalyse = "/Applications/WekAgents.app/Contents/Resources/Resources/sounds/a11wlk01-44_1.aiff";
 		~listeSamplePourAnalyse = [];
 		~listeNameSamplePourAnalyse = [];
 
@@ -1178,98 +1179,98 @@ Preset Wek",
 					[
 						//Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff"
 						// Array Voice Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Voice/voix.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Voice/Choeur.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Voice/voix.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Voice/Choeur.aiff",
 						// Array String Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Contrebasse1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Contrebasse2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Violoncelle1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Alto1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Alto2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/Violon1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/cordes.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/String3.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebasseST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/AltoST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/StringST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/AltoST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonST1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebassePizz1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ContrebassePizz2.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/pizzacato.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/String/ViolonPizz1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/Contrebasse1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/Contrebasse2.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/Violoncelle1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/Alto1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/Alto2.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/Violon1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/cordes.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/String1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/String2.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/String3.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/ContrebasseST1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/AltoST1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/ViolonST1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/StringST1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/AltoST1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/ViolonST1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/ContrebassePizz1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/ContrebassePizz2.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/pizzacato.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/String/ViolonPizz1.wav",
 						// Array Woodwind Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/clarinette basse.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/clarinette.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/hautbois.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Woodwind/flute.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Woodwind/clarinette basse.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Woodwind/clarinette.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Woodwind/hautbois.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Woodwind/flute.aiff",
 						// Array Brass Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain P.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain Soft.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Cor Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Cor Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Sustain MF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Sustain F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Tuba Attack F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Attack F.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/Trombone Attack FFF.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Brass/French Horn Attack F.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain P.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain Soft.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain MF.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Tuba Sustain F.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Trombone Sustain MF.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Trombone Sustain F.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Cor Sustain MF.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Cor Sustain F.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/French Horn Sustain MF.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/French Horn Sustain F.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Tuba Attack F.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Trombone Attack F.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/Trombone Attack FFF.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Brass/French Horn Attack F.aiff",
 						// Array Keyboard Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/piano m.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/piano f.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/fender rhode.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Keyboard/glockenspiel.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Keyboard/piano m.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Keyboard/piano f.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Keyboard/fender rhode.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Keyboard/glockenspiel.aiff",
 						// Array Percussion Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPbassdrum.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPsnare.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPsnareRoll.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPrimshot.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tom.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tomHigh.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/HPhihat.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/CymbaleLow.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/bloc chinois.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/tambourin.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/crapeau.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/crecelle.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Percussion/batonDePluie.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/HPbassdrum.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/HPsnare.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/HPsnareRoll.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/HPrimshot.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/tom.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/tomHigh.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/HPhihat.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/CymbaleLow.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/bloc chinois.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/tambourin.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/crapeau.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/crecelle.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Percussion/batonDePluie.aiff",
 						// Array Special Sound
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSound1.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSine.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSaw.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroSquare.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/MicroNoise.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Pluck.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/RissetPercu.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/CordeMetal.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Roach.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Synth 1.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Special/Synth 2.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/MicroSound1.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/MicroSine.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/MicroSaw.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/MicroSquare.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/MicroNoise.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/Pluck.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/RissetPercu.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/CordeMetal.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/Roach.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/Synth 1.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Special/Synth 2.wav",
 						// Free Buffer different time
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/100milliseconde.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/64samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/128samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/256samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/512samples.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/1024samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/2048samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/4096samples.wav",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample1.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample12.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample14.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample18.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample116.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample132.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample164.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample2.aiff",
-						"/Applications/SuperCollider.app/Contents/Resources/sounds/Buffer/sample4.aiff"
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/100milliseconde.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/64samples.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/128samples.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/256samples.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/512samples.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/1024samples.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/2048samples.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/4096samples.wav",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample1.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample12.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample14.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample18.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample116.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample132.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample164.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample2.aiff",
+						"/Applications/WekAgents.app/Contents/Resources/Resources/sounds/Buffer/sample4.aiff"
 					];
 					file=File(~nompathdata++"List Sounds.scd","w");file.write("~sounds="++~sounds.asCompileString);file.close});
 		};
@@ -3646,9 +3647,11 @@ Preset Wek",
 				\timingOffset, 0,
 				\dur, Pfunc({
 					var flagDead='off', time, prochaineDuree;
-					var cycleSeconds;
+					var cycleSeconds, cycleStartBeat, cycleStartSeconds, elapsedSeconds;
 
 					// Capture atomique des parametres temporels du cycle.
+					cycleStartBeat = thisThread.clock.beats;
+					cycleStartSeconds = Main.elapsedTime;
 					cycleSeconds = ~tempoagents.value.asFloat.reciprocal;
 					if(cycleSeconds.isNumber.not or: {cycleSeconds <= 0}, {
 						cycleSeconds = 0.0001;
@@ -4303,7 +4306,7 @@ Preset Wek",
 		StaticText(~wg, Rect(0, 0, 300, 15)).string_("Musical Genome").stringColor_(Color.magenta).font_(Font("Georgia", 12));
 		~wg.view.decorator.nextLine;
 		~geneFreqRanger=EZRanger(~wg, 300 @ 18, "Frequency", ControlSpec(0, 127, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneFreqRanger", view.value)})}, [24, 108], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneFreqButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneFreqButton", action.value)});
 			if(action.value == 1 ,{~flagGeneFreq='on';~freqInstr.enabled_(false);~geneFreqRanger.enabled_(true)},{~flagGeneFreq='off';~freqInstr.enabled_(true);~geneFreqRanger.enabled_(false)});
@@ -4312,7 +4315,7 @@ Preset Wek",
 		~geneFreqRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneTransFreqRanger=EZRanger(~wg, 300 @ 18, "Translate Frequency", ControlSpec(-127, 127, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneTransFreqRanger", view.value)})}, [-12, 12], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneTransFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneTransFreqButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneTransFreqButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneTransFreqButton", action.value)});
 			if(action.value == 1 ,{~flagGeneTransFreq='on';~freqTransposeInstr.enabled_(false);~geneTransFreqRanger.enabled_(true)},{~flagGeneTransFreq='off';~freqTransposeInstr.enabled_(true);~geneTransFreqRanger.enabled_(false)});
@@ -4320,7 +4323,7 @@ Preset Wek",
 		~geneTransFreqRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneAmpRanger=EZRanger(~wg, 300 @ 18, "Amplitude", ControlSpec(-inf, 0, \db, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAmpRanger", view.value)})}, [-inf, 0], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneAmpButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneAmpButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneAmpButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAmpButton", action.value)});
 			if(action.value == 1 ,{~flagGeneAmp='on';~ampInstr.enabled_(false);~geneAmpRanger.enabled_(true)},{~flagGeneAmp='off';~ampInstr.enabled_(true);~geneAmpRanger.enabled_(false)});
@@ -4328,7 +4331,7 @@ Preset Wek",
 		~geneAmpRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneDureeRanger=EZRanger(~wg, 300 @ 18, "Duration", ControlSpec(0, 60, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneDureeRanger", view.value)})}, [0, 4], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneDureeButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneDureeButton", action.value)});
 			if(action.value == 1 ,{~flagGeneDuree='on';~dureeInstr.enabled_(false);~geneDureeRanger.enabled_(true)},{~flagGeneDuree='off';~dureeInstr.enabled_(true);~geneDureeRanger.enabled_(false)});
@@ -4336,7 +4339,7 @@ Preset Wek",
 		~geneDureeRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneMulDureeRanger=EZRanger(~wg, 300 @ 18, "Stretch Duration", ControlSpec(-16, 64, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMulDureeRanger", view.value)})}, [-2, 4], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneMulDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneMulDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneMulDureeButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMulDureeButton", action.value)});
 			if(action.value == 1 ,{~flagGeneMulDuree='on';~dureeTempoinstr.enabled_(false);~geneMulDureeRanger.enabled_(true)},{~flagGeneMulDuree='off';~dureeTempoinstr.enabled_(true);~geneMulDureeRanger.enabled_(false)});
@@ -4344,7 +4347,7 @@ Preset Wek",
 		~geneMulDureeRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~genePanRanger=EZRanger(~wg, 300 @ 18, "Pan", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genePanRanger", view.value)})}, [-1, 1], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~genePanButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~genePanButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~genePanButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genePanButton", action.value)});
 			if(action.value == 1 ,{~flagGenePan='on';~panInstr.enabled_(false);~genePanRanger.enabled_(true)},{~flagGenePan='off';~panInstr.enabled_(true);~genePanRanger.enabled_(false)});
@@ -4354,7 +4357,7 @@ Preset Wek",
 		~geneBufferRanger=EZRanger(~wg, 300 @ 18, "Time Buffer Sound", ControlSpec(0.01, ~tempsmaxsignal, \exp, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferRanger", view.value)})}, [0.015625, ~tempsmaxsignal], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
 		~geneBufferRanger.view.children.wrapAt(1).decimals = 4;
 		~geneBufferRanger.view.children.wrapAt(3).decimals = 4;
-		~geneBufferButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneBufferButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneBufferButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferButton", action.value)});
 			if(action.value == 1 ,{~flagGeneBuffer='on';
@@ -4373,7 +4376,7 @@ Preset Wek",
 		~geneSampleRangerLow.action = { arg item; ~geneSamplePopUpLow = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSampleRangerLow", item.value)})};
 		~geneSampleRangerHigh=PopUpMenu(~wg,Rect(0,0, 148, 18)).items_(~displaySons).background = Color.magenta;
 		~geneSampleRangerHigh.action = { arg item; ~geneSamplePopUpHigh = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSampleRangerHigh", item.value)})};
-		~geneSampleButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneSampleButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneSampleButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSampleButton", action.value)});
 			if(action.value == 1 ,{~flagGeneSample='on';~geneBufferButton.valueAction_(0);~geneSampleRangerLow.enabled_(true);~geneSampleRangerHigh.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneSample='off';~geneSampleRangerLow.enabled_(false);~geneSampleRangerHigh.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4386,7 +4389,7 @@ Preset Wek",
 		~geneSampleRangerHigh.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneReverseRanger=EZRanger(~wg, 300 @ 18, "Reverse Sample", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneReverseRanger", view.value)})}, [-1, 1], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneReverseButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneReverseButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneReverseButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneReverseButton", action.value)});
 			if(action.value == 1 ,{~flagGeneReverse='on';~geneReverseRanger.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneReverse='off';~geneReverseRanger.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4394,7 +4397,7 @@ Preset Wek",
 		~geneReverseRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneLoopRanger=EZRanger(~wg, 300 @ 18, "Loop Sample", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopRanger", view.value)})}, [-1, 1], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneLoopButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneLoopButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneLoopButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopButton", action.value)});
 			if(action.value == 1 ,{~flagGeneLoop='on';~geneLoopRanger.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneLoop='off';~geneLoopRanger.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4402,7 +4405,7 @@ Preset Wek",
 		~geneLoopRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneOffsetRanger=EZRanger(~wg, 300 @ 18, "Offset Sample", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneOffsetRanger", view.value)})}, [0, 1], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneOffsetButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneOffsetButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneOffsetButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneOffsetButton", action.value)});
 			if(action.value == 1 ,{~flagGeneOffset='on';~geneOffsetRanger.enabled_(true);~evaluationSynthAgent.value(nil, ~synthInstruments)},{~flagGeneOffset='off';~geneOffsetRanger.enabled_(false);~evaluationSynthAgent.value(nil, ~synthInstruments)});
@@ -4410,7 +4413,7 @@ Preset Wek",
 		~geneOffsetRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneEnvLevelRanger=EZRanger(~wg, 300 @ 18, "Envelope Level", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvLevelRanger", view.value)})}, [0.1, 0.9], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneEnvLevelButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneEnvLevelButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneEnvLevelButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvLevelButton", action.value)});
 			if(action.value == 1 ,{~flagGeneEnvLevel='on';~geneEnvLevelRanger.enabled_(true);if(~flagGeneEnvDuree == 'on', {~envelopeSynthMenu.enabled_(false)})},{~flagGeneEnvLevel='off';~envelopeSynthMenu.enabled_(true);~geneEnvLevelRanger.enabled_(false)});
@@ -4418,7 +4421,7 @@ Preset Wek",
 		~geneEnvLevelRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneEnvDureeRanger=EZRanger(~wg, 300 @ 18, "Envelope Duration", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvDureeRanger", view.value)})}, [0.125, 0.75], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneEnvDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneEnvDureeButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneEnvDureeButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneEnvDureeButton", action.value)});
 			if(action.value == 1 ,{~flagGeneEnvDuree='on';~geneEnvDureeRanger.enabled_(true);if(~flagGeneEnvLevel == 'on', {~envelopeSynthMenu.enabled_(false)})},{~flagGeneEnvDuree='off';~envelopeSynthMenu.enabled_(true);~geneEnvDureeRanger.enabled_(false)});
@@ -4429,7 +4432,7 @@ Preset Wek",
 		~geneSynthRangerLow.action = { arg item; ~geneSynthPopUpLow = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSynthRangerLow", item.value)})};
 		~geneSynthRangerHigh=PopUpMenu(~wg,Rect(0,0, 148, 18)).items_(~listSynth).background = Color.magenta;
 		~geneSynthRangerHigh.action = { arg item; ~geneSynthPopUpHigh = item.value; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSynthRangerHigh", item.value)})};
-		~geneSynthButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)], ["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneSynthButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)], ["On", Color.magenta, Color.green]];
 		~geneSynthButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneSynthButton", action.value)});
 			if(action.value == 1 ,{~flagGeneSynth='on';~synthDefInstrMenu.enabled_(false);~geneSynthRangerLow.enabled_(true);~geneSynthRangerHigh.enabled_(true);
@@ -4443,7 +4446,7 @@ Preset Wek",
 		~geneSynthRangerHigh.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneControlsRanger=EZRanger(~wg, 300 @ 18, "Control Synthesizer", ControlSpec(0, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneControlsRanger", view.value)})}, [0, 1], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneControlsButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneControlsButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneControlsButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneControlsButton", action.value)});
 			if(action.value == 1 ,{~flagGeneControl='on';~controlsSynthMenu.enabled_(false);~geneControlsRanger.enabled_(true)},{~flagGeneControl='off';~controlsSynthMenu.enabled_(true);~geneControlsRanger.enabled_(false)});
@@ -4451,7 +4454,7 @@ Preset Wek",
 		~geneControlsRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneAudioOutRanger=EZRanger(~wg, 300 @ 18, "Audio Out", ControlSpec(1, ~sourceOutAgents.size, \lin, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAudioOutRanger", view.value)})}, [1, 1], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneAudioOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneAudioOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneAudioOutButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAudioOutButton", action.value)});
 			if(action.value == 1 ,{~flagGeneOut='on';~sourceOutSlider.enabled_(false);~geneAudioOutRanger.enabled_(true)},{~flagGeneOut='off';~sourceOutSlider.enabled_(true);~geneAudioOutRanger.enabled_(false)});
@@ -4459,7 +4462,7 @@ Preset Wek",
 		~geneAudioOutRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneMidiOutRanger=EZRanger(~wg, 300 @ 18, "Midi Out", ControlSpec(0, 16, \lin, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMidiOutRanger", view.value)})}, [1, 16], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneMidiOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneMidiOutButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneMidiOutButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneMidiOutButton", action.value)});
 			if(action.value == 1 ,{~flagGeneMidi='on';~canalMidiOutSlider.enabled_(false);~geneMidiOutRanger.enabled_(true);
@@ -4474,7 +4477,7 @@ Preset Wek",
 		~geneInputRangerHigh=PopUpMenu(~wg,Rect(0,0, 120, 18)).items_(~audioInLR).background = Color.magenta;
 		~geneInputRangerHigh.action = { arg item; ~geneInputPopUpHigh = item.value;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneInputRangerHigh", item.value)})};
-		~geneInputButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneInputButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneInputButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneInputButton", action.value)});
 			if(action.value == 1 ,{~flagGeneInput='on';
@@ -4489,7 +4492,7 @@ Preset Wek",
 		~geneInputButton.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneLoopMusicRanger=EZRanger(~wg, 300 @ 18, "Loop Buffer Music", ControlSpec(-1, 1, \lin, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopMusicRanger", view.value)})}, [-1, 1], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneLoopMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneLoopMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneLoopMusicButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneLoopMusicButton", action.value)});
 			if(action.value == 1 ,{~flagGeneLoopMusic='on';~geneLoopMusicRanger.enabled_(true);~loopseq.enabled_(false)},{~flagGeneLoopMusic='off';~geneLoopMusicRanger.enabled_(false);~loopseq.enabled_(true)});
@@ -4497,7 +4500,7 @@ Preset Wek",
 		~geneLoopMusicRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneBufferMusicRanger=EZRanger(~wg, 300 @ 18, "Buffer Music", ControlSpec(1, 256, \exp, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferMusicRanger", view.value)})}, [6, 24], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneBufferMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneBufferMusicButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneBufferMusicButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBufferMusicButton", action.value)});
 			if(action.value == 1 ,{~flagGeneBufferMusic='on';~geneBufferMusicRanger.enabled_(true);~dataAgentsSlider.enabled_(false);
@@ -4509,7 +4512,7 @@ Preset Wek",
 		~geneBufferMusicRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneChordMaxRanger=EZRanger(~wg, 300 @ 18, "Chord Max", ControlSpec(1, 12, \exp, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordMaxRanger", view.value)})}, [3, 6], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneChordMaxButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneChordMaxButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneChordMaxButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordMaxButton", action.value)});
 			if(action.value == 1 ,{~flagGeneChordMax='on';~geneChordMaxRanger.enabled_(true);~notesAccordsSlider.enabled_(false);
@@ -4521,7 +4524,7 @@ Preset Wek",
 		~geneChordMaxRanger.enabled_(false);
 		~wg.view.decorator.nextLine;
 		~geneChordDurRanger=EZRanger(~wg, 300 @ 18, "Chord Dur", ControlSpec(0.01, 1, \exp, 0), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordDurRanger", view.value)})}, [0.0625, 0.0833], false, 125, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneChordDurButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneChordDurButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneChordDurButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneChordDurButton", action.value)});
 			if(action.value == 1 ,{~flagGeneChordDur='on';~geneChordDurRanger.enabled_(true);~dureeAccordsSlider.enabled_(false);
@@ -4534,7 +4537,7 @@ Preset Wek",
 		// Algo Choice
 		StaticText(~wg, Rect(0, 0, 46, 15)).string_("Algorithm").stringColor_(Color.magenta);
 		~geneAlgorithm=EZRanger(~wg, 250 @ 18, "Algorithm", ControlSpec(0, ~listeAlgorithm.size - 1, \lin, 1), {|view| if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAlgorithm", view.value)})}, [0, ~listeAlgorithm.size - 1], false, 70, 40).setColors(Color.grey(0.3), Color.magenta);
-		~geneAlgorithmButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneAlgorithmButton=Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneAlgorithmButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneAlgorithmButton", action.value)});
 			if(action.value == 1 ,{~flagGeneAlgorithm='on';~geneAlgorithm.enabled_(true); ~choiceAlgoData.enabled_(false)}, {~flagGeneAlgorithm='off';~geneAlgorithm.enabled_(false); ~choiceAlgoData.enabled_(true)});
@@ -4546,72 +4549,72 @@ Preset Wek",
 		StaticText(~wg, 40 @ 20).string_("FzBand").stringColor_(Color.magenta).font = Font("Helvetica", 8);// 57
 		// Band 0 to 12
 		~geneBand0 = Button.new(~wg, 16 @ 20).
-		states_([["All", Color.magenta, Color.green(0.8, 0.25)], ["All", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["All", Color.magenta, Color.red(0.8, 0.25)], ["All", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(0, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand0", band.value)});
 		}); // all Band 58
 		~geneBand1 = Button.new(~wg, 16 @ 20).
-		states_([["1", Color.magenta, Color.green(0.8, 0.25)], ["1", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["1", Color.magenta, Color.red(0.8, 0.25)], ["1", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(1, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand1", band.value)});
 		});
 		~geneBand2 = Button.new(~wg, 16 @ 20).
-		states_([["2", Color.magenta, Color.green(0.8, 0.25)], ["2", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["2", Color.magenta, Color.red(0.8, 0.25)], ["2", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(2, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand2", band.value)});
 		});
 		~geneBand3 = Button.new(~wg, 16 @ 20).
-		states_([["3", Color.magenta, Color.green(0.8, 0.25)], ["3", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["3", Color.magenta, Color.red(0.8, 0.25)], ["3", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(3, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand3", band.value)});
 		});
 		~geneBand4 = Button.new(~wg, 16 @ 20).
-		states_([["4", Color.magenta, Color.green(0.8, 0.25)], ["4", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["4", Color.magenta, Color.red(0.8, 0.25)], ["4", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(4, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand4", band.value)});
 		});
 		~geneBand5 = Button.new(~wg, 16 @ 20).
-		states_([["5", Color.magenta, Color.green(0.8, 0.25)], ["5", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["5", Color.magenta, Color.red(0.8, 0.25)], ["5", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(5, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand5", band.value)});
 		});
 		~geneBand6 = Button.new(~wg, 16 @ 20).
-		states_([["6", Color.magenta, Color.green(0.8, 0.25)], ["6", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["6", Color.magenta, Color.red(0.8, 0.25)], ["6", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(6, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand6", band.value)});
 		});
 		~geneBand7 = Button.new(~wg, 16 @ 20).
-		states_([["7", Color.magenta, Color.green(0.8, 0.25)], ["7", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["7", Color.magenta, Color.red(0.8, 0.25)], ["7", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(7, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand7", band.value)});
 		});
 		~geneBand8 = Button.new(~wg, 16 @ 20).
-		states_([["8", Color.magenta, Color.green(0.8, 0.25)], ["8", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["8", Color.magenta, Color.red(0.8, 0.25)], ["8", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(8, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand8", band.value)});
 		});
 		~geneBand9 = Button.new(~wg, 16 @ 20).
-		states_([["9", Color.magenta, Color.green(0.8, 0.25)], ["9", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["9", Color.magenta, Color.red(0.8, 0.25)], ["9", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(9, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand9", band.value)});
 		});
 		~geneBand10 = Button.new(~wg, 16 @ 20).
-		states_([["10", Color.magenta, Color.green(0.8, 0.25)], ["10", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["10", Color.magenta, Color.red(0.8, 0.25)], ["10", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(10, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand10", band.value)});
 		});
 		~geneBand11 = Button.new(~wg, 16 @ 20).
-		states_([["11", Color.magenta, Color.green(0.8, 0.25)], ["11", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["11", Color.magenta, Color.red(0.8, 0.25)], ["11", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(11, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand11", band.value)});
 		});
 		~geneBand12 = Button.new(~wg, 16 @ 20).
-		states_([["12", Color.magenta, Color.green(0.8, 0.25)], ["12", Color.magenta, Color.red(0.8, 0.25)]]).font_(Font("Helvetica", 10)).
+		states_([["12", Color.magenta, Color.red(0.8, 0.25)], ["12", Color.magenta, Color.green]]).font_(Font("Helvetica", 10)).
 		action_({arg band; ~flagBandGenes.put(12, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBand12", band.value)});
 		});
 
-		~geneBandButton = Button(~wg,Rect(0, 0, 25, 18)).states=[["On", Color.magenta, Color.green(0.8, 0.25)],["Off", Color.magenta, Color.red(0.8, 0.25)]];
+		~geneBandButton = Button(~wg,Rect(0, 0, 25, 18)).states=[["Off", Color.magenta, Color.red(0.8, 0.25)],["On", Color.magenta, Color.green]];
 		~geneBandButton.action = {arg flag;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~geneBandButton", flag.value)});
 			if(flag.value == 0,
@@ -4816,31 +4819,31 @@ Preset Wek",
 		};
 		~wi.view.decorator.nextLine;
 		// REC
-		~recSamplesButton=Button(~wi,Rect(10, 10, 50, 18)).states=[["Rec On", Color.black, Color.green(0.8, 0.25)],["Rec Off", Color.black, Color.red(0.8, 0.25)]];
+		~recSamplesButton=Button(~wi,Rect(10, 10, 50, 18)).states=[["Rec Off", Color.black, Color.red(0.8, 0.25)],["Rec On", Color.black, Color.green(0.8, 0.25)]];
 		~recSamplesButton.action = {arg rec;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~recSamplesButton", rec.value)});
 			~listesamplein.wrapAt(~soundsInstrMenu.value).set(\run, rec.value, \trigger, rec.value);
 			~recSamplesButtonSons.wrapPut(~soundsInstrMenu.value, rec.value);
 			if(rec.value == 1 , {~flagFreqSamplesSons.wrapPut(~soundsInstrMenu.value, 'on'); ~flagFreqSamples='on'});
 		};
-		~recSamplesLoopButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopR On", Color.black, Color.green(0.8, 0.25)],["LoopR Off", Color.black, Color.red(0.8, 0.25)]];
+		~recSamplesLoopButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopR Off", Color.black, Color.red(0.8, 0.25)],["LoopR On", Color.black, Color.green(0.8, 0.25)]];
 		~recSamplesLoopButton.action = {arg loop;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~recSamplesLoopButton", loop.value)});
 			~listesamplein.wrapAt(~soundsInstrMenu.value).set(\loop, loop.value, \trigger, loop.value);
 			~recSamplesLoopSons.wrapPut(~soundsInstrMenu.value, loop.value);
 		};
-		~loopSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopP On", Color.black, Color.green(0.8, 0.25)],["LoopP Off", Color.black, Color.red(0.8, 0.25)]];
+		~loopSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["LoopP Off", Color.black, Color.red(0.8, 0.25)],["LoopP On", Color.black, Color.green(0.8, 0.25)]];
 		~loopSynthButton.action = {arg loop;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~loopSynthButton", loop.value)});
 			~loopSynthSons.wrapPut(~soundsInstrMenu.value, loop.value);
 		};
-		~reverseSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["Reverse On", Color.black, Color.green(0.8, 0.25)],["Reverse Off", Color.black, Color.red(0.8, 0.25)]];
+		~reverseSynthButton=Button(~wi,Rect(10, 10, 75, 18)).states=[["Reverse Off", Color.black, Color.red(0.8, 0.25)],["Reverse On", Color.black, Color.green(0.8, 0.25)]];
 		~reverseSynthButton.action = {arg reverse;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~reverseSynthButton", reverse.value)});
 			~reverseSynthSons.wrapPut(~soundsInstrMenu.value, reverse.value);
 		};
 		// Amp Synth on/off
-		~ampSynth = Button(~wi,Rect(10,10, 150, 18)).states=[["Bypass Amp Synth->FX On", Color.black, Color.green(0.8, 0.25)],["Bypass Amp Synth->FX Off", Color.black, Color.red(0.8, 0.25)]];
+		~ampSynth = Button(~wi,Rect(10,10, 150, 18)).states=[["Bypass Amp Synth->FX Off", Color.black, Color.red(0.8, 0.25)],["Bypass Amp Synth->FX On", Color.black, Color.green(0.8, 0.25)]];
 		~ampSynth.action = {arg view; if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~ampSynth", view.value)});
 			if(view.value == 0 , {~flagAmpSynth = 'off'},{~flagAmpSynth = 'on'});
 		};
@@ -4872,7 +4875,7 @@ Preset Wek",
 			~automationJitterControlsSynth.wrapPut(~synthDefInstrMenu.value, view.value);
 		}, 0.1, labelWidth: 60,unitWidth: 0, layout: 'horz');
 		// Automation controls synth
-		~randomControlsSynth = Button(~wi,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomControlsSynth = Button(~wi,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomControlsSynth.action = {arg view; ~valueRandomControlsSynth = view.value;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomControlsSynth", view.value)});
 			~automationControlsSynth.wrapPut(~synthDefInstrMenu.value, view.value);
@@ -5002,7 +5005,7 @@ Preset Wek",
 			~randomControlsEffets.value_(~automationControlsEffets.wrapAt(effet.value));
 		};
 		~effetsInstrMenu.focus;
-		~playEffetsButton=Button(~we,Rect(10, 10, 50, 18)).states=[["Play On", Color.black, Color.green(0.8, 0.25)],["Play Off", Color.black, Color.red(0.8, 0.25)]];
+		~playEffetsButton=Button(~we,Rect(10, 10, 50, 18)).states=[["Play Off", Color.black, Color.red(0.8, 0.25)],["Play On", Color.black, Color.green(0.8, 0.25)]];
 		~playEffetsButton.action = {arg play;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~playEffetsButton", play.value)});
 			~playSynthEffets.wrapPut(~effetsInstrMenu.value, play.value);
@@ -5027,7 +5030,7 @@ Preset Wek",
 		~jitterControlsEffets=EZKnob(~we, 55 @ 75, "JitterCtrls", ControlSpec(0, 1, \lin, 0), {arg view; ~jitterControlsSynthEffets.wrapPut(~effetsInstrMenu.value, view.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterControlsEffets", view.value)})}, 0.1, labelWidth: 55,unitWidth: 0, layout: 'vert');
 		// Random Effets
-		~randomControlsEffets= Button(~we,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomControlsEffets= Button(~we,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomControlsEffets.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomControlsEffets", view.value)});
 			~automationControlsEffets.wrapPut(~effetsInstrMenu.value, view.value);
@@ -5043,7 +5046,7 @@ Preset Wek",
 		~jitterPanEffets=EZKnob(~we, 55 @ 75, "JitterPan", ControlSpec(0, 1, \lin, 0), {arg view;
 			~jitterPanSynthEffets.wrapPut(~effetsInstrMenu.value, view.value);if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterPanEffets", view.value)})}, 0.1, labelWidth: 40,unitWidth: 0, layout: 'vert');
 		// Random Pan
-		~randomPanEffets= Button(~we,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomPanEffets= Button(~we,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomPanEffets.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomPanEffets", view.value)});
 			~automationPanEffets.wrapPut(~effetsInstrMenu.value, view.value);
@@ -5097,7 +5100,7 @@ Preset Wek",
 			~randomControlsVerb.value_(~automationControlsVerb.wrapAt(verb.value));
 		};
 		~verbInstrMenu.focus;
-		~playVerbButton=Button(~wv,Rect(10, 10, 50, 18)).states=[["Play On", Color.black, Color.green(0.8, 0.25)],["Play Off", Color.black, Color.red(0.8, 0.25)]];
+		~playVerbButton=Button(~wv,Rect(10, 10, 50, 18)).states=[["Play Off", Color.black, Color.red(0.8, 0.25)],["Play On", Color.black, Color.green(0.8, 0.25)]];
 		~playVerbButton.action = {arg play;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~playVerbButton", play.value)});
 			~playSynthVerb.wrapPut(~verbInstrMenu.value, play.value);
@@ -5122,7 +5125,7 @@ Preset Wek",
 		~jitterControlsVerb=EZKnob(~wv, 55 @ 75, "JitterCtrls", ControlSpec(0, 1, \lin, 0), {arg view; ~jitterControlsSynthVerb.wrapPut(~verbInstrMenu.value, view.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterControlsVerb", view.value)})}, 0.1, labelWidth: 55,unitWidth: 0, layout: 'vert');
 		// Random Verb
-		~randomControlsVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomControlsVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomControlsVerb.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomControlsVerb", view.value)});
 			~automationControlsVerb.wrapPut(~verbInstrMenu.value, view.value);
@@ -5138,7 +5141,7 @@ Preset Wek",
 		~jitterPanVerb=EZKnob(~wv, 55 @ 75, "JitterPan", ControlSpec(0, 1, \lin, 0), {arg view;
 			~jitterPanSynthVerb.wrapPut(~verbInstrMenu.value, view.value);if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~jitterPanVerb", view.value)})}, 0.1, labelWidth: 40,unitWidth: 0, layout: 'vert');
 		// Random Pan
-		~randomPanVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["On", Color.black, Color.green(0.8, 0.25)],["Off", Color.black, Color.red(0.8, 0.25)]];
+		~randomPanVerb= Button(~wv,Rect(10,10, 25, 18)).states=[["Off", Color.black, Color.red(0.8, 0.25)],["On", Color.black, Color.green(0.8, 0.25)]];
 		~randomPanVerb.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~randomPanVerb", view.value)});
 			~automationPanVerb.wrapPut(~verbInstrMenu.value, view.value);
@@ -5177,7 +5180,7 @@ Preset Wek",
 		~wp.view.decorator.nextLine;
 		StaticText(~wp, Rect(10,10,500,20)).string_("System WekAgents").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~startsysteme = Button(~wp,Rect(10,10,75,20)).states=[["System On", Color.black, Color.green(0.8, 0.25)],["System Off", Color.black, Color.red(0.8, 0.25)]];
+		~startsysteme = Button(~wp,Rect(10,10,75,20)).states=[["System Off", Color.black, Color.red(0.8, 0.25)],["System On", Color.black, Color.green(0.8, 0.25)]];
 		~startsysteme.action = {arg view;
 			if(~oscStateFlag == 'master', {~slaveAppAddr.sendMsg('/HPstart', view.value)});// Send Synchro Start
 			if (view.value == 1, {
@@ -5256,7 +5259,7 @@ Preset Wek",
 			if(~flagMidiOut == 'on', {16.do({arg canal; ~midiOut.allNotesOff(canal); if(flagVST == 'on', {~fxVST.midi.allNotesOff(canal)})})});//MIDI setup off
 		};
 		~startsysteme.focus;
-		~musique = Button(~wp,Rect(10,10,75,20)).states=[["Music On", Color.black, Color.green(0.8, 0.25)],["Music Off", Color.black, Color.red(0.8, 0.25)]];
+		~musique = Button(~wp,Rect(10,10,75,20)).states=[["Music Off", Color.black, Color.red(0.8, 0.25)],["Music On", Color.black, Color.green(0.8, 0.25)]];
 		~musique.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~musique", view.value)});
 			if (view.value == 1, {
@@ -5266,21 +5269,21 @@ Preset Wek",
 			{~agents.do({arg agent; ~routineMusic.wrapAt(agent).stop;~musicOutAgents.wrapPut(agent , 0)})});
 			if(~flagMidiOut == 'on', {16.do({arg canal; ~midiOut.allNotesOff(canal); if(flagVST == 'on', {~fxVST.midi.allNotesOff(canal)})})});//MIDI setup off
 		};
-		~viewworld = Button(~wp,Rect(10,10,100,20)).states=[["View Virtual On", Color.black, Color.green(0.8, 0.25)],["View Virtual Off", Color.black, Color.red(0.8, 0.25)]];
+		~viewworld = Button(~wp,Rect(10,10,100,20)).states=[["View Virtual Off", Color.black, Color.red(0.8, 0.25)],["View Virtual On", Color.black, Color.green(0.8, 0.25)]];
 		~viewworld.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~viewworld", view.value)});
 			if (view.value == 1,
 				{if(~startsysteme.value == 1, {~routineVirtual.play(quant: Quant.new(1))})},
 				{~routineVirtual.stop});
 		};
-		~affichage = Button(~wp,Rect(10,10, 100,20)).states=[["State System On", Color.black, Color.green(0.8, 0.25)],["State System Off", Color.black, Color.red(0.8, 0.25)]];
+		~affichage = Button(~wp,Rect(10,10, 100,20)).states=[["State System Off", Color.black, Color.red(0.8, 0.25)],["State System On", Color.black, Color.green(0.8, 0.25)]];
 		~affichage.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~affichage", view.value)});
 			if (view.value == 1,
 				{if(~startsysteme.value == 1, {~routineData.play(quant: Quant.new(1))})},
 				{~routineData.stop});
 		};
-		~tempoButton = Button(~wp,Rect(10,10, 150, 20)).states=[["Tempo Analyze On", Color.black, Color.green(0.8, 0.25)],["Tempo Analyze Off", Color.black, Color.red(0.8, 0.25)]];
+		~tempoButton = Button(~wp,Rect(10,10, 150, 20)).states=[["Tempo Analyze Off", Color.black, Color.red(0.8, 0.25)],["Tempo Analyze On", Color.black, Color.green(0.8, 0.25)]];
 		~tempoButton.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~tempoButton", view.value)});
 			if (view.value == 1,
@@ -5422,74 +5425,74 @@ Preset Wek",
 		// SynthBand
 		// Band 0 to 12
 		~synthBand0 = Button.new(~wp, 16 @ 20).
-		states_([["All", Color.green], ["All", Color.red]]).
+		states_([["All", Color.red], ["All", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(0, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand0", band.value)});
 		}); // all Band 29
 		~synthBand1 = Button.new(~wp, 16 @ 20).
-		states_([["1", Color.green], ["1", Color.red]]).
+		states_([["1", Color.red], ["1", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(1, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand1", band.value)});
 		});
 		~synthBand2 = Button.new(~wp, 16 @ 20).
-		states_([["2", Color.green], ["2", Color.red]]).
+		states_([["2", Color.red], ["2", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(2, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand2", band.value)});
 		});
 		~synthBand3 = Button.new(~wp, 16 @ 20).
-		states_([["3", Color.green], ["3", Color.red]]).
+		states_([["3", Color.red], ["3", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(3, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand3", band.value)});
 		});
 		~synthBand4 = Button.new(~wp, 16 @ 20).
-		states_([["4", Color.green], ["4", Color.red]]).
+		states_([["4", Color.red], ["4", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(4, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand4", band.value)});
 		});
 		~synthBand5 = Button.new(~wp, 16 @ 20).
-		states_([["5", Color.green], ["5", Color.red]]).
+		states_([["5", Color.red], ["5", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(5, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand5", band.value)});
 		});
 		~synthBand6 = Button.new(~wp, 16 @ 20).
-		states_([["6", Color.green], ["6", Color.red]]).
+		states_([["6", Color.red], ["6", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(6, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand6", band.value)});
 		});
 		~synthBand7 = Button.new(~wp, 16 @ 20).
-		states_([["7", Color.green], ["7", Color.red]]).
+		states_([["7", Color.red], ["7", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(7, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand7", band.value)});
 		});
 		~synthBand8 = Button.new(~wp, 16 @ 20).
-		states_([["8", Color.green], ["8", Color.red]]).
+		states_([["8", Color.red], ["8", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(8, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand8", band.value)});
 		});
 		~synthBand9 = Button.new(~wp, 16 @ 20).
-		states_([["9", Color.green], ["9", Color.red]]).
+		states_([["9", Color.red], ["9", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(9, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand9", band.value)});
 		});
 		~synthBand10 = Button.new(~wp, 16 @ 20).
-		states_([["10", Color.green], ["10", Color.red]]).
+		states_([["10", Color.red], ["10", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(10, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand10", band.value)});
 		});
 		~synthBand11 = Button.new(~wp, 16 @ 20).
-		states_([["11", Color.green], ["11", Color.red]]).
+		states_([["11", Color.red], ["11", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(11, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand11", band.value)});
 		});
 		~synthBand12 = Button.new(~wp, 16 @ 20).
-		states_([["12", Color.green], ["12", Color.red]]).
+		states_([["12", Color.red], ["12", Color.green]]).
 		action_({arg band; ~flagBandSynth.put(12, band.value);
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthBand12", band.value)});
 		});
 
 		// flagFhzBand 42
 		~buttonSynthBand = Button(~wp, Rect(0, 0, 40, 20))
-		.states_([["On", Color.green], ["Off", Color.red]])
+		.states_([["Off", Color.red], ["On", Color.green]])
 		.action = {arg flag;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~buttonSynthBand", flag.value)});
 			if(flag.value == 0,
@@ -5648,7 +5651,7 @@ Preset Wek",
 		~wp.view.decorator.nextLine;
 		StaticText(~wp, Rect(10,10,500,20)).string_("Musical").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~loopseq = Button(~wp,Rect(10, 10, 100, 20)).states=[["Loop Music On", Color.black, Color.green(0.8, 0.25)],["Loop Music Off", Color.black, Color.red(0.8, 0.25)]];
+		~loopseq = Button(~wp,Rect(10, 10, 100, 20)).states=[["Loop Music Off", Color.black, Color.red(0.8, 0.25)],["Loop Music On", Color.black, Color.green(0.8, 0.25)]];
 		~loopseq.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~loopseq", view.value)});
 			if (view.value == 1,
@@ -5677,7 +5680,7 @@ Preset Wek",
 
 		StaticText(~wp, Rect(10,10,500,20)).string_("Spatial (Virtual Space)").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~toreButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Toric Space On", Color.black, Color.green(0.8, 0.25)],["Toric Space Off", Color.black, Color.red(0.8, 0.25)]];
+		~toreButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Toric Space Off", Color.black, Color.red(0.8, 0.25)],["Toric Space On", Color.black, Color.green(0.8, 0.25)]];
 		~toreButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~toreButton", action.value)});
 			if(action.value == 1 ,{~flagTore='on';
@@ -5689,7 +5692,7 @@ Preset Wek",
 				~routineSignauxAgents=~signauxvoisinsNoTore;
 				~routineMoveAgents=~movingagentsNoTore});
 		};
-		~flockButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Agent Flock On", Color.black, Color.green(0.8, 0.25)],["Agent Flock Off", Color.black, Color.red(0.8, 0.25)]];
+		~flockButton=Button(~wp,Rect(0, 0, 100, 20)).states=[["Agent Flock Off", Color.black, Color.red(0.8, 0.25)],["Agent Flock On", Color.black, Color.green(0.8, 0.25)]];
 		~flockButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~flockButton", action.value)});
 			if(action.value == 1 ,{~flagFlock='on';
@@ -5709,12 +5712,12 @@ Preset Wek",
 
 		StaticText(~wp, Rect(10,10, 500, 20)).string_("Genetic Algorithm").stringColor_(Color.white).font_(Font("Georgia-BoldItalic", 12));
 		~wp.view.decorator.nextLine;
-		~elitisteButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Elitist Reproduction On", Color.black, Color.green(0.8, 0.25)],["Elitist Reproduction Off", Color.black, Color.red(0.8, 0.25)]];
+		~elitisteButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Elitist Reproduction Off", Color.black, Color.red(0.8, 0.25)],["Elitist Reproduction On", Color.black, Color.green(0.8, 0.25)]];
 		~elitisteButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~elitisteButton", action.value)});
 			if(action.value == 1 ,{~flagElitiste='on'},{~flagElitiste='off'});
 		};
-		~sharedMusicButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Shared Music Agent On", Color.black, Color.green(0.8, 0.25)],["Shared Music Agent Off", Color.black, Color.red(0.8, 0.25)]];
+		~sharedMusicButton=Button(~wp,Rect(10, 10, 125, 20)).states=[["Shared Music Agent Off", Color.black, Color.red(0.8, 0.25)],["Shared Music Agent On", Color.black, Color.green(0.8, 0.25)]];
 		~sharedMusicButton.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~sharedMusicButton", action.value)});
 			if(action.value == 1 ,{~flagSharedMusic='on'},{~flagSharedMusic='off'});
@@ -5877,7 +5880,7 @@ Preset Wek",
 		~stateOSC.background = Color.grey;
 
 		// Wekinator
-		Button(~wp, Rect(0, 0, 70, 20)).states_([["WekRec On", Color.magenta], ["WekRec Off", Color.red]]).action_({|view|
+		Button(~wp, Rect(0, 0, 70, 20)).states_([["WekRec Off", Color.magenta], ["WekRec On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {sender.sendMsg("/wekinator/control/stopRecording")},
 				1, {sender.sendMsg("/wekinator/control/startRecording");
@@ -5885,12 +5888,12 @@ Preset Wek",
 				}
 			);
 		});
-		Button(~wp, Rect(0, 0, 70, 20)).states_([["WekTrain On", Color.magenta]]).action_({|view|
+		Button(~wp, Rect(0, 0, 70, 20)).states_([["WekTrain", Color.magenta]]).action_({|view|
 			sender.sendMsg("/wekinator/control/train");
 			~wp.view.children.wrapAt(95).valueAction = 0;// rec
 			~wp.view.children.wrapAt(97).valueAction = 0;// run
 		});
-		Button(~wp, Rect(0, 0, 70, 20)).states_([["WekRun On", Color.magenta], ["WekRun Off", Color.red]]).action_({|view|
+		Button(~wp, Rect(0, 0, 70, 20)).states_([["WekRun Off", Color.magenta], ["WekRun On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagStreamMFCC = 'off'; sender.sendMsg("/wekinator/control/stopRunning");
 				},
@@ -5900,14 +5903,14 @@ Preset Wek",
 			);
 		});
 
-		Button(~wp, Rect(0, 0, 45, 20)).states_([["WTD On", Color.magenta], ["WTD Off", Color.red]]).action_({|view|
+		Button(~wp, Rect(0, 0, 45, 20)).states_([["WTD Off", Color.magenta], ["WTD On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagWTD = 'off'},
 				1, {flagWTD = 'on'});
 		}).valueAction_(1);
 		NumberBox(~wp, 25 @ 20).value_(0.0625).action_({|ez| timeWekData = ez.value});
 
-		Button(~wp, Rect(0, 0, 45, 20)).states_([["WTP On", Color.magenta], ["WTP Off", Color.red]]).action_({|view|
+		Button(~wp, Rect(0, 0, 45, 20)).states_([["WTP Off", Color.magenta], ["WTP On", Color.green]]).action_({|view|
 			switch(view.value,
 				0, {flagWTP = 'off'},
 				1, {flagWTP = 'on'});
@@ -5921,7 +5924,7 @@ Preset Wek",
 		//Automation et Densite
 		~wad = Window("Automation Density", Rect(595, 10, 415, 85), scroll: true);
 		~wad.view.decorator = FlowLayout(~wad.view.bounds);
-		~startAutomation = Button(~wad, Rect(0, 0, 125, 20)).states=[["All Automation On", Color.black, Color.green(0.8, 0.25)],["All Automation Off", Color.black, Color.red(0.8, 0.25)]];
+		~startAutomation = Button(~wad, Rect(0, 0, 125, 20)).states=[["All Automation Off", Color.black, Color.red(0.8, 0.25)],["All Automation On", Color.black, Color.green(0.8, 0.25)]];
 		~startAutomation.action = {arg view;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~startAutomation", view.value)});
 			if (view.value == 1 and: {~startsysteme.value == 1}, {~routineAutomation.play(quant: Quant.new(1))},{~routineAutomation.stop});
@@ -5936,12 +5939,12 @@ Preset Wek",
 		~densite=EZRanger(~wad, 165@20, "Time", ControlSpec(3600.reciprocal, 60, \exp, 0), {|valeur|  if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~densite", valeur.value)})}, [0.25, 0.5], labelWidth: 30, numberWidth: 30);
 		~wad.view.decorator.nextLine;
 		// Init
-		~initAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["AgentI On", Color.black, Color.green(0.8, 0.25)],["AgentI Off", Color.black, Color.red(0.8, 0.25)]];
+		~initAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["AgentI Off", Color.black, Color.red(0.8, 0.25)],["AgentI On", Color.black, Color.green(0.8, 0.25)]];
 		~initAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~initAutomation", action.value)});
 			if(action.value == 1, {~flagInitAutomation='on'}, {~flagInitAutomation='off'})};
 		// Univers
-		~universAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["PresetL On", Color.black, Color.green(0.8, 0.25)],["PresetL Off", Color.black, Color.red(0.8, 0.25)]];
+		~universAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["PresetL Off", Color.black, Color.red(0.8, 0.25)],["PresetL On", Color.black, Color.green(0.8, 0.25)]];
 		~universAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~universAutomation", action.value)});
 			if(action.value == 1, {~flagUniversAutomation='on'}, {~flagUniversAutomation='off'})};
@@ -5950,38 +5953,38 @@ Preset Wek",
 		~changeSynth.action = {|view| if(~variableChange == "Flux", {~valueSynthChange.put(0,  view.value)}, {~valueSynthChange.put(1,  view.value)})};
 		~changeSynth.step_(0.01); ~changeSynth.clipLo_(0); ~changeSynth.clipHi_(10); ~changeSynth.scroll_step_(0.01); ~changeSynth.value_(~valueSynthChange.wrapAt(0));
 		// Monde Agents
-		~mondesAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlA On", Color.black, Color.green(0.8, 0.25)],["ControlA Off", Color.black, Color.red(0.8, 0.25)]];
+		~mondesAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlA Off", Color.black, Color.red(0.8, 0.25)],["ControlA On", Color.black, Color.green(0.8, 0.25)]];
 		~mondesAgentsAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~mondesAgentsAutomation", action.value)});
 			if(action.value == 1, {~flagMondesAgentsAutomation='on'}, {~flagMondesAgentsAutomation='off'})};
 		// Monde Musique
-		~mondesMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlM On", Color.black, Color.green(0.8, 0.25)],["ControlM Off", Color.black, Color.red(0.8, 0.25)]];
+		~mondesMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["ControlM Off", Color.black, Color.red(0.8, 0.25)],["ControlM On", Color.black, Color.green(0.8, 0.25)]];
 		~mondesMusiqueAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~mondesMusiqueAutomation", action.value)});
 			if(action.value == 1, {~flagMondesMusiqueAutomation='on'}, {~flagMondesMusiqueAutomation='off'})};
 		~wad.view.decorator.nextLine;
 		// Genes Synth
-		~genesSAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesA On", Color.black, Color.green(0.8, 0.25)],["GenesA Off", Color.black, Color.red(0.8, 0.25)]];
+		~genesSAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesA Off", Color.black, Color.red(0.8, 0.25)],["GenesA On", Color.black, Color.green(0.8, 0.25)]];
 		~genesSAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genesSAutomation", action.value)});
 			if(action.value == 1, {~flagGenesSAutomation='on'}, {~flagGenesSAutomation='off'})};
 		// Genes Musique
-		~genesMAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesM On", Color.black, Color.green(0.8, 0.25)],["GenesM Off", Color.black, Color.red(0.8, 0.25)]];
+		~genesMAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["GenesM Off", Color.black, Color.red(0.8, 0.25)],["GenesM On", Color.black, Color.green(0.8, 0.25)]];
 		~genesMAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~genesMAutomation", action.value)});
 			if(action.value == 1, {~flagGenesMAutomation='on'}, {~flagGenesMAutomation='off'})};
 		// Synth agents
-		~synthAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthA On", Color.black, Color.green(0.8, 0.25)],["SynthA Off", Color.black, Color.red(0.8, 0.25)]];
+		~synthAgentsAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthA Off", Color.black, Color.red(0.8, 0.25)],["SynthA On", Color.black, Color.green(0.8, 0.25)]];
 		~synthAgentsAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthAgentsAutomation", action.value)});
 			if(action.value == 1, {~flagSynthAgentsAutomation='on'}, {~flagSynthAgentsAutomation='off'})};
 		// Synth musique
-		~synthMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthM On", Color.black, Color.green(0.8, 0.25)],["SynthM Off", Color.black, Color.red(0.8, 0.25)]];
+		~synthMusiqueAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["SynthM Off", Color.black, Color.red(0.8, 0.25)],["SynthM On", Color.black, Color.green(0.8, 0.25)]];
 		~synthMusiqueAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~synthMusiqueAutomation", action.value)});
 			if(action.value == 1, {~flagSynthMusiqueAutomation='on'}, {~flagSynthMusiqueAutomation='off'})};
 		// Root Automation
-		~rootAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["Root On", Color.black, Color.green(0.8, 0.25)],["Root Off", Color.black, Color.red(0.8, 0.25)]];
+		~rootAutomation = Button(~wad, Rect(0, 0, 75, 20)).states=[["Root Off", Color.black, Color.red(0.8, 0.25)],["Root On", Color.black, Color.green(0.8, 0.25)]];
 		~rootAutomation.action = {arg action;
 			if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~rootAutomation", action.value)});
 			if(action.value == 1, {~flagRootAutomation='on'}, {~flagRootAutomation='off'; /*~rootChoice.valueAction_(0)*/})};
@@ -5996,7 +5999,7 @@ Preset Wek",
 		windowKeyboard.front;
 		// Setup ShortCut
 		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 105, 20));
-		setupKeyboardShortCut.states = [["System Shortcut", Color.green], ["Keyboard Shortcut", Color.red]];
+		setupKeyboardShortCut.states = [["System Shortcut", Color.red], ["Keyboard Shortcut", Color.green]];
 		setupKeyboardShortCut.action = {arg shortcut;
 			if(shortcut.value == 1, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})},
@@ -6047,7 +6050,7 @@ Preset Wek",
 		windowVST = Window.new("VST Stereo", Rect(40, 300, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 60, 20)).
-		states_([["Run On", Color.green], ["Run Off", Color.red]]).
+		states_([["Run Off", Color.red], ["Run On", Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {~synthVST.run(false); flagVST = 'off'},
@@ -7097,7 +7100,7 @@ Preset Wek",
 					lastNote = 74 + keyboardTranslate.value;
 					keyboard.setColor(74 + keyboardTranslate.value, Color.red);
 				});
-				// Key �
+				// Key
 				if(modifiers==0 and: {unicode==233} and: {keycode==41}, {
 					keyboard.removeColor(lastNote);
 					keyboard.setColor(lastNote, Color.blue);

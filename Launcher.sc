@@ -14,7 +14,33 @@ Launcher {
 	init	{arg path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, wek, wekPort, scPort, sl, ml;
 
 		// Init
-		QtGUI.palette = QPalette.dark;// light / system
+var pal;
+
+pal = QPalette.auto(
+    Color(0.27, 0.34, 0.43),  // Boutons
+    Color(0.12, 0.15, 0.20)   // Fenêtres
+);
+
+// Textes principaux
+pal.setColor(Color(0.95, 0.97, 1.00), \windowText);
+pal.setColor(Color(0.95, 0.97, 1.00), \buttonText);
+
+// Zones de saisie et listes
+pal.setColor(Color(0.085, 0.11, 0.15), \base);
+pal.setColor(Color(0.94, 0.96, 0.99), \baseText);
+pal.setColor(Color(0.15, 0.19, 0.25), \alternateBase);
+
+// Sélection
+pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+// Informations et alertes
+pal.setColor(Color(1.0, 0.85, 0.55), \brightText);
+pal.setColor(Color(0.95, 0.97, 1.0), \toolTipText);
+pal.setColor(Color(0.20, 0.25, 0.32), \toolTipBase);
+
+QtGUI.palette = pal;
+
 		//Server.default = Server.internal;
 		ni = 2;
 		o = 2;

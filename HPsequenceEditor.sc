@@ -88,7 +88,7 @@ HPsequenceEditor {
 				if(num.value > ~agents, {~agentCopySequence.value_(1)});
 			},{~agentCopySequence.value_(0)});
 		};
-		~startTdefSeq = Button(~wSequence,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.green(0.8, 0.25)],["Tdef Display On", Color.black, Color.red(0.8, 0.25)]];
+		~startTdefSeq = Button(~wSequence,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
 		~startTdefSeq.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineSequence.play(quant: Quant.new(1, 0.0, 0.0));
@@ -98,7 +98,7 @@ HPsequenceEditor {
 			});
 		};
 		~wSequence.view.decorator.nextLine;
-		~validSeqFreqAmpDur = Button(~wSequence,Rect(0, 0, 250, 20)).states=[["Validation Sequence Fhz/Amp/Time", Color.black, Color.blue(0.8, 0.25)]];
+		~validSeqFreqAmpDur = Button(~wSequence,Rect(0, 0, 250, 20)).states=[["Validation Sequence Fhz/Amp/Time", Color.white, Color.blue(0.8, 0.25)]];
 		~validSeqFreqAmpDur.action = {arg view;
 			if(~agentSequence >= 1 and: {~agentSequence <= ~agents},
 				{~listeagentfreq.wrapPut(~agentSequence-1, ~wSeqFreq.string.interpret/127);
