@@ -21,8 +21,8 @@ WekAgents {
 
 		pal = QPalette.auto(
 			Color(0.27, 0.34, 0.43),  // Boutons
-			//Color(0.12, 0.15, 0.20)   // Fenêtres
-			Color(0.15,0.19,0.25) // Fenêtres
+			Color(0.12, 0.15, 0.20)   // Fenêtres
+			//Color(0.15,0.19,0.25) // Fenêtres
 		);
 
 		// Sélection
