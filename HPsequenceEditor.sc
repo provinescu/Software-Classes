@@ -14,7 +14,20 @@ HPsequenceEditor {
 		// utilise les variables ~listeagentfreq ~listeagentamp ~listeagentduree et ~agents de Agents !!!!
 
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
 
 		~flagHPsequenceEditor = 'on';
 
@@ -55,7 +68,7 @@ HPsequenceEditor {
 		};
 		~menuSequence.focus;
 		// Choix de l'agent et routine automation display
-		StaticText(~wSequence, Rect(0, 0, 50, 18)).string_("Agent").stringColor_(Color.black(1.0,1.0));
+		StaticText(~wSequence, Rect(0, 0, 50, 18)).string_("Agent").stringColor_(Color.white);
 		~agentNumberSeq=NumberBox(~wSequence, 25 @ 18);
 		~agentNumberSeq.value = 1;
 		~agentNumberSeq.action={|num| var number;
@@ -70,7 +83,7 @@ HPsequenceEditor {
 			}, {~agentNumberSeq.value_(0)});
 		};
 		// Copy Sequence
-		~fonctionCopySequence = Button(~wSequence,Rect(0, 0, 150, 20)).states=[["-> Copy Sequence ->", Color.black, Color.yellow(0.8, 0.25)]];
+		~fonctionCopySequence = Button(~wSequence,Rect(0, 0, 150, 20)).states=[["-> Copy Sequence ->", Color.white, Color.yellow(0.8, 0.25)]];
 		~fonctionCopySequence.action={arg item;
 			~fonctionRecordScore.value("~fonctionCopySequence", item.value);
 			if(~agentSequence >= 1 and: {~agentSequence <= ~agents},
@@ -78,7 +91,7 @@ HPsequenceEditor {
 					~listeagentamp.wrapPut(~agentCopySequence.value - 1, ~listeagentamp.wrapAt(~agentSequence-1).copy);
 					~listeagentduree.wrapPut(~agentCopySequence.value - 1, ~listeagentduree.wrapAt(~agentSequence-1).copy)});
 		};
-		StaticText(~wSequence, Rect(0, 0, 50, 18)).string_("Agent").stringColor_(Color.black(1.0,1.0));
+		StaticText(~wSequence, Rect(0, 0, 50, 18)).string_("Agent").stringColor_(Color.white);
 		~agentCopySequence=NumberBox(~wSequence, 25 @ 18);
 		~agentCopySequence.value = 1;
 		~agentCopySequence.action={|num|
@@ -88,7 +101,7 @@ HPsequenceEditor {
 				if(num.value > ~agents, {~agentCopySequence.value_(1)});
 			},{~agentCopySequence.value_(0)});
 		};
-		~startTdefSeq = Button(~wSequence,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
+		~startTdefSeq = Button(~wSequence,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.white, Color.red(0.8, 0.25)],["Tdef Display On", Color.white, Color.green(0.8, 0.25)]];
 		~startTdefSeq.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineSequence.play(quant: Quant.new(1, 0.0, 0.0));

@@ -18,8 +18,21 @@ MatrixMusic {
 	init	{arg name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, scPort, sl, ml;
 
 		// Setup GUI style
-		//GUI.qt;
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
+
 		MainMenu.initBuiltInMenus;
 		udpAdr = NetAddr.langPort;
 		scAdr = NetAddr("localhost", scPort);
@@ -36,7 +49,6 @@ MatrixMusic {
 		switchAudioOut = f;// Type Format stereo, ambisonic, etc...
 
 		//Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
-
 		s = Server.default;
 		s.options.memSize = 2**20;
 		s.options.numWireBufs = 128;
@@ -3021,7 +3033,7 @@ y ... -						Musical keys.
 		windowVST = Window.new("VST Stereo", Rect(40, 500, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 60, 15)).
-		states_([["Run Off", Color.red], ["Run On", Color.green]]).
+		states_([["Run Off", Color.black, Color.gray(0.82)], ["Run On", Color.black, Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {~synthVST.run(false); flagVST = 'off'},
@@ -3075,28 +3087,27 @@ y ... -						Musical keys.
 		windowKeyboard = Window.new("Keyboard", Rect(0, 800, 1024, 175), scroll: true);
 		windowKeyboard.view.decorator = FlowLayout(windowKeyboard.view.bounds);
 		windowKeyboard.front;
-		// Keyboard Translate
-		keyboardTranslate = EZSlider(windowKeyboard, 250 @ 15, "Translate", ControlSpec(-36, 31, \lin, 1),
-			{|ez| forBy(60 + keyboardTranslateBefore, 76 + keyboardTranslateBefore, 1, {arg note; keyboard.removeColor(note)});
-				forBy(60 + ez.value, 76 + ez.value, 1, {arg note; keyboard.setColor(note, Color.blue)});
-				keyboardTranslateBefore = ez.value;
-		}, 0,labelWidth: 75,numberWidth: 50);
-		// Keyboard volume
-		keyboardVolume = EZSlider(windowKeyboard, 250 @ 15, "Volume", \db,
-			{|ez| keyVolume = ez.value.dbamp}, -12,labelWidth: 75,numberWidth: 50);
-		// Setup ShortCut
-		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 200, 15));
-		setupKeyboardShortCut.states = [["System Shortcut", Color.black,  Color.red(0.8, 0.25)], ["Keyboard Shortcut", Color.yellow, Color.green(0.8, 0.25)]];
+		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 105, 20));
+		setupKeyboardShortCut.states = [["System Shortcut", Color.black, Color.gray(0.82)], ["Keyboard Shortcut", Color.black, Color.green]];
 		setupKeyboardShortCut.action = {arg shortcut;
-			if(shortcut.value == 0, {keyboardShortCut.value(windowKeyboard);
+			if(shortcut.value == 1, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})}, {fonctionShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.removeColor(note)});
 			});
 		};
+		// Keyboard Translate
+		keyboardTranslate = EZKnob(windowKeyboard, 130 @ 20, "Translate", ControlSpec(-36, 31, \lin, 1),
+			{|ez| forBy(60 + keyboardTranslateBefore, 76 + keyboardTranslateBefore, 1, {arg note; keyboard.removeColor(note)});
+				forBy(60 + ez.value, 76 + ez.value, 1, {arg note; keyboard.setColor(note, Color.blue)});
+				keyboardTranslateBefore = ez.value;
+		}, 0, layout: \horz);
+		// Keyboard volume
+		keyboardVolume = EZKnob(windowKeyboard, 130 @ 20, "Volume", \db,
+			{|ez| keyVolume = ez.value.dbamp}, -9, layout: \horz);
 		windowKeyboard.view.decorator.nextLine;
 		// Keyboard Keys
 		keyboard = MIDIKeyboard.new(windowKeyboard, Rect(5, 5, 1000, 140), 7, 24);
-		forBy(60, 76, 1, {arg note; keyboard.setColor(note, Color.blue)});
+		//forBy(60, 76, 1, {arg note; keyboard.setColor(note, Color.blue)});
 		// Action Down
 		keyboard.keyDownAction_({arg note;
 			note = note.value + keyboardTranslate.value;
@@ -3415,7 +3426,7 @@ y ... -						Musical keys.
 		windowControl.view.decorator.nextLine;
 		// Systeme start stop playing
 		startSystem = Button(windowControl,Rect(0, 0, 125, 15));
-		startSystem.states = [["System Off", Color.black,  Color.red(0.8, 0.25)], ["System On", Color.black, Color.green(0.8, 0.25)]];
+		startSystem.states = [["System Off", Color.black,  Color.gray(0.82)], ["System On", Color.black, Color.green]];
 		startSystem.action = {|view|
 			if(oscStateflag == 'master', {slaveAppAddr.sendMsg('/HPstart', view.value)});// Send Synchro Start
 			s.bind{
@@ -3720,7 +3731,7 @@ y ... -						Musical keys.
 		switchCanalMIDI.enabled_(false);
 		// Flag Data OSC
 		sliderDataOSC = Button(windowControl,Rect(0, 0, 20, 15));
-		sliderDataOSC.states = [["@", Color.black,  Color.red(0.8, 0.25)],["!", Color.black, Color.green(0.8, 0.25)]];
+		sliderDataOSC.states = [["@", Color.black,  Color.green],["!", Color.black, Color.gray(0.82)]];
 		sliderDataOSC.action = {|view|
 			if(view.value == 0 ,{flagDataOSC = 'on'},{flagDataOSC = 'off'});
 		};
@@ -3986,7 +3997,7 @@ y ... -						Musical keys.
 		displayOSC = TextView(windowControl, Rect(0, 0, 390, 95));
 		windowControl.view.decorator.nextLine;
 		// Auto Preset
-		Button(windowControl,Rect(0, 0, 105, 15)).states_([["Automation Preset Off", Color.black,  Color.red(0.8, 0.25)], ["Automation Preset On", Color.black, Color.green(0.8, 0.25)]]).action = {|view| onOffSynth = view.value};
+		Button(windowControl,Rect(0, 0, 105, 15)).states_([["Automation Preset Off", Color.black, Color.gray(0.82)], ["Automation Preset On", Color.black, Color.green]]).action = {|view| onOffSynth = view.value};
 		// % Change Peset
 		NumberBox(windowControl,Rect(0, 0, 30, 15)).action_({|view| if(variableChange == "Flux", {onOffSynthValue.put(0, view.value)},{onOffSynthValue.put(1, view.value)})}).step_(0.01).clipLo_(0).clipHi_(10).scroll_step_(0.01).value_(onOffSynthValue.at(0));
 		// NumFhzBand
@@ -4105,7 +4116,7 @@ y ... -						Musical keys.
 			windowSynth.front;
 			windowSynth.view.decorator = FlowLayout(windowSynth.view.bounds);
 			// StartStop Synth
-			startStop = Button(windowSynth,Rect(0, 0, 50, 15)).states=[["Stop", Color.black, Color.red(0.8, 0.25)], ["Start", Color.black, Color.green(0.8, 0.25)]];
+			startStop = Button(windowSynth,Rect(0, 0, 50, 15)).states=[["Stop", Color.black, Color.gray(0.82)], ["Start", Color.black, Color.green]];
 			startStop.action = {arg view;
 				if(view.value == 1, {
 					if(startSystem.value == 1, {
@@ -4272,7 +4283,7 @@ y ... -						Musical keys.
 			StaticText(windowSynth, Rect(0, 0, 400, 11)).string_("Buffer Audio for SynthDef").stringColor_(Color.yellow).font_(Font("Georgia", 10)).align_(\center);
 			windowSynth.view.decorator.nextLine;
 			// Button BufferOne Action
-			switchBufferOneAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["O", Color.black, Color.red(0.8, 0.25)], ["X", Color.black, Color.green(0.8, 0.25)]];
+			switchBufferOneAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["O", Color.black, Color.gray(0.82)], ["X", Color.black, Color.green]];
 			switchBufferOneAction.action = {|view| groupe.set(\switchBuffer1, view.value); switch1 = view.value};
 			// Buffer sampler one
 			switchBufferOne = Button(windowSynth, Rect(0, 0, 100, 15)).states=[["Load Buffer I", Color.red(0.8, 0.6), Color.grey(0.75, 0.25)]];
@@ -4284,7 +4295,7 @@ y ... -						Musical keys.
 				},{"cancelled".postln});
 			};
 			// Loop Sample one
-			loopBufferOne = Button(windowSynth,Rect(0, 0, 20, 15)).states = [["!", Color.black,  Color.red(0.8, 0.25)], ["@", Color.black, Color.green(0.8, 0.25)]];
+			loopBufferOne = Button(windowSynth,Rect(0, 0, 20, 15)).states = [["!", Color.black,  Color.gray(0.82)], ["@", Color.black, Color.green]];
 			loopBufferOne.action = {|view|
 				if(view.value == 0, {groupe.set(\loopOne, 0); loop1 = 0},{groupe.set(\loopOne, 1); loop1 = 1});
 			};
@@ -4305,7 +4316,7 @@ y ... -						Musical keys.
 			durSampleOneSlider.value_(timeBuf1);
 			durSampleOneSlider.step_(0.01);
 			// Button Reverse one
-			reverseBufferOneAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["->", Color.black, Color.red(0.8, 0.25)], ["<-", Color.black, Color.green(0.8, 0.25)]];
+			reverseBufferOneAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["->", Color.black, Color.gray(0.82)], ["<-", Color.black, Color.green]];
 			reverseBufferOneAction.action = {|view| if(view.value == 0 , {groupe.set(\reverse1, 1); ctrlBuffer.put(4, 1)}, {groupe.set(\reverse1, 1.neg); ctrlBuffer.put(4, 1.neg)})};
 			// Text Buffer One
 			textBufferOne = StaticText(windowSynth, Rect(0, 0, 155, 15)).string_("Nil").stringColor_(Color.yellow).font_(Font("Georgia", 8)).align_(\center);
@@ -4314,13 +4325,13 @@ y ... -						Musical keys.
 			knobOffset1 = EZSlider(windowSynth, 150 @ 15, "Offset", ControlSpec(0, 1, \lin, 0), {|ez| groupe.set(\offset1, ez.value); ctrlBuffer.put(3, ez.value)}, 0, labelWidth: 40, numberWidth: 30);
 			knobPreLevel1 = EZSlider(windowSynth, 95 @ 15, "Pre", ControlSpec(0, 1, \lin, 0), {|ez| groupe.set(\level1, ez.value); bufferRecording1.set(\preLevel, ez.value); ctrlBuffer.put(0, ez.value)}, 1, labelWidth: 30, numberWidth: 30).view.children.at(2).decimals = 4;
 			knobPostLevel1 = EZSlider(windowSynth, 95 @ 15, "Post", ControlSpec(0, 1, \lin, 0), {|ez| groupe.set(\level2, ez.value); bufferRecording1.set(\postLevel, ez.value); ctrlBuffer.put(1, ez.value)}, 0, labelWidth: 30, numberWidth: 30).view.children.at(2).decimals = 4;
-			knobRecOn1 = Button(windowSynth, Rect(0, 0, 40, 16)).states=[["Rec", Color.black, Color.red(0.8, 0.25)], ["Rec @", Color.black, Color.green(0.8, 0.25)], ["Rec !", Color.black, Color.blue(0.8, 0.25)]];
+			knobRecOn1 = Button(windowSynth, Rect(0, 0, 40, 16)).states=[["Rec", Color.black, Color.gray(0.82)], ["Rec @", Color.black, Color.green], ["Rec !", Color.black, Color.blue(0.8, 0.25)]];
 			knobRecOn1.action = {|view| if(view.value == 2, {groupe.set(\loop, 0); bufferRecording1.set(\loop, 0); ctrlBuffer.put(2, 1); loopRec1 = 0},
 				{groupe.set(\loop, view.value); bufferRecording1.set(\loop, view.value); ctrlBuffer.put(2, view.value); loopRec1 = view.value});
 			};
 			windowSynth.view.decorator.nextLine;
 			// Button BufferTwo Action
-			switchBufferTwoAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["O", Color.black, Color.red(0.8, 0.25)], ["X", Color.black, Color.green(0.8, 0.25)]];
+			switchBufferTwoAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["O", Color.black, Color.gray(0.82)], ["X", Color.black, Color.green]];
 			switchBufferTwoAction.action = {|view| groupe.set(\switchBuffer2, view.value); switch2 = view.value};
 			// Buffer sampler two
 			switchBufferTwo = Button(windowSynth, Rect(0, 0, 100, 15)).states=[["Load Buffer II", Color.blue(0.8, 0.6), Color.grey(0.75, 0.25)]];
@@ -4332,7 +4343,7 @@ y ... -						Musical keys.
 				},{"cancelled".postln});
 			};
 			// Loop Sample Two
-			loopBufferTwo = Button(windowSynth,Rect(0, 0, 20, 15)).states = [["!", Color.black,  Color.red(0.8, 0.25)], ["@", Color.black, Color.green(0.8, 0.25)]];
+			loopBufferTwo = Button(windowSynth,Rect(0, 0, 20, 15)).states = [["!", Color.black,  Color.gray(0.82)], ["@", Color.black, Color.green]];
 			loopBufferTwo.action = {|view|
 				if(view.value == 0, {groupe.set(\loopTwo, 0); loop2 = 0},{groupe.set(\loopTwo, 1); loop2 = 1});
 			};
@@ -4351,7 +4362,7 @@ y ... -						Musical keys.
 			durSampleTwoSlider.value_(timeBuf2);
 			durSampleTwoSlider.step_(0.01);
 			// Button Reverse two
-			reverseBufferTwoAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["->", Color.black, Color.red(0.8, 0.25)], ["<-", Color.black, Color.green(0.8, 0.25)]];
+			reverseBufferTwoAction= Button(windowSynth, Rect(0, 0, 20, 15)).states=[["->", Color.black, Color.gray(0.82)], ["<-", Color.black, Color.green]];
 			reverseBufferTwoAction.action = {|view| if(view.value == 0 , {groupe.set(\reverse2, 1); ctrlBuffer.put(9, 1)}, {groupe.set(\reverse2, 1.neg); ctrlBuffer.put(9, 1.neg)})};
 			// Text Buffer Two
 			textBufferTwo = StaticText(windowSynth, Rect(0, 0, 155, 15)).string_("Nil").stringColor_(Color.yellow).font_(Font("Georgia", 8)).align_(\right);
@@ -4360,7 +4371,7 @@ y ... -						Musical keys.
 			knobOffset2 = EZSlider(windowSynth, 150 @ 15, "Offset", ControlSpec(0, 1, \lin, 0), {|ez| groupe.set(\offset2, ez.value); ctrlBuffer.put(8, ez.value)}, 0, labelWidth: 40, numberWidth: 30);
 			knobPreLevel2 = EZSlider(windowSynth, 95 @ 15, "Pre", ControlSpec(0, 1, \lin, 0), {|ez| bufferRecording2.set(\preLevel, ez.value); ctrlBuffer.put(5, ez.value)}, 1, labelWidth: 30, numberWidth: 30).view.children.at(2).decimals = 4;
 			knobPostLevel2 = EZSlider(windowSynth, 95 @ 15, "Post", ControlSpec(0, 1, \lin, 0), {|ez| bufferRecording2.set(\postLevel, ez.value); ctrlBuffer.put(6, ez.value)}, 0, labelWidth: 30, numberWidth: 30).view.children.at(2).decimals = 4;
-			knobRecOn2 = Button(windowSynth, Rect(0, 0, 40, 16)).states=[["Rec", Color.black, Color.red(0.8, 0.25)], ["Rec @", Color.black, Color.green(0.8, 0.25)], ["Rec !", Color.black, Color.blue(0.8, 0.25)]];
+			knobRecOn2 = Button(windowSynth, Rect(0, 0, 40, 16)).states=[["Rec", Color.black, Color.gray(0.82)], ["Rec @", Color.black, Color.green], ["Rec !", Color.black, Color.blue(0.8, 0.25)]];
 			knobRecOn2.action = {|view| if(view.value == 2, {bufferRecording2.set(\loop, 0); ctrlBuffer.put(7, 1); loopRec2 = 0},
 				{bufferRecording2.set(\loop, view.value); ctrlBuffer.put(7, view.value); loopRec2 = view.value});
 			};
@@ -4459,7 +4470,7 @@ y ... -						Musical keys.
 			windowSynth.view.decorator.nextLine;
 			// AutomationControls start stop playing
 			startAutomationSynthControls = Button(windowSynth,Rect(0, 0, 100, 15));
-			startAutomationSynthControls.states = [["Automation CtrlSynth", Color.black,  Color.red(0.8, 0.25)], ["Automation CtrlSynth", Color.black, Color.green(0.8, 0.25)]];
+			startAutomationSynthControls.states = [["Automation CtrlSynth", Color.black,  Color.gray(0.82)], ["Automation CtrlSynth", Color.black, Color.green]];
 			startAutomationSynthControls.action = {|view| if(view.value == 0, {tdefControls.stop; ctrlSynth=controlsNode.value; jitterAutomationSynthControls.enabled_(false); tempoAutomationSynthControls.enabled_(false)}, {ctrlSynth=controlsNode.value; tdefControls.play; jitterAutomationSynthControls.enabled_(true); tempoAutomationSynthControls.enabled_(true)});
 			};
 			// Tempo AutomationControls Synth
@@ -4469,7 +4480,7 @@ y ... -						Musical keys.
 			windowSynth.view.decorator.nextLine;
 			// AutomationSynthMusicData start stop playing
 			startAutomationSynthMusicData = Button(windowSynth,Rect(0, 0, 100, 15));
-			startAutomationSynthMusicData.states = [["Automation MusicData", Color.black,  Color.red(0.8, 0.25)], ["Automation MusicData", Color.black, Color.green(0.8, 0.25)]];
+			startAutomationSynthMusicData.states = [["Automation MusicData", Color.black,  Color.gray(0.82)], ["Automation MusicData", Color.black, Color.green]];
 			startAutomationSynthMusicData.action = {|view| if(view.value == 0, {tdefMusicData.stop; tempoAutomationSynthMusicData.enabled_(false); jitterAutomationMusicData.enabled_(false)}, {tdefMusicData.play; tempoAutomationSynthMusicData.enabled_(true);jitterAutomationMusicData.enabled_(true)}); fonctionEnabledSlider.value(view.value);
 			};
 			// Tempo AutomationSynthMusicData Synth
@@ -4478,23 +4489,23 @@ y ... -						Musical keys.
 			jitterAutomationMusicData=EZSlider(windowSynth, 100 @ 15, "Jitter", ControlSpec(0.0, 1.0, \lin, 0), {|jitter| }, 0.1, labelWidth: 20, numberWidth: 30);
 			windowSynth.view.decorator.nextLine;
 			// Auto Pan
-			automationSliderPan = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["P", Color.black,  Color.red(0.8, 0.25)], ["P", Color.black, Color.green(0.8, 0.25)], ["P", Color.black, Color.yellow(0.8, 0.25)]];
+			automationSliderPan = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["P", Color.black,  Color.gray(0.82)], ["P", Color.black, Color.green], ["P", Color.black, Color.yellow(0.8, 0.25)]];
 			// Auto Freq
-			automationSliderFreq = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["F", Color.black,  Color.red(0.8, 0.25)], ["F", Color.black, Color.green(0.8, 0.25)], ["F", Color.black, Color.yellow(0.8, 0.25)]];
+			automationSliderFreq = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["F", Color.black,  Color.gray(0.82)], ["F", Color.black, Color.green], ["F", Color.black, Color.yellow(0.8, 0.25)]];
 			// Auto Translate
-			automationSliderTrans = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["T", Color.black,  Color.red(0.8, 0.25)], ["T", Color.black, Color.green(0.8, 0.25)], ["T", Color.black, Color.yellow(0.8, 0.25)]];
+			automationSliderTrans = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["T", Color.black,  Color.gray(0.82)], ["T", Color.black, Color.green], ["T", Color.black, Color.yellow(0.8, 0.25)]];
 			// Auto Amp
-			automationSliderAmp = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["A", Color.black,  Color.red(0.8, 0.25)], ["A", Color.black, Color.green(0.8, 0.25)], ["A", Color.black, Color.yellow(0.8, 0.25)]];
+			automationSliderAmp = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["A", Color.black,  Color.gray(0.82)], ["A", Color.black, Color.green], ["A", Color.black, Color.yellow(0.8, 0.25)]];
 			// Auto Dur
-			automationSliderDur = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["D", Color.black,  Color.red(0.8, 0.25)], ["D", Color.black, Color.green(0.8, 0.25)], ["D", Color.black, Color.yellow(0.8, 0.25)]];
+			automationSliderDur = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["D", Color.black,  Color.gray(0.82)], ["D", Color.black, Color.green], ["D", Color.black, Color.yellow(0.8, 0.25)]];
 			// Auto stretch
-			automationSliderStretch = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["S", Color.black,  Color.red(0.8, 0.25)], ["S", Color.black, Color.green(0.8, 0.25)], ["S", Color.black, Color.yellow(0.8, 0.25)]];
+			automationSliderStretch = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["S", Color.black,  Color.gray(0.82)], ["S", Color.black, Color.green], ["S", Color.black, Color.yellow(0.8, 0.25)]];
 			// Auto Quant
-			automationSliderQuant = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["Q", Color.black,  Color.red(0.8, 0.25)], ["Q", Color.black, Color.green(0.8, 0.25)], ["Q", Color.black, Color.yellow(0.8, 0.25)]];
+			automationSliderQuant = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["Q", Color.black,  Color.gray(0.82)], ["Q", Color.black, Color.green], ["Q", Color.black, Color.yellow(0.8, 0.25)]];
 			// Auto Buffer
-			automationSliderBuffer= Button(windowSynth,Rect(0, 0, 12, 15)).states = [["B", Color.black,  Color.red(0.8, 0.25)], ["B", Color.black, Color.green(0.8, 0.25)]];
+			automationSliderBuffer= Button(windowSynth,Rect(0, 0, 12, 15)).states = [["B", Color.black,  Color.gray(0.82)], ["B", Color.black, Color.green]];
 			// Auto Synth
-			automationSliderSynth = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["Y", Color.black,  Color.red(0.8, 0.25)], ["Y", Color.black, Color.green(0.8, 0.25)]];
+			automationSliderSynth = Button(windowSynth,Rect(0, 0, 12, 15)).states = [["Y", Color.black,  Color.gray(0.82)], ["Y", Color.black, Color.green]];
 			// % Change Synth
 			automationNumberSynth = NumberBox(windowSynth,Rect(0, 0, 20, 15)).minDecimals_(4);
 			automationNumberSynth.action = {|view|};
@@ -4530,43 +4541,43 @@ y ... -						Musical keys.
 			StaticText(windowSynth, 25 @ 15).string = "Band"; // 65
 			// Band 0 to 12
 			Button.new(windowSynth, 25 @ 15).
-			states_([["A", Color.red], ["A", Color.green]]).
+			states_([["All", Color.black, Color.gray(0.82)], ["All", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(0, band.value); fonctionBand.value(0)}); // 71 all data
 			Button.new(windowSynth, 25 @ 15).
-			states_([["1", Color.red], ["1", Color.green]]).
+			states_([["1", Color.black, Color.gray(0.82)], ["1", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(1, band.value); fonctionBand.value(1)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["2", Color.red], ["2", Color.green]]).
+			states_([["2", Color.black, Color.gray(0.82)], ["2", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(2, band.value); fonctionBand.value(2)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["3", Color.red], ["3", Color.green]]).
+			states_([["3", Color.black, Color.gray(0.82)], ["3", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(3, band.value); fonctionBand.value(3)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["4", Color.red], ["4", Color.green]]).
+			states_([["4", Color.black, Color.gray(0.82)], ["4", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(4, band.value); fonctionBand.value(4)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["5", Color.red], ["5", Color.green]]).
+			states_([["5", Color.black, Color.gray(0.82)], ["5", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(5, band.value); fonctionBand.value(5)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["6", Color.red], ["6", Color.green]]).
+			states_([["6", Color.black, Color.gray(0.82)], ["6", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(6, band.value); fonctionBand.value(6)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["7", Color.red], ["7", Color.green]]).
+			states_([["7", Color.black, Color.gray(0.82)], ["7", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(7, band.value); fonctionBand.value(7)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["8", Color.red], ["8", Color.green]]).
+			states_([["8", Color.black, Color.gray(0.82)], ["8", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(8, band.value); fonctionBand.value(8)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["9", Color.red], ["9", Color.green]]).
+			states_([["9", Color.black, Color.gray(0.82)], ["9", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(9, band.value); fonctionBand.value(9)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["10", Color.red], ["10", Color.green]]).
+			states_([["10", Color.black, Color.gray(0.82)], ["10", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(10, band.value); fonctionBand.value(10)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["11", Color.red], ["11", Color.green]]).
+			states_([["11", Color.black, Color.gray(0.82)], ["11", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(11, band.value); fonctionBand.value(11)});
 			Button.new(windowSynth, 25 @ 15).
-			states_([["12", Color.red], ["12", Color.green]]).
+			states_([["12", Color.black, Color.gray(0.82)], ["12", Color.black, Color.green]]).
 			action_({arg band; flagIndexBand.put(12, band.value); fonctionBand.value(12)});// 78
 
 			// Tuning
@@ -4683,7 +4694,7 @@ y ... -						Musical keys.
 				{|ez| root = ez.value; scale = Scale.new(((degrees + root)%tuning.size).sort, tuning.size, tuning)}, 0, labelWidth: 20, numberWidth: 20);
 			// Auto Root
 			Button(windowSynth,Rect(0, 0, 20, 15)).
-			states_([["!", Color.black, Color.red(0.8, 0.25)], ["@", Color.black, Color.green(0.8, 0.25)], ["*", Color.black, Color.yellow(0.8, 0.25)]]).
+			states_([["!", Color.black, Color.gray(0.82)], ["@", Color.black, Color.green], ["*", Color.black, Color.yellow(0.8, 0.25)]]).
 			action_({arg view; flagRoot = view.value;
 				//if(view.value == 0, {windowSynth.view.children.at(85).children.at(2).valueAction_(0)});
 			});
@@ -4722,7 +4733,7 @@ y ... -						Musical keys.
 			});
 
 			// Freeze Data OSC Button
-			Button(windowSynth, Rect(205, 0, 30, 15)).states_([["FAD@", Color.red], ["FAD!", Color.green], ["FAD!", Color.blue]]).action_({arg flag;
+			Button(windowSynth, Rect(205, 0, 30, 15)).states_([["FAD@", Color.black, Color.gray(0.82)], ["FAD!", Color.black, Color.green], ["FAD!", Color.black, Color.blue]]).action_({arg flag;
 				if(flag.value == 0, {flagFreezeDataOSC = 'off'; freezeDataOSC = [ ]});
 				if(flag.value == 1, {flagFreezeDataOSC = 'on'; freezeDataOSC = listeDataOSC.deepCopy;
 					listeWindowFreeze.do({arg freeze, index;
@@ -4734,7 +4745,7 @@ y ... -						Musical keys.
 				if(flag.value == 2, {flagFreezeDataOSC = 'on'});
 			});
 			// Chrd on off
-			Button(windowSynth, Rect(205, 0, 30, 15)).states_([["Chd!", Color.red], ["Chd@", Color.green]]).action_({arg flag;
+			Button(windowSynth, Rect(205, 0, 30, 15)).states_([["Chd!", Color.black, Color.gray(0.82)], ["Chd@", Color.black, Color.green]]).action_({arg flag;
 				flagChord = flag.value
 			});
 			// Chord Time
@@ -5099,6 +5110,8 @@ y ... -						Musical keys.
 				knobPreLevel2.valueAction_(1);
 				knobPostLevel2.valueAction_(0);
 				knobRecOn2.valueAction_(1);
+				loopBufferOne.valueAction_(1);
+				loopBufferTwo.valueAction_(1);
 			};
 			fonctionEnabledControls.value;
 

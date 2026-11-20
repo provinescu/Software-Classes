@@ -13,10 +13,23 @@ HPliveCoding {
 		// Init GUI + edit Coding
 		// utilise les variables de Agents !!!!
 
-		~flagHPliveCoding = 'on';
-
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
+
+		~flagHPliveCoding = 'on';
 
 		this.edit(textOnFly);
 
@@ -51,12 +64,12 @@ HPliveCoding {
 		};
 		~menuCoding.focus;
 		// Evaluate Coding
-		~validCoding = Button(~wCoding,Rect(0, 0, 150, 20)).states=[["Evaluate CodingOnFly", Color.black, Color.blue(0.8, 0.25)]];
+		~validCoding = Button(~wCoding,Rect(0, 0, 150, 20)).states=[["Evaluate CodingOnFly", Color.white, Color.blue(0.8, 0.25)]];
 		~validCoding.action = {arg view;
 			~wEditCoding.string.interpret;
 		};
 		// Reset FX Coding
-		~resetFX = Button(~wCoding,Rect(0, 0, 150, 20)).states=[["Reset FX", Color.black, Color.yellow(0.8, 0.25)]];
+		~resetFX = Button(~wCoding,Rect(0, 0, 150, 20)).states=[["Reset FX", Color.white, Color.yellow(0.8, 0.25)]];
 		~resetFX.action = {arg view;
 			//~groupeSynthAgents.freeAll;
 			~groupeEffets.freeAll;

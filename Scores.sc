@@ -15,34 +15,20 @@ Scores {
 	init	{arg path;
 
 		// Setup GUI style
+		//QtGUI.palette = QPalette.dark;// light / system
 		var pal;
 
 		pal = QPalette.auto(
 			Color(0.27, 0.34, 0.43),  // Boutons
-			Color(0.12, 0.15, 0.20)   // Fenêtres
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
 		);
-
-		// Textes principaux
-		pal.setColor(Color(0.95, 0.97, 1.00), \windowText);
-		pal.setColor(Color(0.95, 0.97, 1.00), \buttonText);
-
-		// Zones de saisie et listes
-		pal.setColor(Color(0.085, 0.11, 0.15), \base);
-		pal.setColor(Color(0.94, 0.96, 0.99), \baseText);
-		pal.setColor(Color(0.15, 0.19, 0.25), \alternateBase);
 
 		// Sélection
 		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
 		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
 
-		// Informations et alertes
-		pal.setColor(Color(1.0, 0.85, 0.55), \brightText);
-		pal.setColor(Color(0.95, 0.97, 1.0), \toolTipText);
-		pal.setColor(Color(0.20, 0.25, 0.32), \toolTipBase);
-
 		QtGUI.palette = pal;
-
-		pathScore = path;
 
 		// Standalone
 		// Robot = 57130, Agents = 57131, Matrix = 57132, Time = 57133, Density = 57134
@@ -130,7 +116,7 @@ Scores {
 		};
 		menuScore.focus;
 		// Button Score Loop Score
-		Button(wScore,Rect(10, 10, 105, 18)).states_([ ["Loop Scores Off", Color.black, Color.red], ["Loop Scores On", Color.white, Color.green]]).action_({arg view;
+		Button(wScore,Rect(10, 10, 105, 18)).states_([ ["Loop Scores Off", Color.black, Color.red], ["Loop Scores On", Color.black, Color.green]]).action_({arg view;
 			if(view.value == 0, {
 				"Loop Scores Off".postln;
 				loopScore = 'off';
@@ -143,7 +129,7 @@ Scores {
 			});
 		});
 		// Button Score
-		startManualScore = Button(wScore,Rect(10, 10, 125, 18)).states=[ ["Manual Stop Scores", Color.black, Color.red], ["Manual Play Scores", Color.white, Color.green]];
+		startManualScore = Button(wScore,Rect(10, 10, 125, 18)).states=[ ["Manual Stop Scores", Color.black, Color.red], ["Manual Play Scores", Color.black, Color.green]];
 		startManualScore.action = {arg view;
 			numView = 3;// manual score
 			startTdefScore.value_(0);
@@ -165,7 +151,7 @@ Scores {
 				wScore.view.children.at(numView.value).focus;
 			});
 		};
-		startTdefScore = Button(wScore,Rect(10, 10, 110, 18)).states=[["Tdef Stop Scores", Color.black, Color.yellow], ["Tdef Play Scores", Color.white, Color.green]];
+		startTdefScore = Button(wScore,Rect(10, 10, 110, 18)).states=[["Tdef Stop Scores", Color.black, Color.yellow], ["Tdef Play Scores", Color.black, Color.green]];
 		startTdefScore.action = {arg view;
 			numView = 5;// valid score
 			startManualScore.value_(0);
@@ -305,7 +291,7 @@ Scores Commandes:
 		EZNumber(wScore, 110@20, "End Scores", ControlSpec(0, 100, 'lin', 1),
 			{arg i; stopItems = i.value}, 0, true, 80, 40).value_(dimScore);
 		// Init
-		Button(wScore,Rect(0, 0, 50, 20)).states_([["Init Val", Color.white, Color.grey]]).
+		Button(wScore,Rect(0, 0, 50, 20)).states_([["Init Val", Color.black, Color.grey]]).
 		action_({arg b;
 			items = 0;
 			startItems = 0;

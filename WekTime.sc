@@ -27,7 +27,21 @@ WekTime {
 	init	{arg name, path, ni, numberOut, numberRec, format, devIn, devOut, size, wid, ori, flag=0, wek, wekPort, scPort, sl, ml;
 
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
+
 		MainMenu.initBuiltInMenus;
 		udpAdr = NetAddr.langPort;
 		scAdr = NetAddr("localhost", scPort);
@@ -46,7 +60,6 @@ WekTime {
 
 		// Setup Server Options
 		//Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
-
 		thisProcess.openUDPPort(wekPort.asInteger); // Sender Port Wekinator + Enter Port change 6448 to an another for example 6449
 
 		s = Server.default;
@@ -3403,9 +3416,9 @@ Preset Wek",
 			{|ez| keyVolume = ez.value.dbamp}, -12,labelWidth: 75,numberWidth: 50);
 		// Setup ShortCut
 		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 200, 20));
-		setupKeyboardShortCut.states = [["System Shortcut", Color.black,  Color.red(0.8, 0.25)],["Keyboard Shortcut", Color.white, Color.green(0.8, 0.25)]];
+		setupKeyboardShortCut.states = [["System Shortcut", Color.white], ["Keyboard Shortcut", Color.green]];
 		setupKeyboardShortCut.action = {arg shortcut;
-			if(shortcut.value == 0, {keyboardShortCut.value(windowKeyboard);
+			if(shortcut.value == 1, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})}, {fonctionShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.removeColor(note)});
 			});
@@ -3413,7 +3426,7 @@ Preset Wek",
 		windowKeyboard.view.decorator.nextLine;
 		// Keyboard Keys
 		keyboard = MIDIKeyboard.new(windowKeyboard, Rect(5, 5, 1000, 140), 7, 24);
-		forBy(60, 76, 1, {arg note; keyboard.setColor(note, Color.blue)});
+		//forBy(60, 76, 1, {arg note; keyboard.setColor(note, Color.blue)});
 		// Action Down
 		keyboard.keyDownAction_({arg note;
 			note = note.value + keyboardTranslate.value;
@@ -3466,7 +3479,7 @@ Preset Wek",
 		///////////////////////////////////////////////////////////////////////////////////////////////
 
 		// Systeme start stop playing
-		startSystem = Button(windowExternalControlGUI,Rect(5, 5, 100, 20)).states_([["System Off", Color.white, Color.red],["System On", Color.black,  Color.green]]).focus.action = {|view|
+		startSystem = Button(windowExternalControlGUI,Rect(5, 5, 100, 20)).states_([["System Off", Color.black, Color.gray(0.82)],["System On", Color.black,  Color.green]]).focus.action = {|view|
 			if(oscStateFlag == 'master', {slaveAppAddr.sendMsg('/HPstart', view.value)});// Send Synchro Start
 			switch(view.value,
 				0, {if(flagRecording == 'on', {s.pauseRecording}); sequencer.stop;
@@ -3497,7 +3510,7 @@ Preset Wek",
 			userOperatingSystem.value_(0)};
 
 		// TempoOSC
-		oscTempo = Button(windowExternalControlGUI,Rect(5, 5, 75, 20)).states_([["OSCtempo Off", Color.red, Color.black],["OSCtempo On", Color.green,  Color.black]]).focus.action = {|view|
+		oscTempo = Button(windowExternalControlGUI,Rect(5, 5, 75, 20)).states_([["OSCtempo Off", Color.white, Color.black],["OSCtempo On", Color.green, Color.black]]).focus.action = {|view|
 			if(view.value == 0, {flagTempo = 0}, {flagTempo = 1});
 		};
 
@@ -4025,7 +4038,7 @@ Preset Wek",
 				modeMIDIOSC.put(synth, changeChoiceMIDI.wrapAt(item.value));
 			};
 
-			Button(windowControlGUI, Rect(synth * 315 + 185, numberSynth * 25 + 100, 100, 20)).states_([["Smp Loop Off", Color.magenta, Color.red(0.8, 0.25)],["Smp Loop On", Color.magenta,  Color.green(0.8, 0.25)]]).action = {|view|
+			Button(windowControlGUI, Rect(synth * 315 + 185, numberSynth * 25 + 100, 100, 20)).states_([["Smp Loop Off", Color.magenta, Color.gray(0.82)],["Smp Loop On", Color.magenta,  Color.green]]).action = {|view|
 				switch(view.value,
 					0, {loopSample.put(synth, 0)},
 					1, {loopSample.put(synth, 1)}
@@ -4035,7 +4048,7 @@ Preset Wek",
 			// Mute Synth
 			Button(windowControlGUI, Rect(synth * 315 + 75, numberSynth * 25 + 125, 50, 20))
 			.background_(Color.grey).
-			states_([["Mute", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["Mute", Color.red(0.8, 0.6), Color.grey(0.75, 0.25)]]).
+			states_([["Mute", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["Mute", Color.green, Color.grey(0.75, 0.25)]]).
 			action_({arg etat; if(etat.value == 0, {listeMuteSynth.put(synth, 0)}, {listeMuteSynth.put(synth, 1); if(flagMidiOut == 'on', {16.do({arg canal; midiOut.allNotesOff(canal);
 				if(flagVST == 'on', {~fxVST.midi.allNotesOff(canal)})})})})});
 
@@ -4077,12 +4090,12 @@ Preset Wek",
 			// Reverse Sample
 			Button(windowControlGUI, Rect(synth * 315 + 95, numberSynth * 25 + 150, 90, 20))
 			.background_(Color.grey).
-			states_([["Reverse Off", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["Reverse On", Color.red(0.8, 0.6), Color.grey(0.75, 0.25)]]).
+			states_([["Reverse Off", Color.new(0.1, 0.8, 0.9, 1),  Color.grey(0.75, 0.25)],["Reverse On", Color.green, Color.grey(0.75, 0.25)]]).
 			action_({arg etat; if(etat.value == 0, {listeReverse.put(synth, 1)}, {listeReverse.put(synth, 1.neg)})});
 
 			// Loop Rec
 			Button(windowControlGUI, Rect(synth * 315 + 190, numberSynth * 25 + 150, 10, 20)).
-			states_([ ["l", Color.white, Color.black], ["L", Color.black, Color.red], ["L", Color.white, Color.blue]]).
+			states_([ ["l", Color.gray(0.82), Color.black], ["L", Color.black, Color.green], ["L", Color.white, Color.blue]]).
 			action_({ arg butt;
 				listeLoop.put(synth, butt.value);
 				if(butt.value == 2, {synthAudioRec.at(synth).set(\loop, 0)}, {synthAudioRec.at(synth).set(\loop, butt.value)});
@@ -4115,19 +4128,19 @@ Preset Wek",
 			// Switch Freq OSC
 			Button(windowControlGUI, Rect(synth * 315 + 5, numberSynth * 25 + 175, 15, 20))
 			.background_(Color.grey).
-			states_([["f", Color.white,  Color.grey(0.75, 0.25)],["F", Color.red(0.8, 0.8), Color.grey(0.75, 0.25)]]).
+			states_([["f", Color.white,  Color.grey(0.75, 0.25)],["F", Color.green, Color.grey(0.75, 0.25)]]).
 			action_({arg etat; switchOSCfreq.put(synth, etat.value)}).valueAction_(1);
 
 			// Switch Amp OSC
 			Button(windowControlGUI, Rect(synth * 315 + 20, numberSynth * 25 + 175, 15, 20))
 			.background_(Color.grey).
-			states_([["a", Color.white,  Color.grey(0.75, 0.25)],["A", Color.red(0.8, 0.8), Color.grey(0.75, 0.25)]]).
+			states_([["a", Color.white,  Color.grey(0.75, 0.25)],["A", Color.green, Color.grey(0.75, 0.25)]]).
 			action_({arg etat; switchOSCamp.put(synth, etat.value)}).valueAction_(0);
 
 			// Switch Duree OSC
 			Button(windowControlGUI, Rect(synth * 315 + 35, numberSynth * 25 + 175, 15, 20))
 			.background_(Color.grey).
-			states_([["d", Color.white,  Color.grey(0.75, 0.25)],["D", Color.red(0.8, 0.8), Color.grey(0.75, 0.25)]]).
+			states_([["d", Color.white,  Color.grey(0.75, 0.25)],["D", Color.green, Color.grey(0.75, 0.25)]]).
 			action_({arg etat;
 				switchOSCdur.put(synth, etat.value);
 			}).valueAction_(0);
@@ -4140,48 +4153,48 @@ Preset Wek",
 
 			// Band 0 to 12
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (0 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["All", Color.red], ["All", Color.green]]).
+			states_([["All", Color.white], ["All", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(0, band.value)); fonctionBand.value(0, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (1 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["1", Color.red], ["1", Color.green]]).
+			states_([["1", Color.white], ["1", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(1, band.value)); fonctionBand.value(1, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (2 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["2", Color.red], ["2", Color.green]]).
+			states_([["2", Color.white], ["2", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(2, band.value)); fonctionBand.value(2, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (3 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["3", Color.red], ["3", Color.green]]).
+			states_([["3", Color.white], ["3", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(3, band.value)); fonctionBand.value(3, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (4 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["4", Color.red], ["4", Color.green]]).
+			states_([["4", Color.white], ["4", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(4, band.value)); fonctionBand.value(4, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (5 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["5", Color.red], ["5", Color.green]]).
+			states_([["5", Color.white], ["5", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(5, band.value)); fonctionBand.value(5, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (6 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["6", Color.red], ["6", Color.green]]).
+			states_([["6", Color.white], ["6", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(6, band.value)); fonctionBand.value(6, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (7 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["7", Color.red], ["7", Color.green]]).
+			states_([["7", Color.white], ["7", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(7, band.value)); fonctionBand.value(7, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (8 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["8", Color.red], ["8", Color.green]]).
+			states_([["8", Color.white], ["8", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(8, band.value)); fonctionBand.value(8, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (9 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["9", Color.red], ["9", Color.green]]).
+			states_([["9", Color.white], ["9", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(9, band.value)); fonctionBand.value(9, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (10 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["10", Color.red], ["10", Color.green]]).
+			states_([["10", Color.white], ["10", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(10, band.value)); fonctionBand.value(10, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (11 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["11", Color.red], ["11", Color.green]]).
+			states_([["11", Color.white], ["11", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(11, band.value)); fonctionBand.value(11, synth)});
 			Button.new(windowControlGUI, Rect(synth * 315 + 45 + (12 * 20), numberSynth * 25 + 200, 15, 20)).
-			states_([["12", Color.red], ["12", Color.green]]).
+			states_([["12", Color.white], ["12", Color.green]]).
 			action_({arg band; flagIndexBand.put(synth, flagIndexBand.at(synth).put(12, band.value)); fonctionBand.value(12, synth)});
 
 			// Active AudioIn/Sample
 			Button(windowControlGUI, Rect(synth * 315 + 5, numberSynth * 25 + 225, 20, 60)).
-			states_([["S", Color.new(0.1, 0.8, 0.9, 1), Color.grey(0.75, 0.25)], ["A", Color.red(0.8, 0.6), Color.grey(0.75, 0.25)]]).
+			states_([["S", Color.new(0.1, 0.8, 0.9, 1), Color.grey(0.75, 0.25)], ["A", Color.green, Color.grey(0.75, 0.25)]]).
 			background_(Color.grey).
 			action_({|view| listeActiveAudioRec.put(synth, view.value);
 			});
@@ -4209,7 +4222,7 @@ Preset Wek",
 
 			// Active Jitter WaveForm
 			Button(windowControlGUI, Rect(synth * 315 + 295, numberSynth * 25 + 225, 20, 60)).
-			states_([["O", Color.new(0.1, 0.8, 0.9, 1), Color.grey(0.75, 0.25)], ["X", Color.red(0.8, 0.6), Color.grey(0.75, 0.25)]]).
+			states_([["O", Color.new(0.1, 0.8, 0.9, 1), Color.grey(0.75, 0.25)], ["X", Color.green, Color.grey(0.75, 0.25)]]).
 			background_(Color.grey).
 			action_({|view| listeActiveJitterWavePos.put(synth, view.value);
 				if(view.value == 0, {listeGUIsoundFile.at(synth).setSelectionColor(0, Color.new(0.985, 0.701, 0)); listeGUIsoundFile.at(synth).setSelection(0, [listeStartPos.at(synth), listeLenght.at(synth)])},{listeGUIsoundFile.at(synth).setSelectionColor(0, Color.red)});
@@ -4722,7 +4735,7 @@ Preset Wek",
 		windowVST = Window.new("VST Stereo", Rect(1000, 540, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 50, 20)).
-		states_([["Run Off", Color.red], ["Run On", Color.green]]).
+		states_([["Run Off", Color.white], ["Run On", Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {~synthVST.run(false); flagVST = 'off'},

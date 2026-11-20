@@ -15,7 +15,21 @@ RobotTR {
 	init {arg name, path, ni, o, r, f, devIn, devOut, size, wid, ori, flag, scPort, sl, ml;
 
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
+
 		MainMenu.initBuiltInMenus;
 		udpAdr = NetAddr.langPort;
 		scAdr = NetAddr("localhost", scPort);
@@ -2782,7 +2796,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		windowVST = Window.new("VST Stereo", Rect(40, 40, 320, 80), scroll: true);
 		windowVST.view.decorator = FlowLayout(windowVST.view.bounds);
 		Button(windowVST, Rect(0, 0, 60, 20)).
-		states_([["Run Off", Color.red], ["Run On", Color.green]]).
+		states_([["Run Off", Color.black, Color.gray(0.82)], ["Run On", Color.black, Color.green]]).
 		action = {arg shortcut;
 			switch (shortcut.value,
 				0, {~synthVST.run(false); flagVST = 'off'},
@@ -2832,7 +2846,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		windowKeyboard.front;
 		// Setup ShortCut
 		setupKeyboardShortCut = Button(windowKeyboard, Rect(0, 0, 105, 20));
-		setupKeyboardShortCut.states = [["System Shortcut", Color.red], ["Keyboard Shortcut", Color.green]];
+		setupKeyboardShortCut.states = [["System Shortcut", Color.black, Color.gray(0.82)], ["Keyboard Shortcut", Color.black, Color.green]];
 		setupKeyboardShortCut.action = {arg shortcut;
 			if(shortcut.value == 1, {keyboardShortCut.value(windowKeyboard);
 				forBy(60 + keyboardTranslate.value, 76 + keyboardTranslate.value, 1, {arg note; keyboard.setColor(note, Color.blue)})},
@@ -2887,14 +2901,14 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		~wp.view.decorator = FlowLayout(~wp.view.bounds);
 		40.do({arg i;
 			~recpartbutton = ~recpartbutton.add(Button(~wp,Rect(0,0,85,18)));
-			~recpartbutton.wrapAt(i).states = [["Rec"+(i+1).asString+"Off", Color.black,  Color.red(0.8, 0.25)], ["Rec"+(i+1).asString+"On", Color.white, Color.green(0.8, 0.25)]];
+			~recpartbutton.wrapAt(i).states = [["Rec"+(i+1).asString+"Off", Color.black,  Color.gray(0.82)], ["Rec"+(i+1).asString+"On", Color.black, Color.green]];
 			~recpartbutton.wrapAt(i).action = {|view| var p;
 				if(view.value == 1, {~tempoSystem.schedAbs(~tempoSystem.beats, {
 					{~dureerecpart.wrapPut(i, 0);~listerecpart.wrapPut(i,[]);~flagrecpart.wrapPut(i,view.value)}.defer;nil})},
 				{p=~listerecpart.wrapAt(i);p=p.add(~dureerecpart.wrapAt(i));p=p.add(""++$\r);p=p.add('end');p=p.add('end');p=p.add('end');p=p.add('end');p=p.add('end');p=p.add('end');~listeplaypart.wrapPut(i,p)});
 			};
 			~playpartbutton = ~playpartbutton.add(Button(~wp,Rect(0,0,85,18)));
-			~playpartbutton.wrapAt(i).states = [["Play"+(i+1).asString+"Off", Color.black, Color.grey],["Play"+(i+1).asString+"On", Color.white, Color.red(0.8, 0.25)]];
+			~playpartbutton.wrapAt(i).states = [["Play"+(i+1).asString+"Off", Color.black, Color.grey],["Play"+(i+1).asString+"On", Color.black, Color.green]];
 			~playpartbutton.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~playpartbutton",view.value);
 				if(view.value == 0, {~flagplaypart.wrapPut(i,view.value);~dureeplaypart.wrapPut(i,0);~pointeurplaypart.wrapPut(i,0)},
 					{~tempoSystem.schedAbs(~tempoSystem.beats, {
@@ -2902,7 +2916,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 				});
 			};
 			~looppartbutton = ~looppartbutton.add(Button(~wp,Rect(0,0,85,18)));
-			~looppartbutton.wrapAt(i).states = [["Loop"+(i+1).asString+"Off", Color.black, Color.white],["Loop"+(i+1).asString+"On", Color.white, Color.red(0.8, 0.25)]];
+			~looppartbutton.wrapAt(i).states = [["Loop"+(i+1).asString+"Off", Color.black, Color.white],["Loop"+(i+1).asString+"On", Color.black, Color.green]];
 			~looppartbutton.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~looppartbutton",view.value);~flaglooppart.wrapPut(i,view.value)};
 		});
 		~playpartbutton.wrapAt(0).focus;
@@ -2929,7 +2943,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			w.view.decorator.nextLine;
 			// Bouton start stop playing
 			~startbutton = ~startbutton.add(Button(w,Rect(0,0,50,18)));
-			~startbutton.wrapAt(i).states = [["Play Off", Color.black,  Color.red(0.8, 0.25)],["Play On", Color.white, Color.green(0.8, 0.25)]
+			~startbutton.wrapAt(i).states = [["Play Off", Color.black,  Color.gray(0.82)],["Play On", Color.black, Color.green]
 			];
 			~startbutton.wrapAt(i).action = {arg view; var duree;
 				~writepartitions.value(i,'normal','off',"~startbutton",view.value);
@@ -3007,19 +3021,19 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			w.view.decorator.nextLine;
 			//neurone button
 			~neuroneviewmode = ~neuroneviewmode.add(Button(w,Rect(0,0,115,18)));
-			~neuroneviewmode.wrapAt(i).states = [["Neurone Rec Off", Color.black,  Color.red(0.8, 0.25)], ["Neurone Rec On", Color.white, Color.green(0.8, 0.25)]];
+			~neuroneviewmode.wrapAt(i).states = [["Neurone Rec Off", Color.black,  Color.gray(0.82)], ["Neurone Rec On", Color.black, Color.green]];
 			~neuroneviewmode.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~neuroneviewmode",view.value);if (view.value == 1, {~neuronemode.wrapPut(i,'rec')},
 				{~neuronemode.wrapPut(i,'off')})};
 			// Init Neurones
 			~initneurones = ~initneurones.add(Button(w,Rect(0,0,115,18)));
-			~initneurones.wrapAt(i).states = [["Init Weight/Thresh", Color.black,  Color.red(0.8, 0.25)], ["Init Weight/Thresh", Color.white, Color.green(0.8, 0.25)]];
+			~initneurones.wrapAt(i).states = [["Init Weight/Thresh", Color.black,  Color.gray(0.82)], ["Init Weight/Thresh", Color.black, Color.green]];
 			~initneurones.wrapAt(i).action = {|view| var x,y;
 				~writepartitions.value(i,'normal','off',"~initneurones",view.value);
 				if (view.value == 1, {~instanceNeurones.wrapAt(i).init(3, ~couchecachee, 3)},{nil});
 				~initneurones.wrapAt(i).value=0};
 			// Rec patterns Neurones out pour algo Neurone2
 			~initpatternneurones = ~initpatternneurones.add(Button(w,Rect(0,0,115,18)));
-			~initpatternneurones.wrapAt(i).states = [["Rec Pattern", Color.black,  Color.red(0.8, 0.25)], ["Rec Pattern", Color.white, Color.green(0.8, 0.25)]];
+			~initpatternneurones.wrapAt(i).states = [["Rec Pattern", Color.black,  Color.gray(0.82)], ["Rec Pattern", Color.black, Color.green]];
 			~initpatternneurones.wrapAt(i).action = {|view|
 				~writepartitions.value(i,'normal','off',"~initpatternneurones",view.value);
 				if (view.value == 1, {~listeoutneuronefreq.wrapPut(i,~listeinfreq.wrapAt(i));~listeoutneuroneamp.wrapPut(i,~listeinamp.wrapAt(i));~listeoutneuroneduree.wrapPut(i,~listeinduree.wrapAt(i));
@@ -3036,13 +3050,13 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			w.view.decorator.nextLine;
 			// genetic button
 			~genetiqueviewmode = ~genetiqueviewmode.add(Button(w,Rect(0,0,110,18)));
-			~genetiqueviewmode.wrapAt(i).states = [["Genetic Rec Off", Color.black,  Color.red(0.8, 0.25)],["GeneticRec On", Color.white, Color.green(0.8, 0.25)]
+			~genetiqueviewmode.wrapAt(i).states = [["Genetic Rec Off", Color.black,  Color.gray(0.82)],["GeneticRec On", Color.black, Color.green]
 			];
 			~genetiqueviewmode.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~genetiqueviewmode",view.value);if (view.value == 1, {~genetiquemode.wrapPut(i,'rec')},
 				{~genetiquemode.wrapPut(i,'off')})};
 			// Init Genetiques
 			~initgenetiques = ~initgenetiques.add(Button(w,Rect(0,0,125,18)));
-			~initgenetiques.wrapAt(i).states = [["Init Algo Population", Color.black,  Color.red(0.8, 0.25)], ["Init Algo Population", Color.white, Color.green(0.8, 0.25)]];
+			~initgenetiques.wrapAt(i).states = [["Init Algo Population", Color.black,  Color.gray(0.82)], ["Init Algo Population", Color.black, Color.green]];
 			~initgenetiques.wrapAt(i).action = {|view| var x;~writepartitions.value(i,'normal','off',"~initgenetiques",view.value);if (view.value == 1, {~instanceGenetiques.wrapAt(i).init(3,~listedatassize.wrapAt(i)); ~instanceAlgo2.wrapAt(i).init(s: ~listedatassize.wrapAt(i))},{nil});
 				~initgenetiques.wrapAt(i).value=0};
 			// genetic croisement
@@ -3117,7 +3131,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			StaticText(w, Rect(0,0, 75, 18)).string_(" <- Sample1").stringColor_(Color.yellow);
 			// rec sample
 			~recsamplebutton = ~recsamplebutton.add(Button(w,Rect( 0, 0, 58, 18)));
-			~recsamplebutton.wrapAt(i).states = [["Rec off", Color.black,  Color.red(0.8, 0.25)], ["Rec on", Color.white, Color.green(0.8, 0.25)]];
+			~recsamplebutton.wrapAt(i).states = [["Rec off", Color.black,  Color.gray(0.82)], ["Rec on", Color.black, Color.green]];
 			~recsamplebutton.wrapAt(i).action = {|view| var level;
 				~writepartitions.value(i,'rec sample',~numerobuffer.wrapAt(i),"~recsamplebutton",view.value);
 				level=~synthcontrolviewlevels.wrapAt(i).value;
@@ -3153,7 +3167,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			};
 			// loop rec sample
 			~looprecsamplebutton = ~looprecsamplebutton.add(Button(w,Rect( 0, 0, 60, 18)));
-			~looprecsamplebutton.wrapAt(i).states = [["LoopR off", Color.black,  Color.red(0.8, 0.25)], ["LoopR on", Color.white, Color.green(0.8, 0.25)]];
+			~looprecsamplebutton.wrapAt(i).states = [["LoopR off", Color.black,  Color.gray(0.82)], ["LoopR on", Color.black, Color.green]];
 			~looprecsamplebutton.wrapAt(i).action = {|view| ~writepartitions.value(i,'loop rec sample',~numerobuffer.wrapAt(i),"~looprecsamplebutton",view.value);
 				~listesamplein.wrapAt(~numerobuffer.wrapAt(i)).set(\loop, view.value);
 				~looprecordingValue.wrapPut(~numerobuffer.wrapAt(i), view.value);
@@ -3164,12 +3178,12 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			};
 			// loop sample
 			~loopbutton = ~loopbutton.add(Button(w,Rect(0, 0, 60, 18)));
-			~loopbutton.wrapAt(i).states = [["LoopP off", Color.black,  Color.red(0.8, 0.25)], ["LoopP on", Color.white, Color.green(0.8, 0.25)]];
+			~loopbutton.wrapAt(i).states = [["LoopP off", Color.black,  Color.gray(0.82)], ["LoopP on", Color.black, Color.green]];
 			~loopbutton.wrapAt(i).action = {|view| ~writepartitions.value(i,'loop sample',~numerobuffer.wrapAt(i),"~loopbutton",view.value);~loopplaysamplerdatas.wrapPut(i,~loopplaysamplerdatas.wrapAt(i).wrapPut(~numerobuffer.wrapAt(i),view.value))};
 
 			// set reverse sample
 			~reversebutton = ~reversebutton.add(Button(w,Rect(0, 0, 60, 18)));
-			~reversebutton.wrapAt(i).states = [["->", Color.black,  Color.red(0.8, 0.25)], ["<-", Color.white, Color.green(0.8, 0.25)]];
+			~reversebutton.wrapAt(i).states = [["->", Color.black,  Color.gray(0.82)], ["<-", Color.black, Color.green]];
 			~reversebutton.wrapAt(i).action = {|view|
 				~writepartitions.value(i,'reverse sample',~numerobuffer.wrapAt(i),"~reversebutton",view.value);
 				if(view.value == 0, {~reversesampledatas.wrapPut(i,~reversesampledatas.wrapAt(i).wrapPut(~numerobuffer.wrapAt(i),1));~busoffsetplaysampler.wrapAt(i).set(~sampleroffsetcontrol.wrapAt(i).value)},{~reversesampledatas.wrapPut(i,~reversesampledatas.wrapAt(i).wrapPut(~numerobuffer.wrapAt(i),-1));~busoffsetplaysampler.wrapAt(i).set(1-~sampleroffsetcontrol.wrapAt(i).value)})};
@@ -3390,12 +3404,12 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			w.view.decorator.nextLine;
 			// Automation controls instrument
 			~automationinstrument = ~automationinstrument.add(Button(w,Rect(0,0,205,18)));
-			~automationinstrument.wrapAt(i).states = [["Random Synth Off", Color.black,  Color.red(0.8, 0.25)], ["Random Synth On", Color.white, Color.green(0.8, 0.25)]];
+			~automationinstrument.wrapAt(i).states = [["Random Synth Off", Color.black,  Color.gray(0.82)], ["Random Synth On", Color.black, Color.green]];
 			~automationinstrument.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationinstrument",view.value);
 				~randomValueSynth.wrapAt(i).wrapPut(~synthcontrol.wrapAt(i).value, view.value)};
 			// Automation parametres instrument
 			~automationparametres = ~automationparametres.add(Button(w,Rect(0,0,205,18)));
-			~automationparametres.wrapAt(i).states = [["Random Instrument Off", Color.black,  Color.red(0.8, 0.25)], ["Random Instrument On", Color.white, Color.green(0.8, 0.25)]];
+			~automationparametres.wrapAt(i).states = [["Random Instrument Off", Color.black,  Color.gray(0.82)], ["Random Instrument On", Color.black, Color.green]];
 			~automationparametres.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationparametres",view.value);
 				~randomValueParametreSynth.wrapAt(i).wrapPut(~synthcontrol.wrapAt(i).value, view.value)};
 			StaticText(w, Rect(0, 0, 52, 12)).string_("").stringColor_(Color.yellow).font_(Font("Helvetica", 10));
@@ -3411,7 +3425,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 				~automationeffetpanpre.wrapAt(i).valueAction_(~randomValueEffetPanPre.wrapAt(i).wrapAt(effetsPre.value).value);
 			};
 			~synthonoffeffetsPre = ~synthonoffeffetsPre.add(Button(w,Rect( 0,0,40,18)));
-			~synthonoffeffetsPre.wrapAt(i).states = [["Off", Color.black,  Color.red(0.8, 0.25)],["On", Color.white, Color.green(0.8, 0.25)]
+			~synthonoffeffetsPre.wrapAt(i).states = [["Off", Color.black,  Color.gray(0.82)],["On", Color.black, Color.green]
 			];
 			~synthonoffeffetsPre.wrapAt(i).action = {|view| var datas;
 				~writepartitions.value(i,'onoff_pre',~listenodeeffetsPresynth.wrapAt(i).value,"~synthonoffeffetsPre",view.value);
@@ -3429,7 +3443,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 				~automationeffetpost.wrapAt(i).valueAction_(~randomValueEffetPost.wrapAt(i).wrapAt(effetsPost.value).value);
 				~automationeffetpanpost.wrapAt(i).valueAction_(~randomValueEffetPanPost.wrapAt(i).wrapAt(effetsPost.value).value)};
 			~synthonoffeffetsPost = ~synthonoffeffetsPost.add(Button(w,Rect( 0,0,40,18)));
-			~synthonoffeffetsPost.wrapAt(i).states = [["Off", Color.black,  Color.red(0.8, 0.25)],["On", Color.white, Color.green(0.8, 0.25)]
+			~synthonoffeffetsPost.wrapAt(i).states = [["Off", Color.black,  Color.gray(0.82)],["On", Color.black, Color.green]
 			];
 			~synthonoffeffetsPost.wrapAt(i).action = {|view| var datas;
 				~writepartitions.value(i,'onoff_post',~listenodeeffetsPostsynth.wrapAt(i).value,"~synthonoffeffetsPost",view.value);
@@ -3526,12 +3540,12 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			//StaticText(w, Rect(0, 0, 50, 10)).string_("").stringColor_(Color.yellow).font_(Font("Helvetica", 10));
 			// Automation pan effets_pre
 			~automationeffetpanpre = ~automationeffetpanpre.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpanpre.wrapAt(i).states = [["Random Pan Effect_Pre Off", Color.black,  Color.red(0.8, 0.25)], ["Random Pan Effect_Pre On", Color.white, Color.green(0.8, 0.25)]];
+			~automationeffetpanpre.wrapAt(i).states = [["Random Pan Effect_Pre Off", Color.black,  Color.gray(0.82)], ["Random Pan Effect_Pre On", Color.black, Color.green]];
 			~automationeffetpanpre.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpanpre",view.value);
 				~randomValueEffetPanPre.wrapAt(i).wrapPut(~syntheffetsPrecontrol.wrapAt(i).value, view.value)};
 			// Automation pan effets_post
 			~automationeffetpanpost = ~automationeffetpanpost.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpanpost.wrapAt(i).states = [["Random Pan Effect_Post Off", Color.black,  Color.red(0.8, 0.25)], ["Random Pan Effect_Post On", Color.white, Color.green(0.8, 0.25)]];
+			~automationeffetpanpost.wrapAt(i).states = [["Random Pan Effect_Post Off", Color.black,  Color.gray(0.82)], ["Random Pan Effect_Post On", Color.black, Color.green]];
 			~automationeffetpanpost.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpanpost",view.value);
 				~randomValueEffetPanPost.wrapAt(i).wrapPut(~syntheffetsPostcontrol.wrapAt(i).value, view.value)};
 			w.view.decorator.nextLine;
@@ -3549,12 +3563,12 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			StaticText(w, Rect(0, 0, 50, 10)).string_("").stringColor_(Color.yellow).font_(Font("Helvetica", 10));
 			// Automation controls effets_pre
 			~automationeffetpre = ~automationeffetpre.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpre.wrapAt(i).states = [["Random Effect_Pre Off", Color.black,  Color.red(0.8, 0.25)], ["Random Effect_Pre On", Color.white, Color.green(0.8, 0.25)]];
+			~automationeffetpre.wrapAt(i).states = [["Random Effect_Pre Off", Color.black,  Color.gray(0.82)], ["Random Effect_Pre On", Color.black, Color.green]];
 			~automationeffetpre.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpre",view.value);
 				~randomValueEffetPre.wrapAt(i).wrapPut(~syntheffetsPrecontrol.wrapAt(i).value, view.value)};
 			// Automation controls effets_post
 			~automationeffetpost = ~automationeffetpost.add(Button(w,Rect(0,0,205,18)));
-			~automationeffetpost.wrapAt(i).states = [["Random Effect_Post Off", Color.black,  Color.red(0.8, 0.25)], ["Random Effect_Post On", Color.white, Color.green(0.8, 0.25)]];
+			~automationeffetpost.wrapAt(i).states = [["Random Effect_Post Off", Color.black,  Color.gray(0.82)], ["Random Effect_Post On", Color.black, Color.green]];
 			~automationeffetpost.wrapAt(i).action = {|view| ~writepartitions.value(i,'normal','off',"~automationeffetpost",view.value);
 				~randomValueEffetPost.wrapAt(i).wrapPut(~syntheffetsPostcontrol.wrapAt(i).value, view.value)};
 			w.view.decorator.nextLine;
@@ -3596,91 +3610,91 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 			// SynthBand 88 to 98
 			// Band 0 to 12
 			~synthBand0 = ~synthBand0.add(Button.new(w, 16 @ 18).
-				states_([["All", Color.red], ["All", Color.green]]).
+				states_([["All", Color.black, Color.gray(0.82)], ["All", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand0",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(0, band.value));
 				});
 			);
 			~synthBand1 = ~synthBand1.add(Button.new(w, 16 @ 18).
-				states_([["1", Color.red], ["1", Color.green]]).
+				states_([["1", Color.black, Color.gray(0.82)], ["1", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand1",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(1, band.value));
 				});
 			);
 			~synthBand2 = ~synthBand2.add(Button.new(w, 16 @ 18).
-				states_([["2", Color.red], ["2", Color.green]]).
+				states_([["2", Color.black, Color.gray(0.82)], ["2", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand2",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(2, band.value));
 				});
 			);
 			~synthBand3 = ~synthBand3.add(Button.new(w, 16 @ 18).
-				states_([["3", Color.red], ["3", Color.green]]).
+				states_([["3", Color.black, Color.gray(0.82)], ["3", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand3",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(3, band.value));
 				});
 			);
 			~synthBand4 = ~synthBand4.add(Button.new(w, 16 @ 18).
-				states_([["4", Color.red], ["4", Color.green]]).
+				states_([["4", Color.black, Color.gray(0.82)], ["4", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand4",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(4, band.value));
 				});
 			);
 			~synthBand5 = ~synthBand5.add(Button.new(w, 16 @ 18).
-				states_([["5", Color.red], ["5", Color.green]]).
+				states_([["5", Color.black, Color.gray(0.82)], ["5", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand5",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(5, band.value));
 				});
 			);
 			~synthBand6 = ~synthBand6.add(Button.new(w, 16 @ 18).
-				states_([["6", Color.red], ["6", Color.green]]).
+				states_([["6", Color.black, Color.gray(0.82)], ["6", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand6",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(6, band.value));
 				});
 			);
 			~synthBand7 = ~synthBand7.add(Button.new(w, 16 @ 18).
-				states_([["7", Color.red], ["7", Color.green]]).
+				states_([["7", Color.black, Color.gray(0.82)], ["7", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand7",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(7, band.value));
 				});
 			);
 			~synthBand8 = ~synthBand8.add(Button.new(w, 16 @ 18).
-				states_([["8", Color.red], ["8", Color.green]]).
+				states_([["8", Color.black, Color.gray(0.82)], ["8", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand8",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(8, band.value));
 				});
 			);
-			~synthBand9 = ~synthBand9.add(Button.new(w, 16 @ 20).
-				states_([["9", Color.red], ["9", Color.green]]).
+			~synthBand9 = ~synthBand9.add(Button.new(w, 16 @ 18).
+				states_([["9", Color.black, Color.gray(0.82)], ["9", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand9",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(9, band.value));
 				});
 			);
 			~synthBand10 = ~synthBand10.add(Button.new(w, 16 @ 18).
-				states_([["10", Color.red], ["10", Color.green]]).
+				states_([["10", Color.black, Color.gray(0.82)], ["10", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand10",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(10, band.value));
 				});
 			);
 			~synthBand11 = ~synthBand11.add(Button.new(w, 16 @ 18).
-				states_([["11", Color.red], ["11", Color.green]]).
+				states_([["11", Color.black, Color.gray(0.82)], ["11", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand11",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(11, band.value));
 				});
 			);
 			~synthBand12 = ~synthBand12.add(Button.new(w, 16 @ 18).
-				states_([["12", Color.red], ["12", Color.green]]).
+				states_([["12", Color.black, Color.gray(0.82)], ["12", Color.black, Color.green]]).
 				action_({arg band;
 					~writepartitions.value(i,'normal','off',"~synthBand12",band.value);
 					~flagBandSynth.put(i, ~flagBandSynth.at(i).put(12, band.value));
@@ -3689,7 +3703,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 
 			// flagFhzBand  99
 			~buttonSynthBand = ~buttonSynthBand.add(Button(w, Rect(0, 0, 40, 18))
-				.states_([["Off", Color.red], ["On", Color.green]])
+				.states_([["Off", Color.black, Color.gray(0.82)], ["On", Color.black, Color.green]])
 				.action = {arg flag;
 					~writepartitions.value(i,'normal','off',"~buttonSynthBand",flag.value);
 					if(flag.value == 0,
@@ -3925,7 +3939,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 
 			// Sound Synth ByPass
 			~byPassSynth = ~byPassSynth.add(Button(w, Rect(0, 0, 100, 18))
-				.states_([["ByPass Off", Color.red], ["ByPass On", Color.green]])
+				.states_([["ByPass Off", Color.black, Color.gray(0.82)], ["ByPass On", Color.black, Color.green]])
 				.action = {arg flag;
 					~writepartitions.value(i,'normal','off',"~byPassSynth", flag.value);
 					~flagByPassSynth.put(i, flag.value);
@@ -3954,7 +3968,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		~wg.view.decorator = FlowLayout(~wg.view.bounds);
 		// Systeme start stop playing
 		~startsysteme = Button(~wg,Rect(0,0,100,18));
-		~startsysteme.states = [["System Off", Color.black,  Color.red(0.8, 0.25)], ["System On", Color.white, Color.green(0.8, 0.25)]];
+		~startsysteme.states = [["System Off", Color.black,  Color.gray(0.82)], ["System On", Color.black, Color.green]];
 		~startsysteme.action = {|view|
 			if(~oscStateFlag == 'master', {~slaveAppAddr.sendMsg('/HPstart', view.value)});// Send OSC pour synchro app
 			if (view.value == 1, {
@@ -4103,7 +4117,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		})};
 		// Calculation midi start stop playing
 		~calculationmidi = Button(~wg,Rect(0,0,100,18));
-		~calculationmidi.states = [["MIDIIn Off", Color.black,  Color.red(0.8, 0.25)], ["MIDIIn On", Color.white, Color.green(0.8, 0.25)]];
+		~calculationmidi.states = [["MIDIIn Off", Color.black,  Color.gray(0.82)], ["MIDIIn On", Color.black, Color.green]];
 		~calculationmidi.action = {|view|
 			~writepartitions.value(nil,'control panel normal','off',"~calculationmidi",view.value);
 			if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
@@ -4233,7 +4247,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 				}
 			);
 		};
-		~tempoButton = Button(~wg,Rect(10,10, 150, 18)).states=[["Tempo Analyze Off", Color.black, Color.red(0.8, 0.25)], ["Tempo Analyze On", Color.black, Color.green(0.8, 0.25)]];
+		~tempoButton = Button(~wg,Rect(10,10, 150, 18)).states=[["Tempo Analyze Off", Color.black, Color.gray(0.82)], ["Tempo Analyze On", Color.black, Color.green]];
 		~tempoButton.action = {arg view;
 			~writepartitions.value(nil,'control panel normal','off',"~tempoButton",view.value);
 			if (view.value == 1,
@@ -4290,7 +4304,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		~wg.view.decorator.nextLine;
 		// Calculation chaos start stop playing
 		~calculationchaos = Button(~wg,Rect(0,0,85,18));
-		~calculationchaos.states = [["Chaos Off", Color.black,  Color.red(0.8, 0.25)], ["Chaos On", Color.white, Color.green(0.8, 0.25)]];
+		~calculationchaos.states = [["Chaos Off", Color.black,  Color.gray(0.82)], ["Chaos On", Color.black, Color.green]];
 		~calculationchaos.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationchaos",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listechaosfreq.wrapPut(instr,[]);~listechaosamp.wrapPut(instr,[]);
@@ -4304,7 +4318,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		})};
 		// Calculation neurone start stop playing
 		~calculationneurone = Button(~wg,Rect(0,0,85,18));
-		~calculationneurone.states = [["Neural Off", Color.black,  Color.red(0.8, 0.25)], ["Neural On", Color.white, Color.green(0.8, 0.25)]];
+		~calculationneurone.states = [["Neural Off", Color.black,  Color.gray(0.82)], ["Neural On", Color.black, Color.green]];
 		~calculationneurone.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationneurone",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listeneuronefreq.wrapPut(instr,[]);~listeneuroneamp.wrapPut(instr,[]);
@@ -4317,7 +4331,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		})};
 		// Calculation genetique start stop playing
 		~calculationgenetique = Button(~wg,Rect(0,0,85,18));
-		~calculationgenetique.states = [["Genetic Off", Color.black,  Color.red(0.8, 0.25)], ["Genetic On", Color.white, Color.green(0.8, 0.25)]];
+		~calculationgenetique.states = [["Genetic Off", Color.black,  Color.gray(0.82)], ["Genetic On", Color.black, Color.green]];
 		~calculationgenetique.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationgenetique",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listegenetiquefreq.wrapPut(instr,[]);~listegenetiqueamp.wrapPut(instr,[]);
@@ -4330,7 +4344,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		})};
 		// Calculation algorithmes start stop playing
 		~calculationalgorithmes= Button(~wg,Rect(0,0,85,18));
-		~calculationalgorithmes.states = [["Algo Off", Color.black,  Color.red(0.8, 0.25)], ["Algo On", Color.white, Color.green(0.8, 0.25)]];
+		~calculationalgorithmes.states = [["Algo Off", Color.black,  Color.gray(0.82)], ["Algo On", Color.black, Color.green]];
 		~calculationalgorithmes.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationalgorithmes",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~nombreinstrument.do({arg instr;
 				~listealgo1freq.wrapPut(instr,[]);~listealgo1amp.wrapPut(instr,[]);~listealgo1duree.wrapPut(instr,[]);~listealgo2freq.wrapPut(instr,[]);~listealgo2amp.wrapPut(instr,[]);~listealgo2duree.wrapPut(instr,[]);
@@ -4346,7 +4360,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		})};
 		// Calculation automation start stop playing
 		~calculationautomation = Button(~wg,Rect(0,0,85,18));
-		~calculationautomation.states = [["Random Off", Color.black,  Color.red(0.8, 0.25)], ["Random On", Color.white, Color.green(0.8, 0.25)]];
+		~calculationautomation.states = [["Random Off", Color.black,  Color.gray(0.82)], ["Random On", Color.black, Color.green]];
 		~calculationautomation.action = {|view| ~writepartitions.value(nil,'control panel normal','off',"~calculationautomation",view.value);if(~startsysteme.value == 1 and: {view.value == 1}, {// set ON les routines de calcul
 			~routineautomation.play(quant: Quant.new(1));
 			~tempoprocessautomation.enabled_(true);

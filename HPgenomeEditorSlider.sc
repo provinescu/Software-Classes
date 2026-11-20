@@ -13,10 +13,23 @@ HPgenomeEditorSlider {
 		// Init GUI + edit sequences
 		// utilise ~genomes et ~agents de Agents !!!!
 
-		~flagHPgenomeEditor = 'on';
-
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
+
+		~flagHPgenomeEditor = 'on';
 
 		this.edit(agent);
 
@@ -85,7 +98,7 @@ HPgenomeEditorSlider {
 				if(num.value > ~agents, {~agentCopy.value_(1)});
 			},{~agentCopy.value_(0)});
 		};
-		~startTdef = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
+		~startTdef = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.white, Color.red(0.8, 0.25)],["Tdef Display On", Color.white, Color.green(0.8, 0.25)]];
 		~startTdef.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineGenome.play(quant: Quant.new(1, 0.0, 0.0));

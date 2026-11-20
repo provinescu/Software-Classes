@@ -14,7 +14,20 @@ HPgenomeEditorAllInOne {
 		// utilise les variables ~genomes et ~agents de Agents !!!!
 
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
 
 		~flagHPgenomeEditor = 'on';
 
@@ -44,12 +57,12 @@ HPgenomeEditorAllInOne {
 		};
 		~menuGenomeAll.focus;
 		// Evaluate Genome
-		~evaluateGenomeAll = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.black, Color.green(0.8, 0.25)]];
+		~evaluateGenomeAll = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.white, Color.green(0.8, 0.25)]];
 		~evaluateGenomeAll.action={arg item;
 			~fonctionRecordScore.value("~evaluateGenomeAll", 1);
 			if(~agents != 0 ,{~fonctionUpdateGenomeAll.value});// Update Display
 		};
-		~validGenomeAll = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.black, Color.blue(0.8, 0.25)]];
+		~validGenomeAll = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.white, Color.blue(0.8, 0.25)]];
 		~validGenomeAll.action = {arg view;
 			var genomeAll=[], genomeAgent=[];
 			// Validation genomes
@@ -90,7 +103,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
+		~startTdefGenomeAll = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.white, Color.red(0.8, 0.25)],["Tdef Display On", Color.white, Color.green(0.8, 0.25)]];
 		~startTdefGenomeAll.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));
@@ -183,12 +196,12 @@ HPgenomeEditorAllInOne {
 			~menuGenomeAll.valueAction_(0);
 		};
 		// Evaluate Genome
-		~evaluateGenomeAll2 = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.black, Color.green(0.8, 0.25)]];
+		~evaluateGenomeAll2 = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.white, Color.green(0.8, 0.25)]];
 		~evaluateGenomeAll2.action={arg item;
 			~fonctionRecordScore.value("~evaluateGenomeAll", 1);
 			if(~agents != 0 ,{~fonctionUpdateGenomeAll.value});// Update Display
 		};
-		~validGenomeAll2 = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.black, Color.blue(0.8, 0.25)]];
+		~validGenomeAll2 = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.white, Color.blue(0.8, 0.25)]];
 		~validGenomeAll2.action = {arg view;
 			var genomeAll=[], genomeAgent=[];
 			// Validation genomes
@@ -229,7 +242,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll2 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
+		~startTdefGenomeAll2 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.white, Color.red(0.8, 0.25)],["Tdef Display On", Color.white, Color.green(0.8, 0.25)]];
 		//~startTdefGenomeAll2.action = {arg view;
 		//if (view.value == 1, {// Start Tdef
 		//~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));
@@ -332,12 +345,12 @@ HPgenomeEditorAllInOne {
 			~menuGenomeAll.valueAction_(0);
 		};
 		// Evaluate Genome
-		~evaluateGenomeAll3 = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.black, Color.green(0.8, 0.25)]];
+		~evaluateGenomeAll3 = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.white, Color.green(0.8, 0.25)]];
 		~evaluateGenomeAll3.action={arg item;
 			~fonctionRecordScore.value("~evaluateGenomeAll", 1);
 			if(~agents != 0 ,{~fonctionUpdateGenomeAll.value});// Update Display
 		};
-		~validGenomeAll3 = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.black, Color.blue(0.8, 0.25)]];
+		~validGenomeAll3 = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.white, Color.blue(0.8, 0.25)]];
 		~validGenomeAll3.action = {arg view;
 			var genomeAll=[], genomeAgent=[];
 			// Validation genomes
@@ -378,7 +391,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll3 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
+		~startTdefGenomeAll3 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.white, Color.red(0.8, 0.25)],["Tdef Display On", Color.white, Color.green(0.8, 0.25)]];
 		//~startTdefGenomeAll3.action = {arg view;
 		//if (view.value == 1, {// Start Tdef
 		//~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));
@@ -472,12 +485,12 @@ HPgenomeEditorAllInOne {
 			~menuGenomeAll.valueAction_(0);
 		};
 		// Evaluate Genome
-		~evaluateGenomeAll4 = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.black, Color.green(0.8, 0.25)]];
+		~evaluateGenomeAll4 = Button(~wEditor, Rect(10, 10, 250, 18)).states=[["Evaluation Genomes", Color.white, Color.green(0.8, 0.25)]];
 		~evaluateGenomeAll4.action={arg item;
 			~fonctionRecordScore.value("~evaluateGenomeAll", 1);
 			if(~agents != 0 ,{~fonctionUpdateGenomeAll.value});// Update Display
 		};
-		~validGenomeAll4 = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.black, Color.blue(0.8, 0.25)]];
+		~validGenomeAll4 = Button(~wEditor,Rect(0, 0, 250, 18)).states=[["Validation Genomes", Color.white, Color.blue(0.8, 0.25)]];
 		~validGenomeAll4.action = {arg view;
 			var genomeAll=[], genomeAgent=[];
 			// Validation genomes
@@ -518,7 +531,7 @@ HPgenomeEditorAllInOne {
 			~genomes=genomeAll;
 			~fonctionRecordScore.value("~validGenomeAll", ~genomes);
 		};
-		~startTdefGenomeAll4 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.black, Color.red(0.8, 0.25)],["Tdef Display On", Color.black, Color.green(0.8, 0.25)]];
+		~startTdefGenomeAll4 = Button(~wEditor,Rect(10, 10, 100, 18)).states=[["Tdef Display Off", Color.white, Color.red(0.8, 0.25)],["Tdef Display On", Color.white, Color.green(0.8, 0.25)]];
 		~startTdefGenomeAll4.action = {arg view;
 			if (view.value == 1, {// Start Tdef
 				~routineGenomeAll.play(quant: Quant.new(1, 0.0, 0.0));

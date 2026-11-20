@@ -14,7 +14,20 @@ HPscoreEditor {
 		// utilise les variables de Agents !!!!
 
 		// Setup GUI style
-		QtGUI.palette = QPalette.dark;// light / system
+		//QtGUI.palette = QPalette.dark;// light / system
+		var pal;
+
+		pal = QPalette.auto(
+			Color(0.27, 0.34, 0.43),  // Boutons
+			//Color(0.12, 0.15, 0.20)   // Fenêtres
+			Color(0.15,0.19,0.25) // Fenêtres
+		);
+
+		// Sélection
+		pal.setColor(Color(0.0, 0.65, 0.75), \highlight);
+		pal.setColor(Color(1.0, 1.0, 1.0), \highlightText);
+
+		QtGUI.palette = pal;
 
 		~flagHPscoreEditor = 'on';
 		~flagHPscorePlaying = 'off';
@@ -56,7 +69,7 @@ HPscoreEditor {
 		};
 		~menuScore.focus;
 		// Routine score display
-		~startTdefScore = Button(~wScore,Rect(10, 10, 150, 18)).states=[["Score Play Off", Color.black, Color.red(0.8, 0.25)],["Score Play On", Color.black, Color.green(0.8, 0.25)]];
+		~startTdefScore = Button(~wScore,Rect(10, 10, 150, 18)).states=[["Score Play Off", Color.white, Color.red(0.8, 0.25)],["Score Play On", Color.white, Color.green(0.8, 0.25)]];
 		~startTdefScore.action = {arg view;
 			if (view.value == 1, {
 				// Start Score
@@ -70,7 +83,7 @@ HPscoreEditor {
 				"Stop Score".postln;~routineScore.value(~scorePlaying).stop;~routineScore.value(~scorePlaying).clear;~flagHPscorePlaying = 'off';
 			});
 		};
-		~validScore = Button(~wScore,Rect(0, 0, 150, 20)).states=[["Validation Score", Color.black, Color.blue(0.8, 0.25)]];
+		~validScore = Button(~wScore,Rect(0, 0, 150, 20)).states=[["Validation Score", Color.white, Color.blue(0.8, 0.25)]];
 		~validScore.action = {arg view;
 			~scorePlaying  = ~wEditScore.string.interpret;
 		};
