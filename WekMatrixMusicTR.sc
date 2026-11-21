@@ -2811,7 +2811,7 @@ Preset Wek",
 					fonctionRecOff.value;
 				});
 				// Key shift + alt + r -> Pause Recording
-				if(modifiers==655360 and: {unicode==85} and: {keycode==15}, {
+				if(modifiers==655360 and: {unicode==82} and: {keycode==15}, {
 					fonctionRecPause.value;
 				});
 				// Key d -> Synchro Synthesizer
