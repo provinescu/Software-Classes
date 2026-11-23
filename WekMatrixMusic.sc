@@ -50,7 +50,7 @@ WekMatrixMusic {
 		recChannels = r;
 		switchAudioOut = f;// Type Format stereo, ambisonic, etc...
 
-		Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
+		//Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
 		thisProcess.openUDPPort(wekPort.asInteger); // Sender Port Wekinator + Enter Port change 6448 to an another for example 6449
 
 		s = Server.default;
@@ -75,7 +75,7 @@ WekMatrixMusic {
 
 		// Safety Limiter
 		Safety(s);
-		s.makeGui;
+		//s.makeGui;
 
 		// MIDI INIT
 		// Connect first device by default

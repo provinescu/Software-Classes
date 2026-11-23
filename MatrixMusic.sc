@@ -48,7 +48,7 @@ MatrixMusic {
 		recChannels = r;
 		switchAudioOut = f;// Type Format stereo, ambisonic, etc...
 
-		Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
+		//Server.default = s = Server(name,NetAddr("localhost", scPort), Server.default.options);
 		s = Server.default;
 		s.options.memSize = 2**20;
 		s.options.numWireBufs = 128;
@@ -71,7 +71,7 @@ MatrixMusic {
 
 		// Safety Limiter
 		Safety(s);
-		s.makeGui;
+		//s.makeGui;
 
 		// MIDI INIT
 		// Connect first device by default
