@@ -53,5 +53,5 @@ These have no effect on the software’s operation.
 
 These Standalone have been tested and verified on Mac OS High Sierra and Sequoia
 
-For Linux and Windows users, the classes have not been tested.
+For Linux and Windows users, the software classes have not been tested.
 Certain features are specific to Mac (Menu, search (Spotlight), etc.)
