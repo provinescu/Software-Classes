@@ -50,3 +50,5 @@ For versions using the Transformer, depending on the latency, you may receive �
 
 With certain software, error messages may appear in the post window (e.g. ‘node not found’, ‘late’, ‘buffer’, etc.).
 These have no effect on the software’s operation.
+
+These Standalone have been tested and verified on Mac OS High Sierra and Sequoia
