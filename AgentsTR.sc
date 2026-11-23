@@ -7420,6 +7420,7 @@ G                       Init Genome Agent (solo).
 				~startpopulation = ~agents = ~genomes.size;
 				~foncInitAgents.value;
 				~genomes=datafile.wrapAt(211); // Load Genomes again for INIT
+				~startpopulation=datafile.wrapAt(21); // init start popu
 				if(flagSequence == 'on' and: {datafile.wrapAt(211).wrapAt(0).size != 0}, {sequence=datafile.wrapAt(212);~listeagentfreq=sequence.wrapAt(0);~listeagentamp=sequence.wrapAt(1);~listeagentduree=sequence.wrapAt(2)}, {flagSequence='off'})},
 			{~foncInitAgents.value});
 		};
