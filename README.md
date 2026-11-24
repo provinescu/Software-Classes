@@ -4,7 +4,7 @@ SuperCollider Software Classes for organising musical sounds created using Super
 
 Notes:
 
-To use these Classes, you will need the contents of the ‘extensions’ folder in your own extensions folder.
+To use these Classes, you will need the contents of the ‘Extensions’ folder in your own extensions folder.
 
 There are several Classes versions (exemple with Agents):
 
