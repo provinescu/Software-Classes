@@ -8,7 +8,7 @@ To use these Classes, you will need the contents of the ‘extensions’ folder 
 
 There are several Classes versions (exemple with Agents):
 
-Agents basic software.
+Agents default/basic software.
 
 WekAgents  with Wekinator added to control parameters.
 
