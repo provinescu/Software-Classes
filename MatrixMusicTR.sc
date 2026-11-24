@@ -3222,13 +3222,21 @@ y ... -						Musical keys.
 		keyboardShortCut.value(windowKeyboard);
 
 		////////////// Window MasterFX /////////////////
-		windowMasterFX = Window.new("MasterFX", Rect(40, 600, 255, 55), scroll: true);
+		windowMasterFX = Window.new("MasterFX + Record", Rect(40, 600, 255, 55), scroll: true);
 		windowMasterFX.view.decorator = FlowLayout(windowMasterFX.view.bounds);
-		windowMasterFXLimit =EZSlider(windowMasterFX, 245 @ 18, "LimitOut",\db,
-			{|ez| masterFX.set(\limit, ez.value.dbamp)},-3,labelWidth: 60,numberWidth: 40);
+		windowMasterFXLimit =EZSlider(windowMasterFX, 190 @ 18, "LimitOut",\db,
+			{|ez| masterFX.set(\limit, ez.value.dbamp)},-3,labelWidth: 40,numberWidth: 35);
+		Button(windowMasterFX, 50@18).states_([["Rec", Color.black, Color.green],["Rec", Color.black, Color.red]])
+		.action_({arg rec;
+			if(rec.value == 0, {fonctionRecOff.value},
+				{fonctionRecOn.value}
+			)
+		});
 		windowMasterFX.view.decorator.nextLine;
-		windowMasterFXPostAmp = EZSlider(windowMasterFX, 245 @ 18, "PostAmp", \db,
-			{|ez| masterFX.set(\postAmp, ez.value.dbamp)}, 0,labelWidth: 60,numberWidth: 40);
+		windowMasterFXPostAmp = EZSlider(windowMasterFX, 190 @ 18, "PostAmp", \db,
+			{|ez| masterFX.set(\postAmp, ez.value.dbamp)}, 0,labelWidth: 40,numberWidth: 35);
+		Button(windowMasterFX, 50@18).states_([["Pause", Color.black, Color.grey],["Resume", Color.black, Color.yellow]])
+		.action_({fonctionRecPause.value});
 		windowMasterFX.front;
 		windowMasterFX.onClose_({
 			masterFX.free;
@@ -3239,7 +3247,7 @@ y ... -						Musical keys.
 		fonctionShortCut.value(windowMasterFX);
 
 		//// Fonction Window for controling all sliders windows instruments ///
-		windowControlSynth = Window("Master Sliders Music Control Synthesizer and FX", Rect(300, 550, 400, 200), scroll: true);
+		windowControlSynth = Window("Master Sliders Music Control Synthesizer and FX", Rect(300, 575, 400, 200), scroll: true);
 		windowControlSynth.alpha=1.0;
 		windowControlSynth.front;
 		windowControlSynth.view.decorator = FlowLayout(windowControlSynth.view.bounds);

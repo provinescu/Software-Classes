@@ -3818,12 +3818,20 @@ G                       Init Genome Agent (solo).
 	fxPanel {
 
 		// MasterFX
-		~windowMasterFX = Window.new("MasterFX", Rect(500, 0, 135, 80), scroll: true);
+		~windowMasterFX = Window.new("MasterFX + Record", Rect(500, 0, 240, 80), scroll: true);
 		~windowMasterFX.view.decorator = FlowLayout(~windowMasterFX.view.bounds);
 		~windowMasterFXLimit =EZKnob(~windowMasterFX, 60 @ 70, "LimitOut",\db,
 			{|ez| ~masterFX.set(\limit, ez.value.dbamp);if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~windowMasterFXLimit", ez.value)})},-3, labelWidth: 60, unitWidth: 0, layout: 'vert');
 		~windowMasterFXPostAmp = EZKnob(~windowMasterFX, 60 @ 70, "PostAmp", \db,
 			{|ez| ~masterFX.set(\postAmp, ez.value.dbamp);if(~flagScoreRecordGUI == 'on', {~fonctionRecordScore.value("~windowMasterFXPostAmp", ez.value)})}, 0, labelWidth: 60,unitWidth: 0, layout: 'vert');
+		Button(~windowMasterFX, 50@70).states_([["Rec", Color.black, Color.green],["Rec", Color.black, Color.red]])
+		.action_({arg rec;
+			if(rec.value == 0, {~fonctionRecOff.value},
+				{~fonctionRecOn.value}
+			)
+		});
+		Button(~windowMasterFX, 50@70).states_([["Pause", Color.black, Color.grey],["Resume", Color.black, Color.yellow]])
+		.action_({~fonctionRecPause.value});
 		~windowMasterFX.front;
 	}
 

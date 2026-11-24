@@ -31,7 +31,7 @@ Robot {
 		QtGUI.palette = pal;
 
 		MainMenu.initBuiltInMenus;
-		udpAdr = NetAddr.langPort;
+		udpAdr = 57130;
 		scAdr = NetAddr("localhost", scPort);
 
 		~nompathdata=PathName.new(path).pathOnly;
@@ -2751,14 +2751,21 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		~playpartbutton.wrapAt(0).focus;
 
 		// MasterFX
-		~windowMasterFX = Window.new("MasterFX", Rect(0, 50, 260, 60), scroll: true);
+		~windowMasterFX = Window.new("MasterFX + Record", Rect(0, 50, 260, 60), scroll: true);
 		~windowMasterFX.view.decorator = FlowLayout(~windowMasterFX.view.bounds);
-		~windowMasterFXLimit =EZSlider(~windowMasterFX, 245 @ 18, "LimitOut",\db,
-			{|ez| ~masterFX.set(\limit, ez.value.dbamp);~writepartitions.value(nil,'masterFX','off',"~windowMasterFXLimit",ez.value)},-3,labelWidth: 60,numberWidth: 40);
+		~windowMasterFXLimit =EZSlider(~windowMasterFX, 190 @ 18, "LimitOut",\db,
+			{|ez| ~masterFX.set(\limit, ez.value.dbamp);~writepartitions.value(nil,'masterFX','off',"~windowMasterFXLimit",ez.value)},-3,labelWidth: 40,numberWidth: 35);
+		Button(~windowMasterFX, 50@18).states_([["Rec", Color.black, Color.green],["Rec", Color.black, Color.red]])
+		.action_({arg rec;
+			if(rec.value == 0, {~fonctionRecOff.value},
+				{~fonctionRecOn.value}
+			)
+		});
 		~windowMasterFX.view.decorator.nextLine;
-		~windowMasterFXPostAmp = EZSlider(~windowMasterFX, 245 @ 18, "PostAmp", \db,
-			{|ez| ~masterFX.set(\postAmp, ez.value.dbamp);~writepartitions.value(nil,'masterFX','off',"~windowMasterFXPostAmp",ez.value)}, 0,labelWidth: 60,numberWidth: 40);
-		~windowMasterFX.view.decorator.nextLine;
+		~windowMasterFXPostAmp = EZSlider(~windowMasterFX, 190 @ 18, "PostAmp", \db,
+			{|ez| ~masterFX.set(\postAmp, ez.value.dbamp);~writepartitions.value(nil,'masterFX','off',"~windowMasterFXPostAmp",ez.value)}, 0,labelWidth: 40,numberWidth: 35);
+		Button(~windowMasterFX, 50@18).states_([["Pause", Color.black, Color.grey],["Resume", Color.black, Color.yellow]])
+		.action_({~fonctionRecPause.value});
 		~windowMasterFX.front;
 
 		// Windows instruments
