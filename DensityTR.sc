@@ -4940,7 +4940,7 @@ ysxdcvgbhnjm,l.e-		Musical Keys.
 		});
 		// Loop RecSound
 		Button(windowEar,Rect(0, 0, 70, 20)).
-		states_([["Rloop Off", Color.white], ["Rloop Off", Color.blue], ["Rloop On", Color.black, Color.green]]).
+		states_([["Rloop Off", Color.white], ["Rloop On", Color.black, Color.green], ["Rloop !",  Color.blue]]).
 		action_({arg loop;
 			if(loop.value == 0, {loopRec = 0; flagRec = 0});
 			if(loop.value == 1, {loopRec = 1; flagRec = 0});
