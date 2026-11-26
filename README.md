@@ -25,7 +25,7 @@ These classes use the VSTplugin class: https://github.com/Spacechild1/vstplugin
 
 Quick started:
 
-Ensure that MIDI is enabled by default ‘IAC Manager’.
+Ensure that MIDI is enabled.
 
 Launch the Class.
 For exemple "Agents.new".
