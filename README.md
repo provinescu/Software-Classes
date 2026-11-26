@@ -21,6 +21,8 @@ To use the Wek... versions, you need to install Wekinator: https://github.com/fi
 You will find the necessary models for each piece of Wek... software in the repository:
 [Wekinator-Models-for-HP-Software](https://github.com/provinescu/Wekinator-Models-for-HP-Software)
 
+These classes use the VSTplugin class: https://github.com/Spacechild1/vstplugin
+
 Quick started:
 
 Ensure that MIDI is enabled by default ‘IAC Manager’.
@@ -52,6 +54,5 @@ For versions using the Transformer, depending on the latency, you may receive �
 With certain software, error messages may appear in the post window (e.g. ‘node not found’, ‘late’, ‘buffer’, etc.).
 These have no effect on the software’s operation.
 
-These classes use the VSTplugin class: https://github.com/Spacechild1/vstplugin
 
 
