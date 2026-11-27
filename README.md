@@ -1,58 +1,84 @@
-# HP Software Classes
+# Classes logicielles pour SuperCollider
 
-SuperCollider Software Classes for organising musical sounds created using SuperCollider 3.14.
+> **Provinescu Software Production**
+> Systèmes SuperCollider destinés à organiser, transformer et générer des sons musicaux.
 
-Notes:
+**SuperCollider 3.14 · Musique générative · Organisation sonore · Performance en direct**
 
-To use these Classes, you will need the contents of the ‘Extensions’ folder and, of course, the software classes too, in your own extensions folder.
+Ce dépôt contient les classes sources SuperCollider qui constituent le cœur de la collection de logiciels Provinescu.
 
-There are several Classes versions (exemple with Agents):
+## Présentation
 
-Agents default/basic software.
+J’ai développé ces outils dans le cadre de ma pratique de **batteur, compositeur et développeur de logiciels**, avec un intérêt particulier pour l’autonomie musicale, l’interaction en temps réel et l’organisation sonore expérimentale.
 
-WekAgents  with Wekinator added to control parameters.
+Les classes peuvent être utilisées comme des instruments, étudiées, adaptées ou développées directement dans SuperCollider.
 
-AgentsTR  with HPtransformer added.
+## Contenu du dépôt
 
-WekAgentsTR -> with Wekinator and HPtransformer added.
+- Systèmes fondés sur les agents, la densité, les matrices, les processus automatisés, les partitions et les structures temporelles
+- Versions Wek permettant le contrôle des paramètres par Wekinator
+- Versions TR intégrant l’apprentissage et la génération avec HPtransformer
+- Versions Wek+TR combinant Wekinator et HPtransformer
+- Gestion des presets et des dossiers de travail
+- Prise en charge de bibliothèques sonores personnalisées
 
-To use the Wek... versions, you need to install Wekinator: https://github.com/fiebrink1/wekinator
+## Versions disponibles
 
-You will find the necessary models for each piece of Wek... software in the repository:
-[Wekinator-Models-for-HP-Software](https://github.com/provinescu/Wekinator-Models-for-HP-Software)
+| Version | Nom type | Wekinator | HPtransformer | Fonction principale |
+|---|---|:---:|:---:|---|
+| **Standard** | `Agents` | Non | Non | Fonctionnement standard |
+| **Wek** | `WekAgents` | Oui | Non | Contrôle des paramètres par Wekinator |
+| **TR** | `AgentsTR` | Non | Oui | Apprentissage et génération avec HPtransformer |
+| **Wek+TR** | `WekAgentsTR` | Oui | Oui | Combinaison de Wekinator et HPtransformer |
 
-These classes use the VSTplugin class: https://github.com/Spacechild1/vstplugin
+## Configuration requise
 
-Quick started:
+- SuperCollider 3.14
+- Extensions fournies avec le dépôt
+- Source MIDI activée avant le lancement
+- [VSTPlugin](https://github.com/Spacechild1/vstplugin) lorsque la classe utilise des plugins VST
+- [Wekinator](https://github.com/fiebrink1/wekinator) pour les versions Wek et Wek+TR
 
-Ensure that MIDI is enabled.
+## Installation
 
-Launch the Class.
-For exemple "Agents.new".
-The first time you use it, a folder named after the programme will be created in your ‘home/documents/’ directory.
-This is where the presets and data will be saved.
-You can, of course, create further working folders later on.
+1. Quittez SuperCollider.
+2. Copiez les classes et le contenu nécessaire du dossier `Extensions` dans votre dossier utilisateur SuperCollider.
+3. Redémarrez SuperCollider et recompilez la bibliothèque de classes.
+4. Corrigez toute erreur signalée dans la fenêtre Post avant de poursuivre.
 
-Please note: some software programmes that use sounds loaded into memory are very sensitive to the number of sounds used.
-If you wish to use your own sounds, you will need to create a new folder so that the software can initialise the start-up files correctly.
-To use your sounds, edit the file named ‘sound’ or ‘list sound’ in the working folder, ensuring you follow the correct syntax.
+## Démarrage rapide
 
-For Mac users, the mdfind function (Spotlight) allows you to load sound files that may no longer be located in the specified path.
-For Linux and Windows users, the paths to the sound files must be correct; otherwise, they will not be loaded.
+Activez une source MIDI, puis évaluez le constructeur de la classe :
 
-Check the guides!
-[ HP-Software-Guides](https://github.com/provinescu/HP-Software-Guides)
+```supercollider
+Agents.new;
+```
 
-Otherwise, explore and have fun.
+Lors du premier lancement, le logiciel crée un dossier de travail dans votre dossier `Documents`. Il contient les presets, les données, les listes de sons et les fichiers de configuration.
 
-Notes:
+## Sons personnalisés
 
-Launcher is a launcher with default settings for All Software.
+Créez un dossier de travail distinct pour chaque collection sonore importante. Modifiez ensuite le fichier `sound` ou `list sound` en conservant exactement les crochets, virgules, symboles et chemins existants.
 
-For versions using the Transformer, depending on the latency, you may receive ‘late’ messages. This is perfectly normal. The Transformer performs a great deal of computation.
+Sur macOS, la commande `mdfind` de Spotlight peut aider à retrouver des fichiers déplacés. Sous Linux et Windows, les chemins enregistrés doivent rester exacts et accessibles.
 
-With certain software, error messages may appear in the post window (e.g. ‘node not found’, ‘late’, ‘buffer’, etc.).
-These have no effect on the software’s operation.
+## Documentation
 
+Consultez les [guides des logiciels HP](https://github.com/provinescu/HP-Software-Guides) et les [modèles Wekinator](https://github.com/provinescu/Wekinator-Models-for-HP-Software).
 
+## Philosophie du projet
 
+Ces outils sont principalement conçus pour la composition/organisation sonore et créent des relations entre **le geste, l’écoute, la mémoire, la variation et les comportements générés par la machine**.
+
+Explorez les paramètres, écoutez les résultats, enregistrez les configurations intéressantes et adaptez les systèmes à votre propre pratique musicale.
+
+## À propos
+
+Ceci est un projet artistique et logiciel consacré à la musique expérimentale, aux systèmes génératifs et à l’organisation sonore. Il est développé par un batteur, compositeur et développeur de logiciels.
+
+- [Profil GitHub](https://github.com/provinescu)
+- [Musique sur Bandcamp](https://provinescu.bandcamp.com/)
+
+## Licence
+
+Consultez le fichier `LICENSE` du dépôt pour connaître les conditions de licence.
