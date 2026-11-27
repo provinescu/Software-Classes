@@ -109,14 +109,6 @@ TR and Wek+TR editions require more CPU resources than Standard and Wek editions
 
 Messages such as `node not found`, `late`, or `buffer` may occasionally be non-critical when audio and controls continue to work normally.
 
-The following situations should be investigated:
-
-- repeated audio dropouts;
-- sounds that fail to load;
-- unavailable buffers;
-- unresponsive controls;
-- repeated errors in the Post window.
-
 ## Documentation
 
 See:
