@@ -45,6 +45,9 @@ The `Wek` prefix identifies an edition that communicates with Wekinator. The `TR
 - A MIDI source enabled before launch
 - [VSTPlugin](https://github.com/Spacechild1/vstplugin) when a class uses VST plugins
 - [Wekinator](https://github.com/fiebrink1/wekinator) for Wek and Wek+TR editions
+- The matching Wekinator project
+
+Matching projects are available in [Wekinator Models for HP Software](https://github.com/provinescu/Wekinator-Models-for-HP-Software).
 
 ## Installation
 
