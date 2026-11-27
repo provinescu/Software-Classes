@@ -121,7 +121,7 @@ See:
 
 ## Project philosophy
 
-An artistic and software project dedicated to experimental music, generative systems, and sound organization. The project is developed by a drummer, composer, and software developer.
+This is an artistic and software project dedicated to experimental music, generative systems, and sound organization. The project is developed by a drummer, composer, and software developer.
 
 Explore the parameters, listen to the results, save useful configurations, and adapt the systems to your own musical practice.
 
